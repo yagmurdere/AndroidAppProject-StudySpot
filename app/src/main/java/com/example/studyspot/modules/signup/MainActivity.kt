@@ -1,4 +1,4 @@
-package com.example.studyspot
+package com.example.studyspot.modules.signup
 
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.studyspot.modules.signup.SignUp
 import com.example.studyspot.ui.theme.StudySpotTheme
 
