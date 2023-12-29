@@ -15,10 +15,14 @@ class SignUpViewModel: ViewModel() {
         password: String,
         confirmPassword: String
     ) {
-        Log.d("pas", password)
-        Log.d("pas2", confirmPassword)
         if(password == confirmPassword) {
-            val user = UserModel(name, surname, eMail, password)
+            val user = UserModel(
+                name.lowercase(),
+                surname.lowercase(),
+                eMail.lowercase(),
+                password,
+                ""
+            )
             fireBaseManager.createAUser(user)
         } else {
 
