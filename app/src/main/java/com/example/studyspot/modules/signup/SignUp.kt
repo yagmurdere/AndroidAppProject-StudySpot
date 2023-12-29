@@ -252,6 +252,8 @@ fun inputComponent() {
             .fillMaxWidth()
             .padding(0.dp, 4.dp),
         textStyle = androidx.compose.ui.text.TextStyle(color = Color.White),
+        visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         decorationBox = { innerTextField ->
             Row(
                 modifier = Modifier
@@ -292,6 +294,8 @@ fun inputComponent() {
             .fillMaxWidth()
             .padding(0.dp, 8.dp),
         textStyle = androidx.compose.ui.text.TextStyle(color = Color.White),
+        visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         decorationBox = { innerTextField ->
             Row(
                 modifier = Modifier
