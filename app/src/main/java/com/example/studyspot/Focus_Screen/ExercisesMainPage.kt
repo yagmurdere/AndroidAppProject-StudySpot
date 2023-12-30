@@ -4,8 +4,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -19,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,14 +35,16 @@ import com.example.studyspot.ui.theme.StudySpotTheme
 fun mainScreen(exercisesData: exerciseViewModel,
                navController: NavController
 ){
-    Box(modifier = Modifier.fillMaxSize()){
+    Column(modifier = Modifier.fillMaxSize()){
         Image(painter = painterResource(id = R.drawable.image_2),
             contentDescription = " ",
-            modifier = Modifier.matchParentSize(),
+            modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.FillBounds)
-        Text(text = "Let's Focus")
+
 
     }
+    Text(text = "Let's Focus", fontSize = 45.sp, color = colorResource(id = R.color.focusTextColor))
+    Spacer(modifier = Modifier.padding(bottom = 20.dp))
     LazyColumn(contentPadding = PaddingValues(16.dp)){
 
         val itemCount=exercisesData.exerciseNames.size
@@ -48,7 +53,6 @@ fun mainScreen(exercisesData: exerciseViewModel,
                 itemIndex=item,
                 title=exercisesData.exerciseNames,
                 navController=navController,
-                definitons = exercisesData.definitons1
             )
 
         }
@@ -60,7 +64,6 @@ fun mainScreen(exercisesData: exerciseViewModel,
 fun ColumnItem(
     itemIndex: Int,
     title: Array<String>,
-    definitons: Array<String>,
     navController: NavController
 ) {
     Card (modifier = Modifier
@@ -78,7 +81,8 @@ fun ColumnItem(
         {
             Text(text = title[itemIndex],
                 fontWeight = FontWeight.Bold,
-                fontSize = 24.sp
+                fontSize = 20.sp,
+                color = colorResource(id = R.color.focusTextColor)
             )
         }
 
