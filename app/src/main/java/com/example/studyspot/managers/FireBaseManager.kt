@@ -2,6 +2,7 @@ package com.example.studyspot.managers
 
 import android.content.Context
 import com.example.studyspot.entities.UserModel
+import com.example.studyspot.utilities.errors.FireBaseError
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -14,10 +15,10 @@ class FireBaseManager {
         .getReference("Users")
         private lateinit var auth: FirebaseAuth
 
-    fun createAUser(user: UserModel): Boolean {
+    fun createAUser(user: UserModel): FireBaseError {
         val userId = realTimeDBReferance.push().key!!
-        var isSuccess: Boolean = false
         auth = Firebase.auth
+        var error = FireBaseError.Sucess
 
         auth.createUserWithEmailAndPassword(user.eMail, user.password)
             .addOnCompleteListener() { task ->
@@ -27,15 +28,14 @@ class FireBaseManager {
                     user.id = uid
                     realTimeDBReferance.child(userId).setValue(user)
                         .addOnCompleteListener{
-                            isSuccess = true
+                            error = FireBaseError.Sucess
                         } .addOnFailureListener {
-                            isSuccess = false
+                            error = FireBaseError.ConnectionError
                         }
                 } else {
-
-                    isSuccess = false
+                    error = FireBaseError.UndifiendError
                 }
             }
-        return isSuccess
+        return error
     }
 }
