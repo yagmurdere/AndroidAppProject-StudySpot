@@ -13,12 +13,12 @@ class exerciseViewModel:ViewModel() {
         R.drawable.time_management_skills_image
     )
     val exerciseNames = arrayOf(
-        "Pomodoro Technique",
-        "Meditation and Focus Exercises",
-        "Mental Break Activities",
-        "Quick Scan Glance, Learn",
-        "Concentration Meditation",
-        "Time Management Skills"
+        "POMODORO TECHNIQUE",
+        "MEDITATION AND FOCUS EXERCISES ",
+        "MENTAL BREAK ACTIVITIES",
+        "QUICK SCAN GLANCE, LEARN",
+        "CONCENTRATION MEDITATION",
+        "TIME MANAGEMENT SKILLS"
     )
     val headLine1=arrayOf(
         "What is the Pomodoro Technique?",
