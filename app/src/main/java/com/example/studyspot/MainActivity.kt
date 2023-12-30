@@ -1,4 +1,4 @@
-package com.example.studyspot.modules.signup
+package com.example.studyspot
 
 import android.os.Bundle
 import android.util.Log
@@ -16,8 +16,10 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.compose.rememberNavController
 import com.example.studyspot.modules.signup.SignUp
 import com.example.studyspot.ui.theme.StudySpotTheme
+import com.example.studyspot.utilities.NavigationSetup
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +31,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SignUp()
+                    NavigationSetup(navController = rememberNavController())
                 }
             }
         }
