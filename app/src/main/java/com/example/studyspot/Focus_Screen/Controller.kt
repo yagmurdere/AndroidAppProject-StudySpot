@@ -24,9 +24,7 @@ fun pageController(exerciseViewModel: exerciseViewModel= viewModel()){
                 }
             )
         ){index->
-            DetailScreen(photos = exerciseViewModel.imageId,
-                names = exerciseViewModel.exerciseNames,
-                definition = exerciseViewModel.definitons1,
+            DetailScreen(exerciseViewModel,
                 itemIndex = index.arguments?.getInt("index") ,
                 navController=navController
             )
