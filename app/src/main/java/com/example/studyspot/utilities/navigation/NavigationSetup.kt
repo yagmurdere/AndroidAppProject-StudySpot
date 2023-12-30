@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.studyspot.ProfileEditScreen.ProfilEditSayfasi
 import com.example.studyspot.ProfileScreen.ProfilSayfasi
+import com.example.studyspot.SettingsScreen.AyarlarSayfasi
 import com.example.studyspot.modules.login.Login
 import com.example.studyspot.modules.mapdetail.MapDetail
 import com.example.studyspot.modules.signup.SignUp
@@ -41,6 +42,11 @@ fun NavigationSetup(navController: NavHostController) {
         composable(
             "profileedit"){
             ProfilEditSayfasi(navController = navController)
+
+        }
+        composable(
+            "settings"){
+            AyarlarSayfasi(navController = navController)
 
         }
 

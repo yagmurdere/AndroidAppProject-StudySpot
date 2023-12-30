@@ -53,232 +53,236 @@ import com.example.studyspot.ui.theme.StudySpotTheme
 import com.example.studyspot.utilities.navigation.NavigationSetup
 
 
+
 @Composable
 fun ProfilSayfasi(navController: NavController) {
-    Column(
-        Modifier.paint(
-            painterResource(id = R.drawable.profile_background),
-            contentScale = ContentScale.FillBounds
-        )
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 10.dp, end = 10.dp),
-            horizontalArrangement = Arrangement.End
-        )
-        {
-            IconButton(
-                onClick = {
-                    navController.navigate("settings")
-                    Log.d("Navigation", "Settings icon clicked")
-                }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.settings_iconn),
-                    contentDescription = "goto settings screen", tint = Color.White
-                )
+
+    Column(Modifier.paint(painterResource(id = R.drawable.profile_background), contentScale = ContentScale.FillBounds))
+    {
+        Row(modifier= Modifier
+            .fillMaxWidth()
+            .padding(top = 10.dp, end = 10.dp),
+            horizontalArrangement = Arrangement.End) {
+            IconButton(onClick = {navController.navigate("settings")
+
+                Log.d("Navigation", "Settings button clicked")
+            }) {
+                Icon(painter = painterResource(id = R.drawable.settings_iconn), contentDescription = "goto settings page ")
             }
-            Column(
+        }
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .padding(15.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.profile_img),
+                contentDescription = "Profile Image",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(150.dp)
+                    .clip(CircleShape)
+                    .border(3.dp, Color.Blue, CircleShape)
+            )
+            Text(text = "John Doe", modifier = Modifier.padding(all = 10.dp), fontSize = 40.sp, color=Color.White)
+            TextButton(onClick = { navController.navigate("profileedit") }) {
+                Text(text = "Edit Profile")
+            }
+        }
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(10.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            )
-            {
-                Image(
-                    modifier = Modifier
-                        .size(150.dp)
-                        .clip(CircleShape)
-                        .border(3.dp, Color.Blue, CircleShape),
-                    painter = painterResource(id = R.drawable.profile_img),
-                    contentDescription = "Profile Img",
-                    contentScale = ContentScale.Crop
-                )
-                Text(
-                    text = "John Doe",
-                    modifier = Modifier.padding(all = 5.dp),
-                    fontSize = 40.sp,
-                    color = Color.White
-                )
-                TextButton(onClick = { navController.navigate("profileedit") }) {
-                    Text(text = "Edit Profile")
-                }
-
-            }
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .padding(start = 26.dp, end = 26.dp)
+                    .background(
+                        colorResource(id = R.color.profileBG1).copy(alpha = 0.3f),
+                        shape = MaterialTheme.shapes.medium
+                    )
             ) {
-                Box(
+                Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 26.dp)
-                        .background(
-                            colorResource(id = R.color.profileBG1).copy(alpha = 0.3f),
-                            shape = MaterialTheme.shapes.medium
-                        )
                 ) {
-                    Column(modifier = Modifier.fillMaxWidth()) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 15.dp, top = 10.dp, end = 10.dp)
-                        ) {
-                            Text(
-                                text = "Favorite Places",
-                                color = colorResource(id = R.color.ProfileTextColor),
-                                fontSize = 15.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-                        }
-                    }
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(start = 15.dp, top = 30.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(text = "Depo", color = Color.Black, fontSize = 13.sp)
-                    }
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 15.dp, top = 48.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(text = "Kafein", color = Color.Black, fontSize = 13.sp)
-                    }
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 15.dp, top = 66.dp, bottom = 15.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(text = "Fine Arts Building", color = Color.Black, fontSize = 13.sp)
-                    }
-
-                }
-
-
-                Column(
-                    Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 30.dp, top = 15.dp, bottom = 15.dp)
+                            .padding(start = 15.dp, top = 10.dp, bottom = 10.dp)
                     ) {
                         Text(
-                            text = "Comment History",
+                            text = "Fav Places",
                             color = colorResource(id = R.color.ProfileTextColor),
                             fontSize = 15.sp,
                             fontWeight = FontWeight.Bold
                         )
                     }
                 }
-
-                //boxList olusturdum
-                val itemList=(1..4).map {  }
-
-                LazyColumn(
+                Row(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) { items(itemList) { item->
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 10.dp, end = 10.dp)
-                                .background(
-                                    colorResource(id = R.color.profileBG1).copy(alpha = 0.3f),
-                                    shape = MaterialTheme.shapes.medium
-                                )
-                        )
-
-                        {
-                            Column {
-                                Row(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(
-                                            start = 10.dp,
-                                            top = 10.dp,
-                                            bottom = 15.dp,
-                                            end = 10.dp
-                                        ),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.SpaceBetween
-                                ) {
-
-                                    Text(
-                                        text = "John Doe",
-                                        color = colorResource(id = R.color.ProfileTextColor),
-                                        fontSize = 13.sp,
-                                        textAlign = TextAlign.Left)
-
-
-                                    var myrating by remember { mutableStateOf(2) }
-                                    @Composable
-                                    fun RatingBar(
-                                        maxRating: Int=5,
-                                        currentRating:Int,
-                                        onRatingChanged: (Int) -> Unit,
-
-                                        ) {
-                                        Row() {
-                                            for (i in 1..5) {
-                                                Icon(
-                                                    imageVector = if (i <= currentRating) Icons.Filled.Star
-                                                    else Icons.Outlined.Star,
-                                                    contentDescription = null,
-                                                    tint = if (i <= currentRating) Color.Yellow
-                                                    else Color.Unspecified,
-                                                    modifier = Modifier
-                                                        .clickable { onRatingChanged(i) }
-                                                        .padding(4.dp)
-
-                                                )
-                                            }
-                                        }
-                                    }
-
-                                    RatingBar(currentRating = myrating,
-                                        onRatingChanged ={myrating=it})
-
-
-                                }
-                                Box(modifier = Modifier.fillMaxWidth()) {
-                                    Column(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(start = 10.dp, end = 10.dp, bottom = 15.dp)
-                                    ) {
-                                        Text(
-                                            text = "Müzik çok yüksekti ama kahve inanılmazdı.",
-                                            fontSize = 13.sp
-                                        )
-
-                                    }
-
-                                }
-                            }
-                        }
-                        Spacer(modifier = Modifier.size(10.dp))
-                    }
+                        .fillMaxWidth()
+                        .padding(start = 15.dp, top = 30.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(text = "Depo", color = Color.Black, fontSize = 13.sp)
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 15.dp, top = 48.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(text = "Kafein", color = Color.Black, fontSize = 13.sp)
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 15.dp, top = 66.dp, bottom = 15.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(text = "Fine Arts Building", color = Color.Black, fontSize = 13.sp)
                 }
             }
+            /***********************************************************************/
+            Column(
+                Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 30.dp, top = 15.dp, bottom = 15.dp)
+                ) {
+                    Text(
+                        text = "Comment History",
+                        color = colorResource(id = R.color.ProfileTextColor),
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
+            val itemList=(1..4).map {}
+            //boxList olusturdum
+            LazyColumn(modifier= Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {items(itemList) { item ->
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 10.dp, end = 10.dp)
+                        .background(
+                            colorResource(id = R.color.profileBG1).copy(alpha = 0.3f),
+                            shape = MaterialTheme.shapes.medium
+                        ))
+
+                {
+                    Column {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(
+                                    start = 10.dp,
+                                    top = 10.dp,
+                                    bottom = 15.dp,
+                                    end = 10.dp
+                                ),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+
+                            Text(
+                                text = "John Doe",
+                                color = colorResource(id = R.color.ProfileTextColor),
+                                fontSize = 13.sp,
+                                textAlign = TextAlign.Left
+
+                            )
+
+                            var myRating by remember { mutableStateOf(2) }
+                            @Composable
+                            fun RatingBar(
+                                maxRating: Int=5,
+                                currentRating:Int,
+                                onRatingChanged: (Int) -> Unit,
+
+                                ) {
+                                Row() {
+                                    for (i in 1..5) {
+                                        Icon(
+                                            imageVector = if (i <= currentRating) Icons.Filled.Star
+                                            else Icons.Outlined.Star,
+                                            contentDescription = null,
+                                            tint = if (i <= currentRating) Color.Yellow
+                                            else Color.Unspecified,
+                                            modifier = Modifier
+                                                .clickable { onRatingChanged(i) }
+                                                .padding(4.dp)
+
+                                        )
+                                    }
+                                }
+                            }
+
+                            RatingBar(
+                                currentRating = myRating,
+                                onRatingChanged = { myRating = it }
+                            )
+                        }
+                        Box(modifier = Modifier.fillMaxWidth()) {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(start = 10.dp, end = 10.dp, bottom = 15.dp)
+                            ) {
+                                Text(
+                                    text = "Müzik çok yüksekti ama kahve inanılmazdı.",
+                                    fontSize = 13.sp
+                                )
+                            }
+
+                        }
+                    }
+                }
+                Spacer(modifier = Modifier.size(10.dp))
+
+
+
+
+            }
+
+
+            }
+
+
         }
+
+
+
+
+
     }
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 @Preview
 @Composable
