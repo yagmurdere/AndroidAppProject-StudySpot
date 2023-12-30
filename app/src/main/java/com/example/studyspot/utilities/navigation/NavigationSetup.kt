@@ -1,17 +1,19 @@
 package com.example.studyspot.utilities.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.studyspot.ProfileEditScreen.ProfilEditSayfasi
+import com.example.studyspot.ProfileScreen.ProfilSayfasi
 import com.example.studyspot.modules.login.Login
 import com.example.studyspot.modules.mapdetail.MapDetail
 import com.example.studyspot.modules.signup.SignUp
 
 @Composable
-fun NavigationSetup(
-    navController: NavHostController
-) {
+fun NavigationSetup(navController: NavHostController) {
+
     NavHost(
         navController = navController,
         startDestination = Screen.SignUp.route
@@ -31,5 +33,16 @@ fun NavigationSetup(
         ) {
             Login(navController = navController)
         }
+        composable(
+            "profile"
+        ){
+            ProfilSayfasi(navController = navController)
+        }
+        composable(
+            "profileedit"){
+            ProfilEditSayfasi(navController = navController)
+
+        }
+
     }
 }
