@@ -1,5 +1,7 @@
 package com.example.studyspot.modules.signup
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -54,15 +56,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.studyspot.R
 import com.example.studyspot.ui.theme.StudySpotTheme
+import com.example.studyspot.utilities.Screen
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 import org.w3c.dom.Text
 import java.time.format.TextStyle
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalTextApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUp() {
+fun SignUp(navController: NavController) {
     val customScreenWidth = LocalConfiguration.current.screenWidthDp * 0.75
 
     Box(
@@ -94,7 +98,7 @@ fun SignUp() {
                 Column(
                     modifier = Modifier.width(customScreenWidth.dp)
                 ) {
-                    inputComponent()
+                    inputComponent(navController)
                 }
             }
 
@@ -104,7 +108,7 @@ fun SignUp() {
 
 @ExperimentalMaterial3Api
 @Composable
-fun inputComponent() {
+fun inputComponent(navController: NavController) {
     var nameText by remember { mutableStateOf(TextFieldValue("")) }
     var surnameText by remember { mutableStateOf(TextFieldValue("")) }
     var eMailText by remember { mutableStateOf(TextFieldValue("")) }
@@ -360,7 +364,7 @@ fun inputComponent() {
             colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
             contentPadding = PaddingValues(),
             onClick = {
-                viewModel.createUser(
+                val isSuccess = viewModel.createUser(
                     nameText.text,
                     surnameText.text,
                     eMailText.text,
