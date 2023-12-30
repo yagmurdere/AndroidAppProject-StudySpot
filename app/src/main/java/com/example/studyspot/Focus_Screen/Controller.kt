@@ -1,7 +1,9 @@
-package com.example.studyspot.FocusPage
+package com.example.studyspot.Focus_Screen
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -9,12 +11,11 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 
 @Composable
-fun exercisesData() {
-    val exerciseClass = remember { exerciseDataClass() }
+fun pageController(exerciseViewModel: exerciseViewModel= viewModel()){
     val navController= rememberNavController()
-    NavHost(navController = navController, startDestination =  "MainScreen"){
+    NavHost(navController = navController, startDestination = "MainScreen" ){
         composable("MainScreen"){
-            myApp(exerciseClass,navController)
+            mainScreen(exercisesData = exerciseViewModel, navController =navController )
         }
         composable("DetailScreen/{index}",
             arguments = listOf(
@@ -23,14 +24,14 @@ fun exercisesData() {
                 }
             )
         ){index->
-            DetailScreen(photos = exerciseClass.imageId,
-                names = exerciseClass.exerciseNames,
-                definition = exerciseClass.definitons,
+            DetailScreen(photos = exerciseViewModel.imageId,
+                names = exerciseViewModel.exerciseNames,
+                definition = exerciseViewModel.definitons1,
                 itemIndex = index.arguments?.getInt("index") ,
                 navController=navController
             )
         }
 
-
     }
+
 }

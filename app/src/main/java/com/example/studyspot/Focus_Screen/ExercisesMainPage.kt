@@ -1,4 +1,4 @@
-package com.example.studyspot.FocusPage
+package com.example.studyspot.Focus_Screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -29,8 +29,9 @@ import com.example.studyspot.R
 import com.example.studyspot.ui.theme.StudySpotTheme
 
 @Composable
-fun myApp(exerciseClass:exerciseDataClass,
-          navController:NavController){
+fun mainScreen(exercisesData: exerciseViewModel,
+               navController: NavController
+){
     Box(modifier = Modifier.fillMaxSize()){
         Image(painter = painterResource(id = R.drawable.image_2),
             contentDescription = " ",
@@ -41,23 +42,27 @@ fun myApp(exerciseClass:exerciseDataClass,
     }
     LazyColumn(contentPadding = PaddingValues(16.dp)){
 
-        val itemCount=exerciseClass.exerciseNames.size
+        val itemCount=exercisesData.exerciseNames.size
         items(itemCount){ item->
             ColumnItem(
                 itemIndex=item,
-                title=exerciseClass.exerciseNames,
-                navController=navController
+                title=exercisesData.exerciseNames,
+                navController=navController,
+                definitons = exercisesData.definitons1
             )
 
         }
     }
+
 }
 
 @Composable
-fun ColumnItem(itemIndex: Int,
-               title: Array<String>,
-               navController: NavController)
-{
+fun ColumnItem(
+    itemIndex: Int,
+    title: Array<String>,
+    definitons: Array<String>,
+    navController: NavController
+) {
     Card (modifier = Modifier
         .padding(10.dp)
         .wrapContentSize()
@@ -79,11 +84,10 @@ fun ColumnItem(itemIndex: Int,
 
     }
 }
-
 @Composable
 @Preview(showBackground = true)
 fun myAppPreview(){
     StudySpotTheme {
-        exercisesData()
+        pageController()
     }
 }
