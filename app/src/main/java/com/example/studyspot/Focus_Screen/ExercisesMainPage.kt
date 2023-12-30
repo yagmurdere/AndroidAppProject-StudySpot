@@ -2,6 +2,7 @@ package com.example.studyspot.Focus_Screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -27,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
@@ -83,10 +85,20 @@ fun ColumnItem(
         .fillMaxSize()
         .height(66.dp)
         .clip(shape = RoundedCornerShape(15.dp))
-        .background(color = colorResource(id = R.color.focusCardBG).copy(alpha = 0.5f))
+        .background(
+            brush = Brush
+                .verticalGradient(
+                    colors = listOf(
+                        colorResource(id = R.color.focusCardBG2).copy(alpha = 0.5f),
+                        colorResource(id = R.color.focusCardBG1).copy(alpha = 0.5f)
+                    )
+                )
+        )
         .clickable { navController.navigate("DetailScreen/$itemIndex") })
     {
-        Row(modifier = Modifier.fillMaxSize().padding(start = 10.dp),
+        Row(modifier = Modifier
+            .fillMaxSize()
+            .padding(start = 10.dp),
             verticalAlignment = Alignment.CenterVertically)
         {
             Text(text = title[itemIndex],

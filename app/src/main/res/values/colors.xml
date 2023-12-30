@@ -8,5 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="focusTextColor">#FF5E44FF</color>
-    <color name="focusCardBG">#FFE8F5FF</color>
+    <color name="focusCardBG1">#FF6779B9</color>
+    <color name="focusCardBG2">#FFE8F5FF</color>
 </resources>
