@@ -65,43 +65,44 @@ fun DetailScreen(
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.FillBounds)
     }
-    Column(horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(25.dp))
-    {
-        Row (modifier = Modifier.fillMaxWidth())
-        {
-            IconButton({navController.navigate("MainScreen")})  {
-                Icon(painter = painterResource(id = R.drawable.back_icon), contentDescription =" ", tint = colorResource(
-                    id = R.color.focusTextColor) )
+    
+    
+    LazyColumn(modifier = Modifier
+        .fillMaxSize()
+        .padding(25.dp)){
+        item{
+            Row (modifier = Modifier.fillMaxWidth())
+            {
+                IconButton({navController.navigate("MainScreen")})  {
+                    Icon(painter = painterResource(id = R.drawable.back_icon), contentDescription =" ", tint = colorResource(
+                        id = R.color.focusTextColor) )
 
-            }
-            Text(text = exerciseViewModel.exerciseNames[itemIndex!!], fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 10.dp),
-                color = colorResource(id = R.color.focusTextColor)
-            )
-        }
-        Image(painter = painterResource(id = exerciseViewModel.imageId[itemIndex!!]), contentDescription =" ",
-            modifier = Modifier
-                .size(224.dp, 224.dp)
-                .padding(top = 10.dp))
-
-
-        LazyColumn(modifier = Modifier.padding(start = 20.dp,top = 20.dp, end = 20.dp)){
-            items(8){
-                i->
-                Text(text = headLines[i][itemIndex!!], fontSize = 18.sp,
-                    color = colorResource(id = R.color.focusTextColor),
+                }
+                Text(text = exerciseViewModel.exerciseNames[itemIndex!!], fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(bottom = 5.dp))
-                Text(text = definitions[i][itemIndex!!], fontSize = 16.sp)
-                Spacer(modifier = Modifier.padding(bottom = 15.dp))
+                    modifier = Modifier.padding(top = 10.dp),
+                    color = colorResource(id = R.color.focusTextColor)
+                )
             }
-        }
-        
+            Image(painter = painterResource(id = exerciseViewModel.imageId[itemIndex!!]), contentDescription =" ",
+                modifier = Modifier
+                    .size(224.dp, 224.dp)
+                    .padding(top = 10.dp))
 
+
+
+
+        }
+        items(8){
+                i->
+            Text(text = headLines[i][itemIndex!!], fontSize = 18.sp,
+                color = colorResource(id = R.color.focusTextColor),
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(bottom = 5.dp))
+            Text(text = definitions[i][itemIndex!!], fontSize = 16.sp)
+            Spacer(modifier = Modifier.padding(bottom = 15.dp))
+        }
     }
+
 }
 
