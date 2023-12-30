@@ -71,28 +71,29 @@ fun DetailScreen(
         .fillMaxSize()
         .padding(25.dp)){
         item{
-            Row (modifier = Modifier.fillMaxWidth())
-            {
-                IconButton({navController.navigate("MainScreen")})  {
-                    Icon(painter = painterResource(id = R.drawable.back_icon), contentDescription =" ", tint = colorResource(
-                        id = R.color.focusTextColor) )
+            Column (horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize()){
+                Row (modifier = Modifier.fillMaxWidth())
+                {
+                    IconButton({navController.navigate("MainScreen")})  {
+                        Icon(painter = painterResource(id = R.drawable.back_icon), contentDescription =" ", tint = colorResource(
+                            id = R.color.focusTextColor) )
 
+                    }
+                    Text(text = exerciseViewModel.exerciseNames[itemIndex!!], fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(top = 10.dp),
+                        color = colorResource(id = R.color.focusTextColor)
+                    )
                 }
-                Text(text = exerciseViewModel.exerciseNames[itemIndex!!], fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = 10.dp),
-                    color = colorResource(id = R.color.focusTextColor)
-                )
+                Image(painter = painterResource(id = exerciseViewModel.imageId[itemIndex!!]), contentDescription =" ",
+                    modifier = Modifier
+                        .size(224.dp, 224.dp)
+                        .padding(top = 10.dp, bottom = 20.dp))
+
             }
-            Image(painter = painterResource(id = exerciseViewModel.imageId[itemIndex!!]), contentDescription =" ",
-                modifier = Modifier
-                    .size(224.dp, 224.dp)
-                    .padding(top = 10.dp))
+            }
 
-
-
-
-        }
         items(8){
                 i->
             Text(text = headLines[i][itemIndex!!], fontSize = 18.sp,
