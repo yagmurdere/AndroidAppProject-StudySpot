@@ -1,9 +1,10 @@
-package com.example.studyspot.utilities
+package com.example.studyspot.utilities.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.studyspot.modules.login.Login
 import com.example.studyspot.modules.mapdetail.MapDetail
 import com.example.studyspot.modules.signup.SignUp
 
@@ -24,6 +25,11 @@ fun NavigationSetup(
             route = Screen.MapDetail.route
         ) {
             MapDetail(navController = navController)
+        }
+        composable(
+            route = Screen.Login.route
+        ) {
+            Login(navController = navController)
         }
     }
 }

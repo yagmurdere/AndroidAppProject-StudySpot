@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.studyspot.entities.UserModel
 import com.example.studyspot.managers.FireBaseManager
+import com.example.studyspot.utilities.errors.FireBaseError
 
 class SignUpViewModel: ViewModel() {
     private val fireBaseManager = FireBaseManager()
@@ -14,7 +15,7 @@ class SignUpViewModel: ViewModel() {
         eMail: String,
         password: String,
         confirmPassword: String
-    ) {
+    ): FireBaseError {
         if(password == confirmPassword) {
             val user = UserModel(
                 name.lowercase(),
@@ -23,9 +24,9 @@ class SignUpViewModel: ViewModel() {
                 password,
                 ""
             )
-            fireBaseManager.createAUser(user)
+            return fireBaseManager.createAUser(user)
         } else {
-
+            return FireBaseError.PasswordNotEqual
         }
     }
 }

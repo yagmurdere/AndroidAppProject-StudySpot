@@ -25,10 +25,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,37 +34,30 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.DefaultShadowColor
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.studyspot.R
-import com.example.studyspot.ui.theme.StudySpotTheme
-import com.example.studyspot.utilities.Screen
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
-import org.w3c.dom.Text
-import java.time.format.TextStyle
+import com.example.studyspot.utilities.errors.FireBaseError
+import com.example.studyspot.utilities.navigation.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignUp(navController: NavController) {
     val customScreenWidth = LocalConfiguration.current.screenWidthDp * 0.75
+    val context = LocalContext.current
 
     Box(
         modifier = Modifier
@@ -98,7 +88,7 @@ fun SignUp(navController: NavController) {
                 Column(
                     modifier = Modifier.width(customScreenWidth.dp)
                 ) {
-                    inputComponent(navController)
+                    inputComponent(navController, context)
                 }
             }
 
@@ -108,7 +98,7 @@ fun SignUp(navController: NavController) {
 
 @ExperimentalMaterial3Api
 @Composable
-fun inputComponent(navController: NavController) {
+fun inputComponent(navController: NavController, context: Context) {
     var nameText by remember { mutableStateOf(TextFieldValue("")) }
     var surnameText by remember { mutableStateOf(TextFieldValue("")) }
     var eMailText by remember { mutableStateOf(TextFieldValue("")) }
@@ -364,13 +354,20 @@ fun inputComponent(navController: NavController) {
             colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
             contentPadding = PaddingValues(),
             onClick = {
-                val isSuccess = viewModel.createUser(
+                val returnFromFireBase = viewModel.createUser(
                     nameText.text,
                     surnameText.text,
                     eMailText.text,
                     passwordText.text,
                     confirmPasswordText.text
                 )
+
+                when(returnFromFireBase) {
+                    FireBaseError.Sucess -> navController.navigate(Screen.Login.route)
+                    FireBaseError.ConnectionError -> Toast.makeText(context, "There is a connection error", Toast.LENGTH_LONG).show()
+                    FireBaseError.PasswordNotEqual -> Toast.makeText(context, "Passwords are not equal.", Toast.LENGTH_LONG).show()
+                    FireBaseError.UndifiendError -> Toast.makeText(context, "Undifiend error", Toast.LENGTH_LONG).show()
+                }
             },
             shape = RoundedCornerShape(20.dp),
         ) {
