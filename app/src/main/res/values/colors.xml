@@ -7,10 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="focusTextColor">#FF5E44FF</color>
+    /*FOCUS PAGE COLORS*/
     <color name="focusCardBG1">#FF6779B9</color>
     <color name="focusCardBG2">#FFE8F5FF</color>
-    <color name="profileBG1">#6779B9</color>
-    <color name="ProfileTextColor">#FF5E44FF</color>
-
+    <color name="buttoncolor">#FF636FAD</color>
+    <color name="FocusPagemaincolor">#FF5E44FF</color>
+    /*PROFILE PAGE COLORS*/
+    <color name="profileBG1">#FFFFFFFF</color>
+    <color name="ProfileTextColor">#FF000000</color>
 </resources>
