@@ -55,7 +55,7 @@ fun mainScreen(exercisesData: exerciseViewModel,
 
     }
     Row(modifier = Modifier.padding(start = 44.dp, top = 76.dp)) {
-        Text(text = "Let's Focus", fontSize = 45.sp, fontWeight = FontWeight.Bold,color = colorResource(id = R.color.focusTextColor))
+        Text(text = "Let's Focus", fontSize = 45.sp, fontWeight = FontWeight.Bold,color = colorResource(id = R.color.FocusPagemaincolor))
 
     }
 
@@ -104,7 +104,7 @@ fun ColumnItem(
             Text(text = title[itemIndex],
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
-                color = colorResource(id = R.color.focusTextColor)
+                color = colorResource(id = R.color.FocusPagemaincolor)
             )
         }
 

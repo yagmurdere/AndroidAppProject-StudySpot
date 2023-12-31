@@ -77,19 +77,25 @@ fun DetailScreen(
                 {
                     IconButton({navController.navigate("MainScreen")})  {
                         Icon(painter = painterResource(id = R.drawable.back_icon), contentDescription =" ", tint = colorResource(
-                            id = R.color.focusTextColor) )
+                            id = R.color.FocusPagemaincolor) )
 
                     }
                     Text(text = exerciseViewModel.exerciseNames[itemIndex!!], fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(top = 10.dp),
-                        color = colorResource(id = R.color.focusTextColor)
+                        color = colorResource(id = R.color.FocusPagemaincolor)
                     )
                 }
-                Image(painter = painterResource(id = exerciseViewModel.imageId[itemIndex!!]), contentDescription =" ",
-                    modifier = Modifier
-                        .size(224.dp, 224.dp)
-                        .padding(top = 10.dp, bottom = 20.dp))
+                if(exerciseViewModel.exerciseNames[itemIndex!!]=="POMODORO TECHNIQUE"){
+                    mainSurface()
+                }
+                else{
+                    Image(painter = painterResource(id = exerciseViewModel.imageId[itemIndex!!]), contentDescription =" ",
+                        modifier = Modifier
+                            .size(224.dp, 224.dp)
+                            .padding(top = 10.dp, bottom = 20.dp))
+                }
+
 
             }
             }
@@ -97,7 +103,7 @@ fun DetailScreen(
         items(8){
                 i->
             Text(text = headLines[i][itemIndex!!], fontSize = 18.sp,
-                color = colorResource(id = R.color.focusTextColor),
+                color = colorResource(id = R.color.FocusPagemaincolor),
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 5.dp))
             Text(text = definitions[i][itemIndex!!], fontSize = 16.sp)

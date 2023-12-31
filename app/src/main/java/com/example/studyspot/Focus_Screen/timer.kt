@@ -1,10 +1,14 @@
 package com.example.studyspot.Focus_Screen
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -14,30 +18,35 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.studyspot.R
 import com.example.studyspot.ui.theme.StudySpotTheme
 import kotlinx.coroutines.delay
 import kotlin.concurrent.timer
 import kotlin.math.PI
 import kotlin.math.cos
+import kotlin.math.floor
 import kotlin.math.sin
 
 @Composable
 fun timerPomodoro(
     totalTime:Long,
-    handleColor: Color,
     inactiveBarColor:Color,
     activeBarColor:Color,
     modifier: Modifier=Modifier,
@@ -88,51 +97,55 @@ fun timerPomodoro(
                 val r=size.width/2f
                 val a = cos(beta) *r
                 val b = sin(beta) *r
-                drawPoints(
-                    listOf(Offset( center.x+a,center.y+b)),
-                    pointMode = PointMode.Points,
-                    color = handleColor,
-                    strokeWidth=(strokeWidth*3f).toPx(),
-                    cap = StrokeCap.Round
-                )
             }
-            Text(text = (currentTime / 1000L).toString(),
-                fontSize = 44.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.DarkGray
-            )
-            Button(onClick = {
+            IconButton(onClick = {
                 if(currentTime<=0L){
                     currentTime=totalTime
                     isTimerRunning=true
                 }else{
                     isTimerRunning=!isTimerRunning
                 }
-            },
-                modifier= Modifier.align(Alignment.BottomCenter),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = if(!isTimerRunning || currentTime<=0L){
-                        Color.Green
-                    }
-                    else{
-                        Color.Red
-                    }
-                )) {
-                Text(text = if (isTimerRunning && currentTime>=0L)"Stop"
-                else if(!isTimerRunning && currentTime >=0L)"Start"
-                else "Restart")
-
-
+            }, modifier = Modifier
+                .align(Alignment.Center)
+                .clip(shape = CircleShape)
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            colorResource(id = R.color.focusCardBG2).copy(alpha = 0.5f),
+                            colorResource(id = R.color.focusCardBG1).copy(alpha = 0.5f)
+                        )
+                    )
+                )
+            ) {
+                Icon(painter = if(isTimerRunning && currentTime>=0L) painterResource(id = R.drawable.pause)
+                else if (!isTimerRunning && currentTime >=0L) painterResource(id = R.drawable.play_arrow)
+                else painterResource(id = R.drawable.stop), contentDescription =" " ,
+                    modifier = Modifier.size(38.dp),
+                    tint = colorResource(id = R.color.FocusPagemaincolor)
+                )
             }
+            Text(text = formattedTime(milliseconds = currentTime),
+                fontSize = 44.sp,
+                fontWeight = FontWeight.Bold,
+                color = colorResource(id = R.color.FocusPagemaincolor),
+                modifier = Modifier.align(Alignment.BottomCenter)
+            )
+
         }
     }
+@Composable
+fun formattedTime(milliseconds:Long):String{
+    val totalSeconds = floor(milliseconds/1000.0).toLong()
+    val minutes = (totalSeconds / 60).toString().padStart(2, '0')
+    val seconds = (totalSeconds % 60).toString().padStart(2, '0')
+    return "$minutes:$seconds"
+}
 @Composable
 fun mainSurface(){
     Box(contentAlignment = Alignment.Center){
         timerPomodoro(totalTime = 15L * 1000L,
-            handleColor = Color.Green,
-            inactiveBarColor = Color.DarkGray,
-            activeBarColor = Color.Green,
+            inactiveBarColor = colorResource(id = R.color.focusCardBG1),
+            activeBarColor = colorResource(id = R.color.FocusPagemaincolor),
             modifier = Modifier.size(200.dp))
     }
 }
