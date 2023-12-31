@@ -65,35 +65,37 @@ fun DetailScreen(
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.FillBounds)
     }
-    
+
     
     LazyColumn(modifier = Modifier
         .fillMaxSize()
         .padding(25.dp)){
         item{
+            Row (modifier = Modifier.fillMaxWidth()
+                .padding(top = 20.dp))
+            {
+                IconButton({navController.navigate("MainScreen")})  {
+                    Icon(painter = painterResource(id = R.drawable.back_icon), contentDescription =" ", tint = colorResource(
+                        id = R.color.FocusPagemaincolor) )
+
+                }
+                Text(text = exerciseViewModel.exerciseNames[itemIndex!!], fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(top = 10.dp),
+                    color = colorResource(id = R.color.FocusPagemaincolor)
+                )
+            }
             Column (horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxSize()){
-                Row (modifier = Modifier.fillMaxWidth())
-                {
-                    IconButton({navController.navigate("MainScreen")})  {
-                        Icon(painter = painterResource(id = R.drawable.back_icon), contentDescription =" ", tint = colorResource(
-                            id = R.color.FocusPagemaincolor) )
 
-                    }
-                    Text(text = exerciseViewModel.exerciseNames[itemIndex!!], fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(top = 10.dp),
-                        color = colorResource(id = R.color.FocusPagemaincolor)
-                    )
-                }
                 if(exerciseViewModel.exerciseNames[itemIndex!!]=="POMODORO TECHNIQUE"){
                     mainSurface()
                 }
                 else{
                     Image(painter = painterResource(id = exerciseViewModel.imageId[itemIndex!!]), contentDescription =" ",
                         modifier = Modifier
-                            .size(224.dp, 224.dp)
-                            .padding(top = 10.dp, bottom = 20.dp))
+                            .size(250.dp, 250.dp)
+                            .padding(top = 15.dp, bottom = 25.dp))
                 }
 
 

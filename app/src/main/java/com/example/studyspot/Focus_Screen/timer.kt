@@ -3,6 +3,7 @@ package com.example.studyspot.Focus_Screen
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
@@ -142,8 +143,9 @@ fun formattedTime(milliseconds:Long):String{
 }
 @Composable
 fun mainSurface(){
-    Box(contentAlignment = Alignment.Center){
-        timerPomodoro(totalTime = 15L * 1000L,
+    Box(contentAlignment = Alignment.Center,
+        modifier = Modifier.padding(top = 15.dp, bottom = 25.dp)){
+        timerPomodoro(totalTime = 1500L * 1000L,
             inactiveBarColor = colorResource(id = R.color.focusCardBG1),
             activeBarColor = colorResource(id = R.color.FocusPagemaincolor),
             modifier = Modifier.size(200.dp))

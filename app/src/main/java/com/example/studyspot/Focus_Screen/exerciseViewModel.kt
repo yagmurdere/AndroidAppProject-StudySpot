@@ -14,7 +14,7 @@ class exerciseViewModel:ViewModel() {
     )
     val exerciseNames = arrayOf(
         "POMODORO TECHNIQUE",
-        "MEDITATION AND FOCUS EXERCISES ",
+        "MEDITATION AND FOCUS",
         "MENTAL BREAK ACTIVITIES",
         "QUICK SCAN GLANCE, LEARN",
         "CONCENTRATION MEDITATION",
