@@ -116,7 +116,7 @@ fun ProfilEditSayfasi(navController: NavController) {
 
             TextField(
                 value = name, onValueChange = { name = it },
-                modifier = Modifier.padding(top = 3.dp)
+                modifier = Modifier.padding( top = 3.dp )
                     .border(1.dp, Color.Gray, shape = MaterialTheme.shapes.small)
 
             )
