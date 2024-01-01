@@ -67,7 +67,7 @@ fun AyarlarSayfasi(navController: NavHostController) {
                         }
 
                     }
-                    Spacer(modifier = Modifier.padding(20.dp))
+                    Spacer(modifier = Modifier.padding(30.dp))
 
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
 

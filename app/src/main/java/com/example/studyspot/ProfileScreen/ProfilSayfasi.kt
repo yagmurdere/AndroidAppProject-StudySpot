@@ -215,6 +215,7 @@ fun ProfilSayfasi(navController: NavController) {
                                 onRatingChanged: (Int) -> Unit,
 
                                 ) {
+
                                 Row() {
                                     for (i in 1..5) {
                                         Icon(
