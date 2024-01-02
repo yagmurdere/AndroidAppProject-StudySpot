@@ -69,6 +69,7 @@ fun PrivacyPolicy(navController: NavController) {
                         .padding(30.dp)
                         .verticalScroll(rememberScrollState())
                 ) {
+
                     Column {
 
 
