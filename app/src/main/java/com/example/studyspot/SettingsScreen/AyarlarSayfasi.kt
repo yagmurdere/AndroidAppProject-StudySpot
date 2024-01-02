@@ -63,29 +63,20 @@ fun AyarlarSayfasi(navController: NavHostController) {
                                 painter = painterResource(id = R.drawable.back_icon),
                                 contentDescription = "back to profile", tint = Color.White
                             )
-
                         }
-
                     }
-                    Spacer(modifier = Modifier.padding(20.dp))
-
+                    Spacer(modifier = Modifier.padding(35.dp))
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
                         Text(
                             text = "Settings",
                             color = Color.White,
                             fontWeight = FontWeight.Bold,
-
-                            fontSize = 40.sp,
-
-                            )
+                            fontSize = 40.sp
+                        )
                     }
                 }
-
-
             }
-
-
         }
 
         Spacer(modifier = Modifier.padding(20.dp))
@@ -129,7 +120,24 @@ fun AyarlarSayfasi(navController: NavHostController) {
                             textAlign = TextAlign.Left
 
                         )
+                        /**/
+                        @Composable
+                        fun ModesIconToggle() {
+                            val checkState = remember { mutableStateOf(false) }
+                            IconToggleButton(checked = checkState.value, onCheckedChange = {
+                                checkState.value = !checkState.value
 
+                            }) {
+                                Icon(
+                                    painter = if (checkState.value) {
+                                        painterResource(id = R.drawable.toggle_on_button)
+                                    } else {
+                                        painterResource(id = R.drawable.toggle_off_button)
+                                    }, contentDescription = " ", tint = Color.White
+                                )
+
+                            }
+                        }
                         ModesIconToggle()
 
                     }
@@ -211,7 +219,8 @@ fun AyarlarSayfasi(navController: NavHostController) {
                             text = "Contact Us",
                             color = colorResource(id = R.color.ProfileTextColor),
                             fontSize = 15.sp,
-                            textAlign = TextAlign.Left)
+                            textAlign = TextAlign.Left
+                        )
 
                     }
 
@@ -257,26 +266,8 @@ fun AyarlarSayfasi(navController: NavHostController) {
                 }
             }
         }
-    }
-}
-
-
-
-
-
-
-
-@Composable
-fun ModesIconToggle(){
-    val checkState= remember{ mutableStateOf(false) }
-    IconToggleButton(checked = checkState.value, onCheckedChange = {
-        checkState.value = !checkState.value
-
-    }) {
-        Icon(painter = if (checkState.value){
-            painterResource(id = R.drawable.toggle_on_button)} else {
-            painterResource(id = R.drawable.toggle_off_button)}, contentDescription =" " , tint = Color.White )
 
     }
-}
 
+
+}

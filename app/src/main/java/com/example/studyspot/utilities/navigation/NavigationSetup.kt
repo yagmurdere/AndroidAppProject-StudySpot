@@ -5,6 +5,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.studyspot.PrivacyAndPolicyScreen.PrivacyPolicy
 import com.example.studyspot.ProfileEditScreen.ProfilEditSayfasi
 import com.example.studyspot.ProfileScreen.ProfilSayfasi
 import com.example.studyspot.SettingsScreen.AyarlarSayfasi
@@ -47,6 +48,11 @@ fun NavigationSetup(navController: NavHostController) {
         composable(
             "settings"){
             AyarlarSayfasi(navController = navController)
+
+        }
+        composable(
+            "privacyandpolicy"){
+            PrivacyPolicy(navController = navController)
 
         }
 
