@@ -15,4 +15,5 @@
     /*PROFILE PAGE COLORS*/
     <color name="profileBG1">#6779B9</color>
     <color name="ProfileTextColor">#FF5E44FF</color>
+
 </resources>

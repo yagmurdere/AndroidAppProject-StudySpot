@@ -32,6 +32,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -54,15 +55,21 @@ fun ProfilEditSayfasi(navController: NavController) {
                 .padding(top = 10.dp, end = 10.dp),
             horizontalArrangement = Arrangement.End
         ) {
-            IconButton(onClick = {
-                navController.navigate("settings")
-                Log.d("Navigation", "Settings button clicked")
-            }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.settings_iconn),
-                    contentDescription = "goto settings page ",
-                    tint = Color.White
-                )
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 30.dp),
+            ) {
+                IconButton(onClick = {
+                    navController.navigate("settings")
+                    Log.d("Navigation", "Settings button clicked")
+                }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.settings_iconn),
+                        contentDescription = "goto settings page ",
+                        tint = Color.White
+                    )
+                }
             }
         }
 
@@ -99,6 +106,7 @@ fun ProfilEditSayfasi(navController: NavController) {
                         .size(150.dp)
                         .clip(CircleShape)
                         .border(3.dp, Color.Blue, CircleShape)
+
                 )
 
             }
@@ -116,8 +124,10 @@ fun ProfilEditSayfasi(navController: NavController) {
 
             TextField(
                 value = name, onValueChange = { name = it },
-                modifier = Modifier.padding( top = 3.dp )
+                modifier = Modifier
+                    .padding(top= 10.dp, bottom = 30.dp)
                     .border(1.dp, Color.Gray, shape = MaterialTheme.shapes.small)
+
 
             )
 
@@ -130,6 +140,7 @@ fun ProfilEditSayfasi(navController: NavController) {
                     value = email, onValueChange = { email = it },
                     modifier = Modifier
                         .border(1.dp, Color.Gray, shape = MaterialTheme.shapes.small)
+                        .background(colorResource(id = R.color.profileBG1).copy(alpha = 0.3f))
 
                 )
 
