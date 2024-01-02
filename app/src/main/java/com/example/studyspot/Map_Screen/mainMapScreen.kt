@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,9 +27,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.studyspot.R
 import com.example.studyspot.ui.theme.StudySpotTheme
+import com.google.firebase.auth.actionCodeSettings
 
 
 @Composable
@@ -54,7 +58,7 @@ fun mapMain(mapDetailViewModel: mapDetailViewModel){
             Image(painter = painterResource(id = R.drawable.map), contentDescription =" " ,
                 modifier = Modifier.size(394.dp,640.dp),
                 contentScale = ContentScale.FillBounds)
-            LazyColumn(modifier = Modifier.background(Color.Red)){
+            LazyColumn(modifier = Modifier.fillMaxWidth()){
                 val itemCount=mapDetailViewModel.places.size
                 items(itemCount){
                         count->
@@ -79,11 +83,16 @@ fun mapButtons(
     places:Array<String>,
     xcor:Array<Int>,
     ycor:Array<Int>){
-    Box(modifier = Modifier
-        .size(5.dp, 5.dp)
+    Button(onClick = { /*TODO*/ },modifier = Modifier
+        .size(50.dp, 50.dp)
         .clip(shape = CircleShape)
-        .offset(xcor[count!!].dp, ycor[count!!].dp)){
+        .background(Color.Red)
+        .offset(xcor[count!!].dp, ycor[count!!].dp)) {
+
     }
+
+
+
 
 }
 
