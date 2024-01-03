@@ -1,4 +1,4 @@
-package com.example.studyspot.ProfileEditScreen
+package com.example.studyspot.modules.profileeditscreen
 
 import android.util.Log
 import androidx.compose.foundation.Image
@@ -20,7 +20,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -57,15 +56,16 @@ fun ProfilEditSayfasi(navController: NavController) {
         ) {
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 30.dp),
+                    .fillMaxWidth(),
+
+                horizontalAlignment = Alignment.End
             ) {
                 IconButton(onClick = {
                     navController.navigate("settings")
                     Log.d("Navigation", "Settings button clicked")
                 }) {
                     Icon(
-                        painter = painterResource(id = R.drawable.settings_iconn),
+                        painter = painterResource(id = R.drawable.icon_settings),
                         contentDescription = "goto settings page ",
                         tint = Color.White
                     )
@@ -79,7 +79,7 @@ fun ProfilEditSayfasi(navController: NavController) {
         Column(
             Modifier
                 .fillMaxWidth()
-                .padding(10.dp),
+                .padding(15.dp),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

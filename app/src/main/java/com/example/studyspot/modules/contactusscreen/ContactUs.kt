@@ -1,4 +1,4 @@
-package com.example.studyspot.SettingsScreen
+package com.example.studyspot.modules.contactusscreen
 
 
 import androidx.compose.foundation.Image
@@ -45,7 +45,7 @@ fun ContactUs(name: String, modifier: Modifier = Modifier,
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = {navController.navigate("settings") }) {
                         Icon(
                             painter = painterResource(id = R.drawable.backicon),
                             contentDescription = "",

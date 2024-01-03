@@ -1,4 +1,4 @@
-package com.example.studyspot.SettingsScreen
+package com.example.studyspot.modules.settingsscreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -28,14 +28,10 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.studyspot.R
-import com.example.studyspot.ui.theme.StudySpotTheme
-import com.example.studyspot.utilities.navigation.NavigationSetup
 
 @Composable
 fun AyarlarSayfasi(navController: NavHostController) {

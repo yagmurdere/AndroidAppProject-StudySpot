@@ -1,14 +1,14 @@
 package com.example.studyspot.utilities.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.studyspot.PrivacyAndPolicyScreen.PrivacyPolicy
-import com.example.studyspot.ProfileEditScreen.ProfilEditSayfasi
-import com.example.studyspot.ProfileScreen.ProfilSayfasi
-import com.example.studyspot.SettingsScreen.AyarlarSayfasi
+import com.example.studyspot.modules.contactusscreen.ContactUs
+import com.example.studyspot.modules.privacyandpolicyscreen.PrivacyPolicy
+import com.example.studyspot.modules.profileeditscreen.ProfilEditSayfasi
+import com.example.studyspot.modules.profilescreen.ProfilSayfasi
+import com.example.studyspot.modules.settingsscreen.AyarlarSayfasi
 import com.example.studyspot.modules.login.Login
 import com.example.studyspot.modules.mapdetail.MapDetail
 import com.example.studyspot.modules.signup.SignUp
@@ -18,7 +18,7 @@ fun NavigationSetup(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = Screen.MapDetail.route
+        startDestination = "profile"
     ) {
         composable(
             route = Screen.SignUp.route
@@ -53,6 +53,11 @@ fun NavigationSetup(navController: NavHostController) {
         composable(
             "privacyandpolicy"){
             PrivacyPolicy(navController = navController)
+
+        }
+        composable(
+            "contactus"){
+            ContactUs(name = String(), navController = navController)
 
         }
 
