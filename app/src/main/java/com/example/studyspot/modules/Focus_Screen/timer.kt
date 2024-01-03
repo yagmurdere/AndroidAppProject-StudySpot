@@ -1,4 +1,4 @@
-package com.example.studyspot.Focus_Screen
+package com.example.studyspot.modules.Focus_Screen
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background

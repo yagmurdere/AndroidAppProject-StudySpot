@@ -1,5 +1,6 @@
-package com.example.studyspot.Map_Screen
+package com.example.studyspot.modules.Map_Screen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -37,7 +38,7 @@ import com.google.firebase.auth.actionCodeSettings
 @Composable
 fun mapMain(mapDetailViewModel: mapDetailViewModel){
     Column(modifier = Modifier.fillMaxSize()){
-        Image(painter = painterResource(id = R.drawable.map_bg),
+        Image(painter = painterResource(id = R.drawable.map_background),
             contentDescription = " ",
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.FillBounds)
@@ -51,45 +52,44 @@ fun mapMain(mapDetailViewModel: mapDetailViewModel){
         Image(painter = painterResource(id = R.drawable.logo), contentDescription =" " ,
             modifier = Modifier.size(147.dp,36.dp))
     }
-    Column (modifier=Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Bottom,
-        horizontalAlignment = Alignment.CenterHorizontally) {
-        Box(modifier = Modifier.fillMaxWidth()){
-            Image(painter = painterResource(id = R.drawable.map), contentDescription =" " ,
-                modifier = Modifier.size(394.dp,640.dp),
-                contentScale = ContentScale.FillBounds)
-            LazyColumn(modifier = Modifier.fillMaxWidth()){
-                val itemCount=mapDetailViewModel.places.size
-                items(itemCount){
-                        count->
-                    mapButtons(
-                        count=count,
-                        xcor = mapDetailViewModel.xcor,
-                        ycor = mapDetailViewModel.ycor,
-                        places = mapDetailViewModel.places
-                    )
-                }
-            }
+
+    Box(modifier = Modifier.fillMaxSize()){
+        repeat(mapDetailViewModel.places.size){
+            count->
+            mapButtons(count = count,
+                places = mapDetailViewModel.places ,
+                xcor = mapDetailViewModel.xcor,
+                ycor = mapDetailViewModel.ycor )
+        }
+
+
+    }
+
 
 
         }
 
-    }
 
-}
+
+
 @Composable
 fun mapButtons(
-    count:Int,
+    count : Int,
     places:Array<String>,
     xcor:Array<Int>,
-    ycor:Array<Int>){
-    Button(onClick = { /*TODO*/ },modifier = Modifier
+    ycor:Array<Int>)
+{
+
+
+    Box(modifier = Modifier
         .size(50.dp, 50.dp)
         .clip(shape = CircleShape)
         .background(Color.Red)
-        .offset(xcor[count!!].dp, ycor[count!!].dp)) {
+        .offset(xcor[count].dp, ycor[count].dp)) {
 
     }
+
+
 
 
 

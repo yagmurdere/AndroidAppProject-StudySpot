@@ -1,4 +1,4 @@
-package com.example.studyspot.Focus_Screen
+package com.example.studyspot.modules.Focus_Screen
 
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
@@ -11,7 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 
 @Composable
-fun pageController(exerciseViewModel: exerciseViewModel= viewModel()){
+fun pageController(exerciseViewModel: exerciseViewModel = viewModel()){
     val navController= rememberNavController()
     NavHost(navController = navController, startDestination = "MainScreen" ){
         composable("MainScreen"){

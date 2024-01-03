@@ -1,4 +1,4 @@
-package com.example.studyspot.Map_Screen
+package com.example.studyspot.modules.Map_Screen
 
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
@@ -16,10 +16,10 @@ class mapDetailViewModel : ViewModel() {
         "Headquarters Coffee"
     )
     val xcor= arrayOf(
-        100,
-        200,
-        300,
         400,
+        500,
+        400,
+        500,
         500,
         600,/**/
         500,
@@ -27,12 +27,12 @@ class mapDetailViewModel : ViewModel() {
         500
     )
     val ycor= arrayOf(
-        100,
-        100,
-        100,
-        100,
-        100,
-        300,
+        400,
+        500,
+        400,
+        400,
+        500,
+        800,
         300,
         300,
         100
