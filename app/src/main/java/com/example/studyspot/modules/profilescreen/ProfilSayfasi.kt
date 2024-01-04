@@ -1,9 +1,6 @@
-package com.example.studyspot.ProfileScreen
+package com.example.studyspot.modules.profilescreen
 
-import android.os.Build
 import android.util.Log
-import android.widget.RatingBar
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -54,6 +51,7 @@ import com.example.studyspot.utilities.navigation.NavigationSetup
 
 
 
+
 @Composable
 fun ProfilSayfasi(navController: NavController) {
 
@@ -67,7 +65,7 @@ fun ProfilSayfasi(navController: NavController) {
 
                 Log.d("Navigation", "Settings button clicked")
             }) {
-                Icon(painter = painterResource(id = R.drawable.settings_iconn), contentDescription = "goto settings page ")
+                Icon(painter = painterResource(id = R.drawable.icon_settings), contentDescription = "goto settings page ")
             }
         }
         Column(
@@ -100,8 +98,9 @@ fun ProfilSayfasi(navController: NavController) {
                     .fillMaxWidth()
                     .padding(start = 26.dp, end = 26.dp)
                     .background(
-                        colorResource(id = R.color.profileBG1).copy(alpha = 0.3f),
+                        colorResource(id = R.color.profileBG1).copy(alpha = 0.5f),
                         shape = MaterialTheme.shapes.medium
+
                     )
             ) {
                 Column(
@@ -180,7 +179,7 @@ fun ProfilSayfasi(navController: NavController) {
                         .fillMaxWidth()
                         .padding(start = 10.dp, end = 10.dp)
                         .background(
-                            colorResource(id = R.color.profileBG1).copy(alpha = 0.3f),
+                            colorResource(id = R.color.profileBG1).copy(alpha = 0.5f),
                             shape = MaterialTheme.shapes.medium
                         ))
 
@@ -285,15 +284,14 @@ fun ProfilSayfasi(navController: NavController) {
 
 
 
-@Preview
-@Composable
-@Preview
-fun GreetingPreview() {
-    StudySpotTheme {
-        NavigationSetup(navController = rememberNavController())
 
-    }
-}
+@Composable
+@Preview(showBackground = true)
+fun ProfilSayfasiPreview() {
+    StudySpotTheme {
+        NavigationSetup(navController = rememberNavController())}}
+
+
 
 
 
