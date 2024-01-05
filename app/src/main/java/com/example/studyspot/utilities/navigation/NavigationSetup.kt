@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.studyspot.modules.contactusscreen.ContactUs
 import com.example.studyspot.modules.privacyandpolicyscreen.PrivacyPolicy
 import com.example.studyspot.modules.profileeditscreen.ProfilEditSayfasi
@@ -18,7 +19,7 @@ fun NavigationSetup(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = "profile"
+        startDestination = Screen.SignUp.route
     ) {
         composable(
             route = Screen.SignUp.route
@@ -41,10 +42,11 @@ fun NavigationSetup(navController: NavHostController) {
             ProfilSayfasi(navController = navController)
         }
         composable(
-            "profileedit"){
+            "x"
+        ){
             ProfilEditSayfasi(navController = navController)
-
         }
+
         composable(
             "settings"){
             AyarlarSayfasi(navController = navController)

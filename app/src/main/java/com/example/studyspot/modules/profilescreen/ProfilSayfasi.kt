@@ -21,6 +21,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.Star
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -35,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -84,12 +86,28 @@ fun ProfilSayfasi(navController: NavController) {
                 modifier = Modifier
                     .size(150.dp)
                     .clip(CircleShape)
-                    .border(3.dp, Color.Blue, CircleShape)
+                    .border(
+                        width = 4.dp,
+                        brush = Brush.linearGradient(
+                            colors = listOf(
+                                colorResource(id = R.color.Profileimgbordercolor),
+                                Color.Blue
+                            ), // You can customize the gradient colors
+                            start = Offset(0f, 170f),
+                            end = Offset(170f, 480f)
+                        ),
+                        shape = CircleShape
+                    )
             )
+
             Text(text = "John Doe", modifier = Modifier.padding(all = 10.dp), fontSize = 40.sp, color=Color.White)
-            TextButton(onClick = { navController.navigate("profileedit") }) {
-                Text(text = "Edit Profile")
-            }
+
+                TextButton(onClick = { navController.navigate("x")
+                    Log.d("Navigation", "profileedit button clicked")}) {
+                    Text(text = "Edit Profile")
+                }
+
+
         }
         Column(
             verticalArrangement = Arrangement.Center,
@@ -109,7 +127,8 @@ fun ProfilSayfasi(navController: NavController) {
                                 )
                             )
                     )
-                    .border(0.5.dp, color = Color.White, shape = RoundedCornerShape(15.dp)
+                    .border(
+                        0.5.dp, color = Color.White, shape = RoundedCornerShape(15.dp)
 
                     )
             ) {
@@ -275,7 +294,6 @@ fun ProfilSayfasi(navController: NavController) {
 
 
             }
-
 
             }
 
