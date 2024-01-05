@@ -1,8 +1,10 @@
 package com.example.studyspot.modules.Map_Screen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -127,7 +129,9 @@ fun MapButtons(
             Text("${places[count]}", color = colorResource(id = R.color.map_page_box_text_color),
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 13.sp,
-                modifier = Modifier.padding(15.dp))
+                modifier = Modifier.padding(15.dp).
+                clickable { Log.e("msj","buton çalışıyor") },
+                )
         }
     }
 
