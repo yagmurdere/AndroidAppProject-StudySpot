@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.Star
@@ -34,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
@@ -97,9 +99,17 @@ fun ProfilSayfasi(navController: NavController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 26.dp, end = 26.dp)
+                    .clip(shape = RoundedCornerShape(15.dp))
                     .background(
-                        colorResource(id = R.color.profileBG1).copy(alpha = 0.5f),
-                        shape = MaterialTheme.shapes.medium
+                        brush = Brush
+                            .verticalGradient(
+                                colors = listOf(
+                                    colorResource(id = R.color.focusCardBG2).copy(alpha = 0.5f),
+                                    colorResource(id = R.color.focusCardBG1).copy(alpha = 0.5f)
+                                )
+                            )
+                    )
+                    .border(0.5.dp, color = Color.White, shape = RoundedCornerShape(15.dp)
 
                     )
             ) {
@@ -178,10 +188,17 @@ fun ProfilSayfasi(navController: NavController) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(start = 10.dp, end = 10.dp)
+                        .clip(shape = RoundedCornerShape(15.dp))
                         .background(
-                            colorResource(id = R.color.profileBG1).copy(alpha = 0.5f),
-                            shape = MaterialTheme.shapes.medium
-                        ))
+                            brush = Brush
+                                .verticalGradient(
+                                    colors = listOf(
+                                        colorResource(id = R.color.focusCardBG2).copy(alpha = 0.5f),
+                                        colorResource(id = R.color.focusCardBG1).copy(alpha = 0.5f)
+                                    )
+                                )
+                        )
+                        .border(0.5.dp, color = Color.White, shape = RoundedCornerShape(15.dp)))
 
                 {
                     Column {
