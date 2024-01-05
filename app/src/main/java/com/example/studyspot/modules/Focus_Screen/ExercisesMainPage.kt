@@ -94,6 +94,7 @@ fun ColumnItem(
                     )
                 )
         )
+        .border(0.5.dp, color = Color.White, shape = RoundedCornerShape(15.dp))
         .clickable { navController.navigate("DetailScreen/$itemIndex") })
     {
         Row(modifier = Modifier
