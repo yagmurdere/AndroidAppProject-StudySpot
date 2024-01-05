@@ -16,6 +16,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,6 +33,7 @@ import com.example.studyspot.ui.theme.StudySpotTheme
 
 @Composable
 fun MapMain(mapDetailViewModel: mapDetailViewModel){
+    var selectedBoxIndex by remember { mutableStateOf(-1) }
     Column(modifier = Modifier.fillMaxSize())
     {
         Image(painter = painterResource(id = R.drawable.map_bg),
@@ -57,7 +62,12 @@ fun MapMain(mapDetailViewModel: mapDetailViewModel){
                 MapButtons(count = count,
                     places = mapDetailViewModel.places ,
                     xcor = mapDetailViewModel.xcor,
-                    ycor = mapDetailViewModel.ycor )
+                    ycor = mapDetailViewModel.ycor ,
+                    isSelected = selectedBoxIndex == count,
+                    onBoxClick = {
+                        selectedBoxIndex = if (selectedBoxIndex == count) -1 else count
+                    }
+                )
             }
 
         }
@@ -69,15 +79,27 @@ fun MapButtons(
     count : Int,
     places:Array<String>,
     xcor:Array<Int>,
-    ycor:Array<Int>)
+    ycor:Array<Int>,
+    isSelected: Boolean,
+    onBoxClick: () -> Unit)
 {
-    Button(onClick = { /*TODO*/ },
+    Button(onClick = onBoxClick,
         modifier = Modifier
             .size(20.dp, 20.dp)
             .offset(x = xcor[count].dp, y = ycor[count].dp),
         colors = ButtonDefaults.buttonColors(Color.Red)) {
     }
-
+    if (isSelected) {
+        Box(
+            modifier = Modifier
+                .size(500.dp,50.dp)
+                .background(Color.Gray.copy(alpha = 0.5f))
+                .padding(16.dp)
+        ) {
+            // Kutucuğun içeriği
+            Text("Seçilen Kutucuk: ${places[count]}")
+        }
+    }
 
 
 }
