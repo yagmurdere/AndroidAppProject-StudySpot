@@ -15,5 +15,6 @@
     /*PROFILE PAGE COLORS*/
     <color name="profileBG1">#6779B9</color>
     <color name="ProfileTextColor">#FF5E44FF</color>
-
+    /*MAP PAGE*/
+    <color name="map_page_box_color">#FF57FF53</color>
 </resources>

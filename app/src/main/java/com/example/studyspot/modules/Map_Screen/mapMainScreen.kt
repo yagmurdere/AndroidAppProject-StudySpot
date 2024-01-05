@@ -2,6 +2,7 @@ package com.example.studyspot.modules.Map_Screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -23,8 +25,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -92,9 +96,27 @@ fun MapButtons(
     if (isSelected) {
         Box(
             modifier = Modifier
-                .size(500.dp,50.dp)
-                .background(Color.Gray.copy(alpha = 0.5f))
+                .size(500.dp, 100.dp)
                 .padding(16.dp)
+                .clip(shape = RoundedCornerShape(15.dp))
+                .background(
+                    brush = Brush
+                        .verticalGradient(
+                            colors = listOf(
+                                colorResource(id = R.color.focusCardBG2).copy(alpha = 0.9f),
+                                colorResource(id = R.color.focusCardBG1).copy(alpha = 0.9f)
+                            )
+                        )
+                )
+                .border(width = 5.dp,
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            colorResource(id = R.color.map_page_box_color).copy(alpha = 0.9f),
+                            Color.White.copy(alpha = 0.9f)
+                            )
+                    ), shape = RoundedCornerShape(15.dp)
+                )
+
         ) {
             // Kutucuğun içeriği
             Text("Seçilen Kutucuk: ${places[count]}")
