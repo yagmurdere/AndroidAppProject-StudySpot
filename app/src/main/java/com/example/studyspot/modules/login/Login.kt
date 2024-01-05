@@ -3,6 +3,7 @@ package com.example.studyspot.modules.login
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,6 +18,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -41,7 +43,7 @@ import com.example.studyspot.R
 import com.example.studyspot.ui.theme.color1
 import com.example.studyspot.ui.theme.color2
 import com.example.studyspot.ui.theme.newfontfamily
-
+import com.example.studyspot.ui.theme.signupcolor
 
 
 @Composable
@@ -195,11 +197,22 @@ fun Login(navController: NavController) {
 
                 Row {
                     Text(
-                        text = "Not a member? Sign Up!", fontSize = 14.sp,
+                        text = "Not a member?", fontSize = 14.sp,
                         fontFamily = newfontfamily,
                         color = Color.White,
                         modifier = Modifier.padding(10.dp)
                     )
+                    Surface(
+                        modifier = Modifier.clickable {},
+                        color = Color.Transparent
+                    ) {
+                        Text(
+                            text = "Sign up!",
+                            color = signupcolor,
+                            fontSize = 14.sp,
+                            fontFamily = newfontfamily
+                        )
+                    }
                 }
             }
 
