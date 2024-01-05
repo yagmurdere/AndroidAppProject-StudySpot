@@ -30,8 +30,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.studyspot.R
 import com.example.studyspot.ui.theme.StudySpotTheme
 
@@ -96,31 +98,36 @@ fun MapButtons(
     if (isSelected) {
         Box(
             modifier = Modifier
-                .size(500.dp, 100.dp)
+                .size(180.dp, 140.dp)
                 .padding(16.dp)
-                .offset(x=10.dp,y=500.dp)
+                //.offset(x = 10.dp, y = 350.dp)
+                .offset(x = (xcor[count]-120).dp, y = ycor[count].dp)
                 .clip(shape = RoundedCornerShape(15.dp))
                 .background(
                     brush = Brush
                         .verticalGradient(
                             colors = listOf(
-                                colorResource(id = R.color.focusCardBG2).copy(alpha = 0.9f),
-                                colorResource(id = R.color.focusCardBG1).copy(alpha = 0.9f)
+                                Color.White.copy(alpha = 0.9f),
+                                colorResource(id = R.color.map_page_box_color).copy(alpha = 0.9f)
                             )
                         )
                 )
-                .border(width = 5.dp,
+                .border(
+                    width = 5.dp,
                     brush = Brush.verticalGradient(
                         colors = listOf(
-                            colorResource(id = R.color.map_page_box_color).copy(alpha = 0.9f),
+                            colorResource(id = R.color.map_page_box_border_color).copy(alpha = 0.9f),
                             Color.White.copy(alpha = 0.9f)
-                            )
+                        )
                     ), shape = RoundedCornerShape(15.dp)
                 )
 
         ) {
-            // Kutucuğun içeriği
-            Text("Seçilen Kutucuk: ${places[count]}")
+
+            Text("${places[count]}", color = colorResource(id = R.color.map_page_box_text_color),
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 13.sp,
+                modifier = Modifier.padding(15.dp))
         }
     }
 
