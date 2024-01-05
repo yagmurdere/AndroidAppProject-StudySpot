@@ -77,6 +77,8 @@ fun MapMain(mapDetailViewModel: mapDetailViewModel){
                     }
                 )
             }
+            Image(painter = painterResource(id = R.drawable.map_details), contentDescription ="" ,
+                modifier = Modifier.size(169.dp,50.dp).offset(x=21.dp,y=500.dp))
 
         }
     }
@@ -103,7 +105,7 @@ fun MapButtons(
                 .size(180.dp, 140.dp)
                 .padding(16.dp)
                 //.offset(x = 10.dp, y = 350.dp)
-                .offset(x = (xcor[count]-120).dp, y = ycor[count].dp)
+                .offset(x = (xcor[count] - 120).dp, y = ycor[count].dp)
                 .clip(shape = RoundedCornerShape(15.dp))
                 .background(
                     brush = Brush
@@ -129,8 +131,9 @@ fun MapButtons(
             Text("${places[count]}", color = colorResource(id = R.color.map_page_box_text_color),
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 13.sp,
-                modifier = Modifier.padding(15.dp).
-                clickable { Log.e("msj","buton çalışıyor") },
+                modifier = Modifier
+                    .padding(15.dp)
+                    .clickable { Log.e("msj", "buton çalışıyor") },
                 )
         }
     }
