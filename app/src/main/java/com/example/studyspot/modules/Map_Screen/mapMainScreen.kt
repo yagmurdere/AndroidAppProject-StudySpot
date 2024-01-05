@@ -98,6 +98,7 @@ fun MapButtons(
             modifier = Modifier
                 .size(500.dp, 100.dp)
                 .padding(16.dp)
+                .offset(x=10.dp,y=500.dp)
                 .clip(shape = RoundedCornerShape(15.dp))
                 .background(
                     brush = Brush
