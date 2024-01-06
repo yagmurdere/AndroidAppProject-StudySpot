@@ -35,9 +35,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import com.example.studyspot.R
 import com.example.studyspot.ui.theme.StudySpotTheme
 import com.example.studyspot.ui.theme.newfontfamily
+import com.example.studyspot.utilities.navigation.NavigationSetup
 
 @Composable
 fun MapMain(mapDetailViewModel: mapDetailViewModel){
@@ -147,16 +149,20 @@ fun MapButtons(
                    color = colorResource(id = R.color.map_page_box_text_color),
                    fontWeight = FontWeight.SemiBold,
                    fontSize = 13.sp,
-                   fontFamily = newfontfamily,
-                   modifier = Modifier
-                       .clickable { Log.e("msj","buton çalışıyor ") })
+                   fontFamily = newfontfamily)
                Row {
                    Icon(painter = painterResource(id = R.drawable.wifi_icon), contentDescription =" ",
-                       modifier = Modifier.size(15.dp).padding(end = 2.dp))
+                       modifier = Modifier
+                           .size(15.dp)
+                           .padding(end = 2.dp))
                    Icon(painter = painterResource(id = R.drawable.plug_icon), contentDescription =" ",
-                       modifier = Modifier.size(15.dp).padding(end = 2.dp))
+                       modifier = Modifier
+                           .size(15.dp)
+                           .padding(end = 2.dp))
                    Icon(painter = painterResource(id = R.drawable.coffe_icon), contentDescription =" ",
-                       modifier = Modifier.size(15.dp).padding(end = 2.dp))
+                       modifier = Modifier
+                           .size(15.dp)
+                           .padding(end = 2.dp))
                }
            }
 
@@ -170,6 +176,6 @@ fun MapButtons(
 @Composable
 fun MapPreview(){
     StudySpotTheme {
-        MapMain(mapDetailViewModel = mapDetailViewModel())
+        NavigationSetup(navController = rememberNavController())
     }
 }

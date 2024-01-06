@@ -41,9 +41,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.studyspot.R
 import com.example.studyspot.ui.theme.StudySpotTheme
 import com.example.studyspot.ui.theme.newfontfamily
+import com.example.studyspot.utilities.navigation.NavigationSetup
 
 @Composable
 fun mainScreen(exercisesData: exerciseViewModel,
@@ -123,6 +126,6 @@ fun ColumnItem(
 @Preview(showBackground = true)
 fun myAppPreview(){
     StudySpotTheme {
-        pageController()
+        NavigationSetup(navController = rememberNavController())
     }
 }

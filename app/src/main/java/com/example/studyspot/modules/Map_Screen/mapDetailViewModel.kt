@@ -25,9 +25,6 @@ class mapDetailViewModel : ViewModel() {
         190,
         350,
         250
-
-
-
     )
     val ycor= arrayOf(
         250,

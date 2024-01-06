@@ -5,6 +5,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.studyspot.modules.Focus_Screen.pageController
+import com.example.studyspot.modules.Map_Screen.MapMain
+import com.example.studyspot.modules.Map_Screen.mapDetailViewModel
 import com.example.studyspot.modules.contactusscreen.ContactUs
 import com.example.studyspot.modules.privacyandpolicyscreen.PrivacyPolicy
 import com.example.studyspot.modules.profileeditscreen.ProfilEditSayfasi
@@ -61,6 +64,12 @@ fun NavigationSetup(navController: NavHostController) {
             "contactus"){
             ContactUs(name = String(), navController = navController)
 
+        }
+        composable("focus"){
+            pageController()
+        }
+        composable("map"){
+            MapMain(mapDetailViewModel = mapDetailViewModel())
         }
 
     }
