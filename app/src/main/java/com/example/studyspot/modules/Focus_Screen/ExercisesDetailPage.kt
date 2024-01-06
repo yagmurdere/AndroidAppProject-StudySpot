@@ -66,20 +66,26 @@ fun DetailScreen(
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.FillBounds)
     }
+    Row (horizontalArrangement = Arrangement.Start, modifier = Modifier.padding(top = 28.dp)){
+        IconButton({navController.navigate("MainScreen")})  {
+            Icon(painter = painterResource(id = R.drawable.back_icon), contentDescription =" ", tint = colorResource(
+                id = R.color.FocusPagemaincolor) ,
+                modifier = Modifier.size(40.dp,48.dp))
+
+        }
+    }
 
     
     LazyColumn(modifier = Modifier
         .fillMaxSize()
         .padding(25.dp)){
         item{
-            Row (modifier = Modifier.fillMaxWidth()
-                .padding(top = 20.dp))
-            {
-                IconButton({navController.navigate("MainScreen")})  {
-                    Icon(painter = painterResource(id = R.drawable.back_icon), contentDescription =" ", tint = colorResource(
-                        id = R.color.FocusPagemaincolor) )
 
-                }
+            Row (modifier = Modifier.fillMaxWidth()
+                .padding(top = 5.dp),
+                horizontalArrangement = Arrangement.Center)
+            {
+
                 Text(text = exerciseViewModel.exerciseNames[itemIndex!!], fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 10.dp),
