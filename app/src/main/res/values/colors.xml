@@ -23,4 +23,7 @@
     /*PROFILE EDIT*/
     <color name="Profileimgbordercolor">#FF47E9FF</color>
     <color name="profileeditbuttoncolor">#FF6779B9</color>
+    <color name="boxblurr">#93ADC1</color>
+    <color name="boxblurr2">#C2CED8</color>
+
 </resources>

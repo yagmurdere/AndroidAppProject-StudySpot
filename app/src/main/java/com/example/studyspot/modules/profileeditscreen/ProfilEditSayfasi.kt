@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -53,7 +54,11 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.studyspot.R
+import com.example.studyspot.modules.login.GradientButton
 import com.example.studyspot.ui.theme.StudySpotTheme
+import com.example.studyspot.ui.theme.color1
+import com.example.studyspot.ui.theme.color2
+import com.example.studyspot.ui.theme.newfontfamily
 import com.example.studyspot.utilities.navigation.NavigationSetup
 
 @Composable
@@ -92,6 +97,14 @@ fun ProfilEditSayfasi(navController: NavController) {
             }
         }
 
+        val backgroundBrush = Brush.verticalGradient(
+            colors = listOf(
+                colorResource(id = R.color.boxblurr).copy(alpha = 0.3f),
+                colorResource(id = R.color.boxblurr2).copy(alpha = 0.3f)
+            )
+        )
+
+
         var isEditing by remember { mutableStateOf(true) }
         var name by remember {
             mutableStateOf("John Doe")
@@ -107,7 +120,7 @@ fun ProfilEditSayfasi(navController: NavController) {
         Column(
             Modifier
                 .fillMaxWidth()
-                .padding(15.dp),
+                .padding(vertical = 5.dp, horizontal = 15.dp),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -139,7 +152,7 @@ fun ProfilEditSayfasi(navController: NavController) {
                                 colors = listOf(
                                     colorResource(id = R.color.Profileimgbordercolor),
                                     Color.Blue
-                                ), // You can customize the gradient colors
+                                ),
                                 start = Offset(0f, 170f),
                                 end = Offset(170f, 480f)
                             ),
@@ -158,26 +171,26 @@ fun ProfilEditSayfasi(navController: NavController) {
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 25.dp, start = 26.dp, end = 26.dp),
+                    .padding(top = 15.dp, bottom=15.dp, start = 26.dp, end = 26.dp),
                 textStyle = TextStyle(
                     color = Color.White,
                     fontSize = 35.sp,
                     fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    fontFamily = newfontfamily
                 ),
                 decorationBox = { innerTextField ->
                     Row(
                         modifier = Modifier
                             .background(
-                                color = Color.Transparent,
-                                shape = RoundedCornerShape(6.dp)
+                                brush = backgroundBrush, shape = RoundedCornerShape(6.dp)
                             )
                             .border(
                                 1.dp,
                                 color = Color.White,
                                 shape = RoundedCornerShape(6.dp)
                             )
-                            .height(60.dp),
+                            .height(50.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
 
@@ -189,198 +202,237 @@ fun ProfilEditSayfasi(navController: NavController) {
         }
 
 
-        Column(modifier = Modifier.padding(start = 40.dp, end = 40.dp, bottom = 15.dp)) {
 
 
-            Row {
-                Text(
-                    text = "E-mail", color = colorResource(id = R.color.ProfileTextColor),
-                    fontSize = 15.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-            var email by remember {
-                mutableStateOf("john.doe@gmail.com")
-            }
-
-            BasicTextField(
-                value = email,
-                onValueChange = {
-                    email = it
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 10.dp),
-                textStyle = TextStyle(color = Color.Black),
-                decorationBox = { innerTextField ->
-                    Row(
-                        modifier = Modifier
-                            .background(
-                                brush = Brush.verticalGradient(
-                                    colors = listOf(
-                                        colorResource(id = R.color.focusCardBG2).copy(alpha = 0.5f),
-                                        colorResource(id = R.color.focusCardBG1).copy(alpha = 0.5f)
-                                    )
-                                ),
-                                shape = RoundedCornerShape(6.dp)
-                            )
-                            .border(
-                                0.dp,
-                                color = Color.White,
-                                shape = RoundedCornerShape(6.dp)
-                            )
-                            .height(50.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Spacer(modifier = Modifier.width(width = 5.dp))
-                        innerTextField()
-                    }
-                },
-                cursorBrush = SolidColor(Color.White)
+        Column( modifier = Modifier
+            .fillMaxHeight()
+            .padding(0.dp)
+            .border(1.dp, color = Color.White, shape = RoundedCornerShape(20.dp))
+            .background(
+                brush = backgroundBrush, shape = RoundedCornerShape(20.dp)
             )
+        ) {
 
-            Row {
-                Text(
-                    text = "Change Password",
-                    color = colorResource(id = R.color.ProfileTextColor),
-                    fontSize = 15.sp,
-                    fontWeight = FontWeight.Bold
+            Column(
+                modifier = Modifier.padding(horizontal = 35.dp, vertical = 15.dp),
+                horizontalAlignment = Alignment.Start
+            ) {
+
+
+                Row {
+                    Text(
+                        text = "E-mail", color = colorResource(id = R.color.ProfileTextColor),
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = newfontfamily,
+                    )
+                }
+
+
+                BasicTextField(
+                    value = email,
+                    onValueChange = {
+                        email = it
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 10.dp),
+                    textStyle = TextStyle(color = Color.Black, fontFamily = newfontfamily),
+                    decorationBox = { innerTextField ->
+                        Row(
+                            modifier = Modifier
+                                .background(
+                                    brush = Brush.verticalGradient(
+                                        colors = listOf(
+                                            colorResource(id = R.color.focusCardBG2).copy(alpha = 0.5f),
+                                            colorResource(id = R.color.focusCardBG1).copy(alpha = 0.5f)
+                                        )
+                                    ),
+                                    shape = RoundedCornerShape(6.dp)
+                                )
+                                .border(
+                                    0.dp,
+                                    color = Color.White,
+                                    shape = RoundedCornerShape(6.dp)
+                                )
+                                .height(40.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Spacer(modifier = Modifier.width(width = 5.dp))
+                            innerTextField()
+                        }
+                    },
+                    cursorBrush = SolidColor(Color.White)
                 )
-            }
-            Row {
-                Text(
-                    text = "Old Passsword", color = Color.Black,
-                    fontSize = 13.sp,
-                    fontWeight = FontWeight.Bold
+
+                Row {
+                    Text(
+                        modifier = Modifier.padding(top = 10.dp),
+                        text = "Change Password",
+                        color = colorResource(id = R.color.ProfileTextColor),
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = newfontfamily,
+                    )
+                }
+                Row {
+                    Text(
+                        modifier = Modifier.padding(5.dp),
+                        text = "Old Passsword", color = Color.Black,
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = newfontfamily
+                    )
+
+                }
+
+                BasicTextField(
+                    value = oldpassword,
+                    onValueChange = {
+                        oldpassword = it
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 10.dp),
+                    textStyle = TextStyle(color = Color.Black, fontFamily = newfontfamily),
+                    decorationBox = { innerTextField ->
+                        Row(
+                            modifier = Modifier
+                                .background(
+                                    brush = Brush.verticalGradient(
+                                        colors = listOf(
+                                            colorResource(id = R.color.focusCardBG2).copy(alpha = 0.5f),
+                                            colorResource(id = R.color.focusCardBG1).copy(alpha = 0.5f)
+                                        )
+                                    ),
+                                    shape = RoundedCornerShape(6.dp)
+                                )
+                                .border(
+                                    0.dp,
+                                    color = Color.White,
+                                    shape = RoundedCornerShape(6.dp)
+                                )
+                                .height(40.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Spacer(modifier = Modifier.width(width = 5.dp))
+                            innerTextField()
+                        }
+                    },
+                    cursorBrush = SolidColor(Color.White)
+                )
+
+                Row {
+                    Text(
+                        modifier = Modifier.padding(5.dp),
+                        text = "New Passsword", color = Color.Black,
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = newfontfamily,
+                    )
+                }
+
+                BasicTextField(
+                    value = " ",
+                    onValueChange = {
+
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 10.dp),
+                    textStyle = TextStyle(color = Color.Black, fontFamily = newfontfamily),
+                    decorationBox = { innerTextField ->
+                        Row(
+                            modifier = Modifier
+                                .background(
+                                    brush = Brush.verticalGradient(
+                                        colors = listOf(
+                                            colorResource(id = R.color.focusCardBG2).copy(alpha = 0.5f),
+                                            colorResource(id = R.color.focusCardBG1).copy(alpha = 0.5f)
+                                        )
+                                    ),
+                                    shape = RoundedCornerShape(6.dp)
+                                )
+                                .border(
+                                    0.dp,
+                                    color = Color.White,
+                                    shape = RoundedCornerShape(6.dp)
+                                )
+                                .height(40.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Spacer(modifier = Modifier.width(width = 5.dp))
+                            innerTextField()
+                        }
+                    },
+                    cursorBrush = SolidColor(Color.White)
+                )
+                Row {
+                    Text(
+                        modifier = Modifier.padding(5.dp),
+                        text = "New Passsword", color = Color.Black,
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = newfontfamily,
+                    )
+                }
+
+                BasicTextField(
+                    value = " ",
+                    onValueChange = {
+
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 10.dp),
+                    textStyle = TextStyle(color = Color.Black, fontFamily = newfontfamily,),
+                    decorationBox = { innerTextField ->
+                        Row(
+                            modifier = Modifier
+                                .background(
+                                    brush = Brush.verticalGradient(
+                                        colors = listOf(
+                                            colorResource(id = R.color.focusCardBG2).copy(alpha = 0.5f),
+                                            colorResource(id = R.color.focusCardBG1).copy(alpha = 0.5f)
+                                        )
+                                    ),
+                                    shape = RoundedCornerShape(6.dp)
+                                )
+                                .border(
+                                    0.dp,
+                                    color = Color.White,
+                                    shape = RoundedCornerShape(6.dp)
+                                )
+                                .height(40.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+
+                            innerTextField()
+                        }
+                    },
+                    cursorBrush = SolidColor(Color.White)
                 )
 
             }
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                GradientButton(
+                    text = "Save",
+                    textColor = Color.White,
+                    gradient = Brush.verticalGradient(
+                        colors = listOf(
+                            color2,
+                            color1,
+                            color1
+                        )
+                    )
+                ) {
 
-            var oldpassword by remember {
-                mutableStateOf("**********")
+                }
+
             }
-            BasicTextField(
-                value = oldpassword,
-                onValueChange = {
-                    oldpassword = it
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 10.dp),
-                textStyle = TextStyle(color = Color.Black),
-                decorationBox = { innerTextField ->
-                    Row(
-                        modifier = Modifier
-                            .background(
-                                brush = Brush.verticalGradient(
-                                    colors = listOf(
-                                        colorResource(id = R.color.focusCardBG2).copy(alpha = 0.5f),
-                                        colorResource(id = R.color.focusCardBG1).copy(alpha = 0.5f)
-                                    )
-                                ),
-                                shape = RoundedCornerShape(6.dp)
-                            )
-                            .border(
-                                0.dp,
-                                color = Color.White,
-                                shape = RoundedCornerShape(6.dp)
-                            )
-                            .height(50.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Spacer(modifier = Modifier.width(width = 5.dp))
-                        innerTextField()
-                    }
-                },
-                cursorBrush = SolidColor(Color.White)
-            )
-
-            Row {
-                Text(
-                    text = "New Passsword", color = Color.Black,
-                    fontSize = 13.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-
-            BasicTextField(
-                value = " ",
-                onValueChange = {
-
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 10.dp),
-                textStyle = TextStyle(color = Color.Black),
-                decorationBox = { innerTextField ->
-                    Row(
-                        modifier = Modifier
-                            .background(
-                                brush = Brush.verticalGradient(
-                                    colors = listOf(
-                                        colorResource(id = R.color.focusCardBG2).copy(alpha = 0.5f),
-                                        colorResource(id = R.color.focusCardBG1).copy(alpha = 0.5f)
-                                    )
-                                ),
-                                shape = RoundedCornerShape(6.dp)
-                            )
-                            .border(
-                                0.dp,
-                                color = Color.White,
-                                shape = RoundedCornerShape(6.dp)
-                            )
-                            .height(50.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Spacer(modifier = Modifier.width(width = 5.dp))
-                        innerTextField()
-                    }
-                },
-                cursorBrush = SolidColor(Color.White)
-            )
-            Row {
-                Text(
-                    text = "New Passsword", color = Color.Black,
-                    fontSize = 13.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-
-            BasicTextField(
-                value = " ",
-                onValueChange = {
-
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 10.dp),
-                textStyle = TextStyle(color = Color.Black),
-                decorationBox = { innerTextField ->
-                    Row(
-                        modifier = Modifier
-                            .background(
-                                brush = Brush.verticalGradient(
-                                    colors = listOf(
-                                        colorResource(id = R.color.focusCardBG2).copy(alpha = 0.5f),
-                                        colorResource(id = R.color.focusCardBG1).copy(alpha = 0.5f)
-                                    )
-                                ),
-                                shape = RoundedCornerShape(6.dp)
-                            )
-                            .border(
-                                0.dp,
-                                color = Color.White,
-                                shape = RoundedCornerShape(6.dp)
-                            )
-                            .height(50.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-
-                        innerTextField()
-                    }
-                },
-                cursorBrush = SolidColor(Color.White)
-            )
         }
 
     }

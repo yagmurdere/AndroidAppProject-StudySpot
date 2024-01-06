@@ -42,7 +42,7 @@ fun NavigationSetup(navController: NavHostController) {
             ProfilSayfasi(navController = navController)
         }
         composable(
-            "x"
+            "profileedit"
         ){
             ProfilEditSayfasi(navController = navController)
         }
