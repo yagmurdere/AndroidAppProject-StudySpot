@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.studyspot.R
 import com.example.studyspot.ui.theme.StudySpotTheme
+import com.example.studyspot.ui.theme.newfontfamily
 import kotlinx.coroutines.delay
 import kotlin.concurrent.timer
 import kotlin.math.PI
@@ -128,6 +129,7 @@ fun timerPomodoro(
             Text(text = formattedTime(milliseconds = currentTime),
                 fontSize = 44.sp,
                 fontWeight = FontWeight.Bold,
+                fontFamily = newfontfamily,
                 color = colorResource(id = R.color.FocusPagemaincolor),
                 modifier = Modifier.align(Alignment.BottomCenter)
             )

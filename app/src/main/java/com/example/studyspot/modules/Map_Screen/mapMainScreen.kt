@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.studyspot.R
 import com.example.studyspot.ui.theme.StudySpotTheme
+import com.example.studyspot.ui.theme.newfontfamily
 
 @Composable
 fun MapMain(mapDetailViewModel: mapDetailViewModel){
@@ -135,6 +136,7 @@ fun MapButtons(
                Text("${places[count]}",
                    color = colorResource(id = R.color.map_page_box_text_color),
                    fontWeight = FontWeight.SemiBold,
+                   fontFamily = newfontfamily,
                    fontSize = 13.sp,
                    modifier = Modifier
 
@@ -145,6 +147,7 @@ fun MapButtons(
                    color = colorResource(id = R.color.map_page_box_text_color),
                    fontWeight = FontWeight.SemiBold,
                    fontSize = 13.sp,
+                   fontFamily = newfontfamily,
                    modifier = Modifier
                        .clickable { Log.e("msj","buton çalışıyor ") })
                Row {

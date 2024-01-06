@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.studyspot.R
 import com.example.studyspot.ui.theme.StudySpotTheme
+import com.example.studyspot.ui.theme.newfontfamily
 
 @Composable
 fun DetailScreen(
@@ -82,6 +83,7 @@ fun DetailScreen(
                 Text(text = exerciseViewModel.exerciseNames[itemIndex!!], fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 10.dp),
+                    fontFamily = newfontfamily,
                     color = colorResource(id = R.color.FocusPagemaincolor)
                 )
             }
@@ -107,6 +109,7 @@ fun DetailScreen(
             Text(text = headLines[i][itemIndex!!], fontSize = 18.sp,
                 color = colorResource(id = R.color.FocusPagemaincolor),
                 fontWeight = FontWeight.Bold,
+                fontFamily = newfontfamily,
                 modifier = Modifier.padding(bottom = 5.dp))
             Text(text = definitions[i][itemIndex!!], fontSize = 16.sp)
             Spacer(modifier = Modifier.padding(bottom = 15.dp))
