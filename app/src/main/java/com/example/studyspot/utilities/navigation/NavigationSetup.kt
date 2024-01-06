@@ -16,6 +16,7 @@ import com.example.studyspot.modules.settingsscreen.AyarlarSayfasi
 import com.example.studyspot.modules.login.Login
 import com.example.studyspot.modules.mapdetail.MapDetail
 import com.example.studyspot.modules.signup.SignUp
+import com.example.studyspot.entities.RestaurantModel
 
 @Composable
 fun NavigationSetup(navController: NavHostController) {
@@ -32,7 +33,15 @@ fun NavigationSetup(navController: NavHostController) {
         composable(
             route = Screen.MapDetail.route
         ) {
-            MapDetail(navController = navController)
+            val dummyRestaurant = RestaurantModel(
+                "Top Reastary",
+                "10:00-24:00",
+                "Yeni Çamlıca, M, Reşit Paşa Cd. No: 6, 34779 Ataşehir/İstanbul",
+                true,
+                true,
+                true
+            )
+            MapDetail(navController = navController, restaurant = dummyRestaurant)
         }
         composable(
             route = Screen.Login.route
