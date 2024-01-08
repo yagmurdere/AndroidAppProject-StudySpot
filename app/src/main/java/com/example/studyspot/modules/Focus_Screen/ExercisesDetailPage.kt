@@ -78,10 +78,11 @@ fun DetailScreen(
     
     LazyColumn(modifier = Modifier
         .fillMaxSize()
-        .padding(25.dp)){
+        .padding(top=25.dp, start = 25.dp,end=25.dp,bottom=100.dp)){
         item{
 
-            Row (modifier = Modifier.fillMaxWidth()
+            Row (modifier = Modifier
+                .fillMaxWidth()
                 .padding(top = 5.dp),
                 horizontalArrangement = Arrangement.Center)
             {
@@ -120,6 +121,7 @@ fun DetailScreen(
             Text(text = definitions[i][itemIndex!!], fontSize = 16.sp)
             Spacer(modifier = Modifier.padding(bottom = 15.dp))
         }
+
     }
 
 }
