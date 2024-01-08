@@ -1,6 +1,7 @@
 package com.example.studyspot.modules.settingsscreen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconToggleButton
@@ -22,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
@@ -32,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.studyspot.R
+import com.example.studyspot.ui.theme.newfontfamily
 
 @Composable
 fun AyarlarSayfasi(navController: NavHostController) {
@@ -68,7 +72,8 @@ fun AyarlarSayfasi(navController: NavHostController) {
                             text = "Settings",
                             color = Color.White,
                             fontWeight = FontWeight.Bold,
-                            fontSize = 40.sp
+                            fontSize = 40.sp,
+                            fontFamily = newfontfamily
                         )
                     }
                 }
@@ -89,10 +94,19 @@ fun AyarlarSayfasi(navController: NavHostController) {
                     .size(50.dp)
                     .padding(start = 26.dp, end = 26.dp)
                     .background(
-                        colorResource(id = R.color.profileBG1).copy(alpha = 0.3f),
-                        shape = MaterialTheme.shapes.medium
-                    )
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                colorResource(id = R.color.focusCardBG2).copy(alpha = 0.5f),
+                                colorResource(id = R.color.focusCardBG1).copy(alpha = 0.5f)
+                            )
+                    ),
+                        shape = RoundedCornerShape(6.dp)
             )
+                    .border(
+                    0.5.dp,
+                    color = Color.White,
+                    shape = RoundedCornerShape(6.dp)
+                ))
             {
                 Column {
                     Row(
@@ -113,7 +127,9 @@ fun AyarlarSayfasi(navController: NavHostController) {
                             text = "Light Mode",
                             color = colorResource(id = R.color.ProfileTextColor),
                             fontSize = 15.sp,
-                            textAlign = TextAlign.Left
+                            textAlign = TextAlign.Left,
+                            fontFamily = newfontfamily,
+                            fontWeight = FontWeight.Bold
 
                         )
                         /**/
@@ -151,8 +167,18 @@ fun AyarlarSayfasi(navController: NavHostController) {
                     .size(50.dp)
                     .padding(start = 26.dp, end = 26.dp)
                     .background(
-                        colorResource(id = R.color.profileBG1).copy(alpha = 0.3f),
-                        shape = MaterialTheme.shapes.medium
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                colorResource(id = R.color.focusCardBG2).copy(alpha = 0.5f),
+                                colorResource(id = R.color.focusCardBG1).copy(alpha = 0.5f)
+                            )
+                        ),
+                        shape = RoundedCornerShape(6.dp)
+                    )
+                    .border(
+                        0.5.dp,
+                        color = Color.White,
+                        shape = RoundedCornerShape(6.dp)
                     )
                     .clickable { navController.navigate("privacyandpolicy") }
 
@@ -175,7 +201,9 @@ fun AyarlarSayfasi(navController: NavHostController) {
                             text = "Privacy & Policy",
                             color = colorResource(id = R.color.ProfileTextColor),
                             fontSize = 15.sp,
-                            textAlign = TextAlign.Left
+                            textAlign = TextAlign.Left,
+                            fontFamily = newfontfamily,
+                            fontWeight = FontWeight.Bold
 
                         )
 
@@ -192,8 +220,18 @@ fun AyarlarSayfasi(navController: NavHostController) {
                     .size(50.dp)
                     .padding(start = 26.dp, end = 26.dp)
                     .background(
-                        colorResource(id = R.color.profileBG1).copy(alpha = 0.3f),
-                        shape = MaterialTheme.shapes.medium
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                colorResource(id = R.color.focusCardBG2).copy(alpha = 0.5f),
+                                colorResource(id = R.color.focusCardBG1).copy(alpha = 0.5f)
+                            )
+                        ),
+                        shape = RoundedCornerShape(6.dp)
+                    )
+                    .border(
+                        0.5.dp,
+                        color = Color.White,
+                        shape = RoundedCornerShape(6.dp)
                     )
                     .clickable { navController.navigate("contactus") }
             ) {
@@ -215,7 +253,9 @@ fun AyarlarSayfasi(navController: NavHostController) {
                             text = "Contact Us",
                             color = colorResource(id = R.color.ProfileTextColor),
                             fontSize = 15.sp,
-                            textAlign = TextAlign.Left
+                            textAlign = TextAlign.Left,
+                            fontFamily = newfontfamily,
+                            fontWeight = FontWeight.Bold
                         )
 
                     }
@@ -230,8 +270,18 @@ fun AyarlarSayfasi(navController: NavHostController) {
                     .size(50.dp)
                     .padding(start = 26.dp, end = 26.dp)
                     .background(
-                        colorResource(id = R.color.profileBG1).copy(alpha = 0.3f),
-                        shape = MaterialTheme.shapes.medium
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                colorResource(id = R.color.focusCardBG2).copy(alpha = 0.5f),
+                                colorResource(id = R.color.focusCardBG1).copy(alpha = 0.5f)
+                            )
+                        ),
+                        shape = RoundedCornerShape(6.dp)
+                    )
+                    .border(
+                        0.5.dp,
+                        color = Color.White,
+                        shape = RoundedCornerShape(6.dp)
                     )
                     .clickable { navController.navigate("logout") }
             ) {
@@ -253,7 +303,9 @@ fun AyarlarSayfasi(navController: NavHostController) {
                             text = "Log Out",
                             color = colorResource(id = R.color.ProfileTextColor),
                             fontSize = 15.sp,
-                            textAlign = TextAlign.Left
+                            textAlign = TextAlign.Left,
+                            fontFamily = newfontfamily,
+                            fontWeight = FontWeight.Bold
 
                         )
 

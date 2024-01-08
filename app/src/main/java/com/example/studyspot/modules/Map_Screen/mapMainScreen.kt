@@ -7,17 +7,16 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,8 +35,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import com.example.studyspot.R
 import com.example.studyspot.ui.theme.StudySpotTheme
+import com.example.studyspot.ui.theme.newfontfamily
+import com.example.studyspot.utilities.navigation.NavigationSetup
 
 @Composable
 fun MapMain(mapDetailViewModel: mapDetailViewModel){
@@ -78,7 +80,9 @@ fun MapMain(mapDetailViewModel: mapDetailViewModel){
                 )
             }
             Image(painter = painterResource(id = R.drawable.map_details), contentDescription ="" ,
-                modifier = Modifier.size(169.dp,50.dp).offset(x=21.dp,y=500.dp))
+                modifier = Modifier
+                    .size(169.dp, 50.dp)
+                    .offset(x = 21.dp, y = 500.dp))
 
         }
     }
@@ -93,50 +97,83 @@ fun MapButtons(
     isSelected: Boolean,
     onBoxClick: () -> Unit)
 {
-    Button(onClick = onBoxClick,
-        modifier = Modifier
-            .size(20.dp, 20.dp)
-            .offset(x = xcor[count].dp, y = ycor[count].dp),
-        colors = ButtonDefaults.buttonColors(Color.Red)) {
-    }
-    if (isSelected) {
-        Box(
+    Box {
+        Button(onClick = onBoxClick,
             modifier = Modifier
-                .size(180.dp, 140.dp)
-                .padding(16.dp)
-                //.offset(x = 10.dp, y = 350.dp)
-                .offset(x = (xcor[count] - 120).dp, y = ycor[count].dp)
-                .clip(shape = RoundedCornerShape(15.dp))
-                .background(
-                    brush = Brush
-                        .verticalGradient(
-                            colors = listOf(
-                                Color.White.copy(alpha = 0.9f),
-                                colorResource(id = R.color.map_page_box_color).copy(alpha = 0.9f)
-                            )
-                        )
-                )
-                .border(
-                    width = 5.dp,
-                    brush = Brush.verticalGradient(
-                        colors = listOf(
-                            colorResource(id = R.color.map_page_box_border_color).copy(alpha = 0.9f),
-                            Color.White.copy(alpha = 0.9f)
-                        )
-                    ), shape = RoundedCornerShape(15.dp)
-                )
-
-        ) {
-
-            Text("${places[count]}", color = colorResource(id = R.color.map_page_box_text_color),
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 13.sp,
+                .size(20.dp, 20.dp)
+                .offset(x = xcor[count].dp, y = ycor[count].dp),
+            colors = ButtonDefaults.buttonColors(Color.Red)) {
+        }
+        if (isSelected) {
+            Box(
                 modifier = Modifier
-                    .padding(15.dp)
-                    .clickable { Log.e("msj", "buton çalışıyor") },
-                )
+                    .size(180.dp, 150.dp)
+                    .padding(16.dp)
+                    //.offset(x = 10.dp, y = 350.dp)
+                    .offset(
+                        x=if(count==0) 210.dp else if(count==4) 80.dp else (xcor[count] - 130).dp,
+                        y=if(count==0) 140.dp else if(count==4) 40.dp else (ycor[count].dp))
+
+                    .clip(shape = RoundedCornerShape(15.dp))
+                    .background(
+                        brush = Brush
+                            .verticalGradient(
+                                colors = listOf(
+                                    Color.White.copy(alpha = 0.9f),
+                                    colorResource(id = R.color.map_page_box_color).copy(alpha = 0.9f)
+                                )
+                            )
+                    )
+                    .border(
+                        width = 5.dp,
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                colorResource(id = R.color.map_page_box_border_color).copy(alpha = 0.9f),
+                                Color.White.copy(alpha = 0.9f)
+                            )
+                        ), shape = RoundedCornerShape(15.dp)
+                    )
+
+            ) {
+                Column(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(start = 15.dp, top = 15.dp, end = 15.dp),
+                    verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                    Text("${places[count]}",
+                        color = colorResource(id = R.color.map_page_box_text_color),
+                        fontWeight = FontWeight.SemiBold,
+                        fontFamily = newfontfamily,
+                        fontSize = 13.sp,
+                        modifier = Modifier
+
+                            .clickable { Log.e("msj", "buton çalışıyor") },
+                    )
+                    RatingStarExample()
+                    Text(text = "Features",
+                        color = colorResource(id = R.color.map_page_box_text_color),
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 13.sp,
+                        fontFamily = newfontfamily)
+                    Row {
+                        Icon(painter = painterResource(id = R.drawable.wifi_icon), contentDescription =" ",
+                            modifier = Modifier
+                                .size(15.dp)
+                                .padding(end = 2.dp))
+                        Icon(painter = painterResource(id = R.drawable.plug_icon), contentDescription =" ",
+                            modifier = Modifier
+                                .size(15.dp)
+                                .padding(end = 2.dp))
+                        Icon(painter = painterResource(id = R.drawable.coffe_icon), contentDescription =" ",
+                            modifier = Modifier
+                                .size(15.dp)
+                                .padding(end = 2.dp))
+                    }
+                }
+
+            }
         }
     }
+
 
 
 }

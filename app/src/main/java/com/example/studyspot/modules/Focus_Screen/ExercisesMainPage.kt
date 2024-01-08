@@ -1,5 +1,6 @@
 package com.example.studyspot.modules.Focus_Screen
 
+import android.graphics.Paint.Style
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -33,14 +34,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.studyspot.R
 import com.example.studyspot.ui.theme.StudySpotTheme
+import com.example.studyspot.ui.theme.newfontfamily
+import com.example.studyspot.utilities.navigation.NavigationSetup
 
 @Composable
 fun mainScreen(exercisesData: exerciseViewModel,
@@ -55,7 +60,11 @@ fun mainScreen(exercisesData: exerciseViewModel,
 
     }
     Row(modifier = Modifier.padding(start = 44.dp, top = 76.dp)) {
-        Text(text = "Let's Focus", fontSize = 45.sp, fontWeight = FontWeight.Bold,color = colorResource(id = R.color.FocusPagemaincolor))
+        Text(text = "Let's Focus",
+            fontSize = 45.sp,
+            fontWeight = FontWeight.Bold,
+            fontFamily = newfontfamily,
+            color = colorResource(id = R.color.FocusPagemaincolor))
 
     }
 
@@ -105,6 +114,7 @@ fun ColumnItem(
             Text(text = title[itemIndex],
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
+                fontFamily = newfontfamily,
                 color = colorResource(id = R.color.FocusPagemaincolor)
             )
         }
@@ -115,6 +125,6 @@ fun ColumnItem(
 @Preview(showBackground = true)
 fun myAppPreview(){
     StudySpotTheme {
-        pageController()
+        NavigationSetup(navController = rememberNavController())
     }
 }

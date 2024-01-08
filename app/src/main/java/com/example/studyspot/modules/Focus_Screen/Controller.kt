@@ -9,11 +9,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.studyspot.modules.profileeditscreen.ProfilEditSayfasi
 
 @Composable
 fun pageController(exerciseViewModel: exerciseViewModel = viewModel()){
     val navController= rememberNavController()
     NavHost(navController = navController, startDestination = "MainScreen" ){
+
         composable("MainScreen"){
             mainScreen(exercisesData = exerciseViewModel, navController =navController )
         }
