@@ -59,7 +59,7 @@ fun mainScreen(exercisesData: exerciseViewModel,
 
 
     }
-    Row(modifier = Modifier.padding(start = 44.dp, top = 76.dp)) {
+    Row(modifier = Modifier.padding(start = 44.dp, top = 50.dp)) {
         Text(text = "Let's Focus",
             fontSize = 45.sp,
             fontWeight = FontWeight.Bold,
@@ -68,7 +68,7 @@ fun mainScreen(exercisesData: exerciseViewModel,
 
     }
 
-    LazyColumn(contentPadding = PaddingValues(top = 155.dp, start = 20.dp, end = 20.dp)){
+    LazyColumn(contentPadding = PaddingValues(top = 130.dp, start = 20.dp, end = 20.dp)){
 
         val itemCount=exercisesData.exerciseNames.size
         items(itemCount){ item->
@@ -90,7 +90,7 @@ fun ColumnItem(
     navController: NavController
 ) {
     Box (modifier = Modifier
-        .padding(10.dp)
+        .padding(5.dp)
         .fillMaxSize()
         .height(66.dp)
         .clip(shape = RoundedCornerShape(15.dp))
