@@ -31,6 +31,11 @@ fun NavigationSetup(navController: NavHostController) {
             MapDetail(navController = navController)
         }
         composable(
+            "mapdetail"
+        ) {
+            MapDetail(navController = navController)
+        }
+        composable(
             route = Screen.Login.route
         ) {
             Login(navController = navController)
@@ -57,7 +62,7 @@ fun NavigationSetup(navController: NavHostController) {
         }
         composable(
             "contactus"){
-            ContactUs(name = String(), navController = navController)
+            ContactUs(navController = navController)
 
         }
 
