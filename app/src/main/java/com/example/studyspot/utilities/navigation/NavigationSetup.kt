@@ -23,7 +23,7 @@ fun NavigationSetup(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = Screen.SignUp.route
+        startDestination = "profile"/*Screen.SignUp.route*/
     ) {
         composable(
             route = Screen.SignUp.route

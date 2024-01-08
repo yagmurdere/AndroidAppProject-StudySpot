@@ -35,6 +35,7 @@ fun PrivacyPolicy(navController: NavController) {
                 painterResource(id = R.drawable.privacypolicy_background),
                 contentScale = ContentScale.FillBounds
             )
+            .padding(bottom = 80.dp)
 
     ) {
 

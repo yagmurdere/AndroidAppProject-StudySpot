@@ -65,7 +65,7 @@ import com.example.studyspot.utilities.navigation.NavigationSetup
 @Composable
 fun ProfilSayfasi(navController: NavController) {
 
-    Column(Modifier.paint(painterResource(id = R.drawable.profile_background), contentScale = ContentScale.FillBounds))
+    Column(Modifier.paint(painterResource(id = R.drawable.profile_background), contentScale = ContentScale.FillBounds).padding(bottom = 80.dp))
     {
         Row(modifier= Modifier
             .fillMaxWidth()
@@ -269,7 +269,7 @@ fun ProfilSayfasi(navController: NavController) {
                                             else Icons.Outlined.Star,
                                             contentDescription = null,
                                             tint = if (i <= currentRating) Color.Yellow
-                                            else Color.Unspecified,
+                                            else Color.Gray,
                                             modifier = Modifier
                                                 .clickable { onRatingChanged(i) }
                                                 .padding(4.dp)

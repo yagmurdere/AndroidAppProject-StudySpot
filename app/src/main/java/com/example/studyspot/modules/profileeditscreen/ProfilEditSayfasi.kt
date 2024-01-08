@@ -170,14 +170,13 @@ fun ProfilEditSayfasi(navController: NavController) {
                     name = it
                 },
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 15.dp, bottom=15.dp, start = 26.dp, end = 26.dp),
+                    .padding(top = 15.dp, bottom=15.dp),
                 textStyle = TextStyle(
                     color = Color.White,
                     fontSize = 35.sp,
                     fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    fontFamily = newfontfamily
+                    fontFamily = newfontfamily,
+
                 ),
                 decorationBox = { innerTextField ->
                     Row(
@@ -190,14 +189,18 @@ fun ProfilEditSayfasi(navController: NavController) {
                                 color = Color.White,
                                 shape = RoundedCornerShape(6.dp)
                             )
-                            .height(50.dp),
-                        verticalAlignment = Alignment.CenterVertically,
+
+                            .height(45.dp)
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+
                     ) {
 
                         innerTextField()
                     }
                 },
-                cursorBrush = SolidColor(Color.White)
+                cursorBrush = SolidColor(Color.White),
+
             )
         }
 
@@ -214,7 +217,7 @@ fun ProfilEditSayfasi(navController: NavController) {
         ) {
 
             Column(
-                modifier = Modifier.padding(horizontal = 35.dp, vertical = 15.dp),
+                modifier = Modifier.padding(horizontal = 35.dp, vertical = 10.dp),
                 horizontalAlignment = Alignment.Start
             ) {
 
@@ -236,7 +239,7 @@ fun ProfilEditSayfasi(navController: NavController) {
                     },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 10.dp),
+                        .padding(top = 5.dp),
                     textStyle = TextStyle(color = Color.Black, fontFamily = newfontfamily),
                     decorationBox = { innerTextField ->
                         Row(
@@ -267,7 +270,7 @@ fun ProfilEditSayfasi(navController: NavController) {
 
                 Row {
                     Text(
-                        modifier = Modifier.padding(top = 10.dp),
+                        modifier = Modifier.padding(top = 15.dp),
                         text = "Change Password",
                         color = colorResource(id = R.color.ProfileTextColor),
                         fontSize = 15.sp,
@@ -293,7 +296,7 @@ fun ProfilEditSayfasi(navController: NavController) {
                     },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 10.dp),
+                        .padding(top = 5.dp),
                     textStyle = TextStyle(color = Color.Black, fontFamily = newfontfamily),
                     decorationBox = { innerTextField ->
                         Row(
@@ -312,7 +315,7 @@ fun ProfilEditSayfasi(navController: NavController) {
                                     color = Color.White,
                                     shape = RoundedCornerShape(6.dp)
                                 )
-                                .height(40.dp),
+                                .height(35.dp),
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Spacer(modifier = Modifier.width(width = 5.dp))
@@ -339,7 +342,7 @@ fun ProfilEditSayfasi(navController: NavController) {
                     },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 10.dp),
+                        .padding(top = 5.dp),
                     textStyle = TextStyle(color = Color.Black, fontFamily = newfontfamily),
                     decorationBox = { innerTextField ->
                         Row(
@@ -358,7 +361,7 @@ fun ProfilEditSayfasi(navController: NavController) {
                                     color = Color.White,
                                     shape = RoundedCornerShape(6.dp)
                                 )
-                                .height(40.dp),
+                                .height(35.dp),
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Spacer(modifier = Modifier.width(width = 5.dp))
@@ -384,7 +387,7 @@ fun ProfilEditSayfasi(navController: NavController) {
                     },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 10.dp),
+                        .padding(top = 5.dp),
                     textStyle = TextStyle(color = Color.Black, fontFamily = newfontfamily,),
                     decorationBox = { innerTextField ->
                         Row(
@@ -403,7 +406,7 @@ fun ProfilEditSayfasi(navController: NavController) {
                                     color = Color.White,
                                     shape = RoundedCornerShape(6.dp)
                                 )
-                                .height(40.dp),
+                                .height(35.dp),
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
 
@@ -415,7 +418,7 @@ fun ProfilEditSayfasi(navController: NavController) {
 
             }
             Column(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 GradientButton(
