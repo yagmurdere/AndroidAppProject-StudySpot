@@ -11,8 +11,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.example.studyspot.modules.contactusscreen.BottomNavBar
-import com.example.studyspot.modules.contactusscreen.BottomNavItem
+import com.example.studyspot.modules.navbar.BottomNavBar
+import com.example.studyspot.modules.navbar.BottomNavItem
 import com.example.studyspot.ui.theme.StudySpotTheme
 import com.example.studyspot.utilities.navigation.NavigationSetup
 
@@ -34,8 +34,8 @@ class MainActivity : ComponentActivity() {
                         bottomBar = {
                             BottomNavBar(items = listOf(
                                 BottomNavItem(
-                                    name = "ContactUs",
-                                    route = "contactus",
+                                    name = "Focus",
+                                    route = "focus",
                                     iconResId = R.drawable.focusicon
                                 ),
                                 BottomNavItem(
