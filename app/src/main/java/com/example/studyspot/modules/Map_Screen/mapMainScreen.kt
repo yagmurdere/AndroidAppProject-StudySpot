@@ -111,8 +111,8 @@ fun MapButtons(
                     .padding(16.dp)
                     //.offset(x = 10.dp, y = 350.dp)
                     .offset(
-                        x=if(count==0) 210.dp else if(count==4) 80.dp else (xcor[count] - 130).dp,
-                        y=if(count==0) 140.dp else if(count==4) 40.dp else (ycor[count].dp))
+                        x=if(count==0) 210.dp else if(count==4) 80.dp else if (count==1) 160.dp else (xcor[count] - 130).dp,
+                        y=if(count==0) 140.dp else if(count==4) 40.dp else if (count==1) 370.dp else (ycor[count].dp))
 
                     .clip(shape = RoundedCornerShape(15.dp))
                     .background(

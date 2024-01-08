@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
                                 BottomNavItem(
                                     name = "Focus",
                                     route = "focus",
-                                    iconResId = R.drawable.focusicon
+                                    iconResId = R.drawable.focusicon,
                                 ),
                                 BottomNavItem(
                                     name = "Mapmain",
