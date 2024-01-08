@@ -75,7 +75,7 @@ fun ProfilSayfasi(navController: NavController) {
 
                 Log.d("Navigation", "Settings button clicked")
             }) {
-                Icon(painter = painterResource(id = R.drawable.icon_settings), contentDescription = "goto settings page ")
+                Icon(painter = painterResource(id = R.drawable.icon_settings), contentDescription = "goto settings page ", tint = Color.White)
             }
         }
         Column(

@@ -50,7 +50,7 @@ fun PrivacyPolicy(navController: NavController) {
 
                     IconButton(onClick = { navController.navigate("settings") }) {
                         Icon(
-                            painter = painterResource(id = R.drawable.back_icon),
+                            painter = painterResource(id = R.drawable.backicon),
                             contentDescription = "back to settings", tint = Color.White
                         )
                     }
