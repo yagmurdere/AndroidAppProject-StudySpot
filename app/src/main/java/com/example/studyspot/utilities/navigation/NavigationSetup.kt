@@ -43,11 +43,7 @@ fun NavigationSetup(navController: NavHostController) {
             )
             MapDetail(navController = navController, restaurant = dummyRestaurant)
         }
-        composable(
-            "mapdetail"
-        ) {
-            MapDetail(navController = navController)
-        }
+
         composable(
             route = Screen.Login.route
         ) {

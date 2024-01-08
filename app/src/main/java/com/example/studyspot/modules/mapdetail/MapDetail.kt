@@ -55,7 +55,6 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
     val screenHeight = LocalConfiguration.current.screenWidthDp
     val mapDetailViewModel = MapDetailViewModel()
-    mapDetailViewModel.createRestaurant()
     Box(
         modifier = Modifier.fillMaxSize()
     ) {

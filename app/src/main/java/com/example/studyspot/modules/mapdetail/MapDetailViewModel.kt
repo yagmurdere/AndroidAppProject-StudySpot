@@ -33,7 +33,5 @@ class MapDetailViewModel: ViewModel() {
         )
     }
 
-    fun createRestaurant() {
-        fireBaseManager.createRestaurant()
-    }
+
 }
