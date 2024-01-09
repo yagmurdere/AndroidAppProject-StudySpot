@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.studyspot.modules.Focus_Screen.pageController
 import com.example.studyspot.modules.Map_Screen.MapMain
 import com.example.studyspot.modules.Map_Screen.mapDetailViewModel
@@ -17,13 +16,14 @@ import com.example.studyspot.modules.login.Login
 import com.example.studyspot.modules.mapdetail.MapDetail
 import com.example.studyspot.modules.signup.SignUp
 import com.example.studyspot.entities.RestaurantModel
+import com.example.studyspot.modules.profilescreen.profileViewModel
 
 @Composable
 fun NavigationSetup(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = "contactus"
+        startDestination = "profile"/*Screen.SignUp.route*/
     ) {
         composable(
             route = Screen.SignUp.route
@@ -52,7 +52,7 @@ fun NavigationSetup(navController: NavHostController) {
         composable(
             "profile"
         ){
-            ProfilSayfasi(navController = navController)
+            ProfilSayfasi(navController = navController, viewModel = profileViewModel())
         }
         composable(
             "profileedit"
