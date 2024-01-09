@@ -35,6 +35,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.studyspot.R
+import com.example.studyspot.modules.navbar.BottomNavBar
+import com.example.studyspot.modules.navbar.BottomNavItem
 import com.example.studyspot.ui.theme.newfontfamily
 
 @Composable
@@ -313,6 +315,30 @@ fun AyarlarSayfasi(navController: NavHostController) {
 
                 }
             }
+        }
+        Column(modifier = Modifier.fillMaxWidth()
+            .weight(1f),
+            verticalArrangement = Arrangement.Bottom) {
+            BottomNavBar(items =listOf(
+                BottomNavItem(
+                    name = "Focus",
+                    route = "focus",
+                    iconResId = R.drawable.focusicon
+                ),
+                BottomNavItem(
+                    name = "Mapmain",
+                    route = "map",
+                    iconResId = R.drawable.mapicon
+                ),
+                BottomNavItem(
+                    name = "Profile",
+                    route = "profile",
+                    iconResId = R.drawable.personicon
+                )
+            )
+                ,
+                navController = navController,
+                onItemClick = {navController.navigate(it.route)})
         }
 
     }

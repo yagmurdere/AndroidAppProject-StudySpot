@@ -29,37 +29,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     NavigationSetup(navController = rememberNavController())
-                    val navController = rememberNavController()
-                    Scaffold(
-                        bottomBar = {
-                            BottomNavBar(items = listOf(
-                                BottomNavItem(
-                                    name = "Focus",
-                                    route = "focus",
-                                    iconResId = R.drawable.focusicon
-                                ),
-                                BottomNavItem(
-                                    name = "Mapmain",
-                                    route = "map",
-                                    iconResId = R.drawable.mapicon
-                                ),
-                                BottomNavItem(
-                                    name = "Profile",
-                                    route = "profile",
-                                    iconResId = R.drawable.personicon
-                                )
 
-
-                            ),
-                                navController = navController,
-                                onItemClick = {
-                                    navController.navigate(it.route)
-                                }
-                            )
-                        }
-                    ) {
-                        NavigationSetup(navController = navController)
-                    }
                 }
             }
         }

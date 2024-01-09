@@ -23,7 +23,7 @@ fun NavigationSetup(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = Screen.SignUp.route
+        startDestination = "contactus"
     ) {
         composable(
             route = Screen.SignUp.route

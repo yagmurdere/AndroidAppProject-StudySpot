@@ -33,8 +33,7 @@ fun BottomNavBar(
     items: List<BottomNavItem>,
     navController: NavController,
     modifier: Modifier = Modifier,
-    onItemClick: (BottomNavItem) -> Unit,
-
+    onItemClick: (BottomNavItem) -> Unit
     ) {
     val backstackentery = navController.currentBackStackEntryAsState()
 
