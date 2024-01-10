@@ -32,7 +32,7 @@ class FireBaseManager {
         auth = Firebase.auth
         var error = FireBaseError.Sucess
 
-        auth.createUserWithEmailAndPassword(user.eMail, user.password)
+        auth.createUserWithEmailAndPassword(user.eMail!!, user.password!!)
             .addOnCompleteListener() { task ->
                 if(task.isSuccessful) {
                     val savedUser = FirebaseAuth.getInstance().currentUser
@@ -70,5 +70,27 @@ class FireBaseManager {
             }
         })
     }
+
+    fun readUsers(completion: (List<UserModel>?) -> Unit){
+        val usersinfo = mutableListOf<UserModel>()
+
+        restaurantDBRefrance.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(uSnapshot in snapshot.children){
+                    val usersi = uSnapshot.getValue(UserModel::class.java)
+                    if (usersi != null) {
+                        usersinfo.add(usersi)
+                        //Log.d("nefret", usersi.toString())
+                    }
+                }
+                completion(usersinfo)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
 }
+
 

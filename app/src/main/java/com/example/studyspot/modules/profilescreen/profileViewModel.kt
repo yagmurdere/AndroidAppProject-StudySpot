@@ -2,8 +2,10 @@ package com.example.studyspot.modules.profilescreen
 
 
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.studyspot.R
+import com.example.studyspot.managers.FireBaseManager
 
 class profileViewModel:ViewModel() {
     val user_names = arrayOf(
@@ -29,5 +31,19 @@ class profileViewModel:ViewModel() {
         "Rektörlük",
         "GSF"
     )
+
+    val fireBaseManager = FireBaseManager()
+
+    fun fetchUser(){
+        fireBaseManager.readUsers {
+            if(it != null){
+                for (item in it){
+                    Log.d("doa", item.name!!)
+                }
+            }
+        }
+    }
+
+
 
 }

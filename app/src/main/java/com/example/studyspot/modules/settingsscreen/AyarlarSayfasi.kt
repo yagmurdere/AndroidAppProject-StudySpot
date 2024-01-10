@@ -43,6 +43,7 @@ import com.example.studyspot.R
 import com.example.studyspot.modules.navbar.BottomNavBar
 import com.example.studyspot.modules.navbar.BottomNavItem
 import com.example.studyspot.ui.theme.newfontfamily
+import com.example.studyspot.utilities.navigation.Screen
 
 
 @Composable
@@ -293,7 +294,7 @@ fun AyarlarSayfasi(navController: NavHostController) {
                         color = Color.White,
                         shape = RoundedCornerShape(6.dp)
                     )
-                    .clickable { System.exit(0)}
+                    .clickable { navController.navigate(Screen.Login.route)}
             ) {
                 Column {
                     Row(
