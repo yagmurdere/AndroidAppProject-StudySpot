@@ -80,14 +80,16 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
                 contentDescription = "RestourantImage",
                 contentScale = ContentScale.FillBounds
             )
-            createText(
-                fontSize = 20,
-                text = restaurant.restaurantName,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier
-                    .padding(0.dp, 16.dp),
-                color = Color(android.graphics.Color.parseColor("#" + "5E44FF"))
-            )
+            restaurant.restaurantName?.let {
+                createText(
+                    fontSize = 20,
+                    text = it,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .padding(0.dp, 16.dp),
+                    color = Color(android.graphics.Color.parseColor("#" + "5E44FF"))
+                )
+            }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.width((screenWidth*0.80).dp)
@@ -142,13 +144,15 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
                     modifier = Modifier,
                     color = Color(android.graphics.Color.parseColor("#" + "5E44FF"))
                 )
-                createText(
-                    fontSize = 16,
-                    text = restaurant.restaurantHours,
-                    fontWeight = FontWeight.Normal,
-                    modifier = Modifier,
-                    color = Color.Black
-                )
+                restaurant.restaurantHours?.let {
+                    createText(
+                        fontSize = 16,
+                        text = it,
+                        fontWeight = FontWeight.Normal,
+                        modifier = Modifier,
+                        color = Color.Black
+                    )
+                }
                 createText(
                     fontSize = 16,
                     text = "Address",
@@ -156,13 +160,15 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
                     modifier = Modifier,
                     color = Color(android.graphics.Color.parseColor("#" + "5E44FF"))
                 )
-                createText(
-                    fontSize = 16,
-                    text = restaurant.restaurantAddress,
-                    fontWeight = FontWeight.Normal,
-                    modifier = Modifier,
-                    color = Color.Black
-                )
+                restaurant.restaurantAddress?.let {
+                    createText(
+                        fontSize = 16,
+                        text = it,
+                        fontWeight = FontWeight.Normal,
+                        modifier = Modifier,
+                        color = Color.Black
+                    )
+                }
                 createText(
                     fontSize = 16,
                     text = "Features",
@@ -171,21 +177,21 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
                     color = Color(android.graphics.Color.parseColor("#" + "5E44FF"))
                 )
                 Row {
-                    if (restaurant.wifi) {
+                    if (restaurant.wifi!!) {
                         Image(
                             painter = painterResource(
                                 id = R.drawable.wifi),
                             contentDescription = "Wifi"
                         )
                     }
-                    if(restaurant.electric) {
+                    if(restaurant.electric!!) {
                         Image(
                             painter = painterResource(
                                 id = R.drawable.electric),
                             contentDescription = "Electric"
                         )
                     }
-                    if(restaurant.hotDrink) {
+                    if(restaurant.hotDrink!!) {
                         Image(
                             painter = painterResource(
                                 id = R.drawable.hot),

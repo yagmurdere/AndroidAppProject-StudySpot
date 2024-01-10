@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -35,15 +36,23 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.studyspot.R
+import com.example.studyspot.entities.RestaurantModel
+import com.example.studyspot.modules.mapdetail.MapDetailViewModel
+import com.example.studyspot.modules.navbar.BottomNavBar
+import com.example.studyspot.modules.navbar.BottomNavItem
 import com.example.studyspot.ui.theme.StudySpotTheme
 import com.example.studyspot.ui.theme.newfontfamily
 import com.example.studyspot.utilities.navigation.NavigationSetup
 
 @Composable
-fun MapMain(mapDetailViewModel: mapDetailViewModel){
+fun MapMain(mapDetailViewModel: mapDetailViewModel,navController: NavController){
     var selectedBoxIndex by remember { mutableStateOf(-1) }
+    val viewModel = mapDetailViewModel()
+    val restaurantList = viewModel.fetchRestaurant()
+
     Column(modifier = Modifier.fillMaxSize())
     {
         Image(painter = painterResource(id = R.drawable.map_bg),
@@ -84,7 +93,33 @@ fun MapMain(mapDetailViewModel: mapDetailViewModel){
                     .size(169.dp, 50.dp)
                     .offset(x = 21.dp, y = 500.dp))
 
+            Column(modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter),
+                verticalArrangement = Arrangement.Bottom) {
+                BottomNavBar(items =listOf(
+                    BottomNavItem(
+                        name = "Focus",
+                        route = "focus",
+                        iconResId = R.drawable.focusicon
+                    ),
+                    BottomNavItem(
+                        name = "Mapmain",
+                        route = "map",
+                        iconResId = R.drawable.mapicon
+                    ),
+                    BottomNavItem(
+                        name = "Profile",
+                        route = "profile",
+                        iconResId = R.drawable.personicon
+                    )
+                )
+                    ,
+                    navController = navController,
+                    onItemClick = {navController.navigate(it.route)})
+            }
         }
+
     }
 }
 
@@ -95,7 +130,8 @@ fun MapButtons(
     xcor:Array<Int>,
     ycor:Array<Int>,
     isSelected: Boolean,
-    onBoxClick: () -> Unit)
+    onBoxClick: () -> Unit
+)
 {
     Box {
         Button(onClick = onBoxClick,
@@ -111,8 +147,9 @@ fun MapButtons(
                     .padding(16.dp)
                     //.offset(x = 10.dp, y = 350.dp)
                     .offset(
-                        x=if(count==0) 210.dp else if(count==4) 80.dp else if (count==1) 160.dp else (xcor[count] - 130).dp,
-                        y=if(count==0) 140.dp else if(count==4) 40.dp else if (count==1) 370.dp else (ycor[count].dp))
+                        x = if (count == 0) 210.dp else if (count == 4) 80.dp else if (count == 1) 160.dp else (xcor[count] - 130).dp,
+                        y = if (count == 0) 140.dp else if (count == 4) 40.dp else if (count == 1) 370.dp else (ycor[count].dp)
+                    )
 
                     .clip(shape = RoundedCornerShape(15.dp))
                     .background(
@@ -182,6 +219,6 @@ fun MapButtons(
 @Composable
 fun MapPreview(){
     StudySpotTheme {
-        MapMain(mapDetailViewModel = mapDetailViewModel())
+        MapMain(mapDetailViewModel = mapDetailViewModel(), navController = rememberNavController())
     }
 }

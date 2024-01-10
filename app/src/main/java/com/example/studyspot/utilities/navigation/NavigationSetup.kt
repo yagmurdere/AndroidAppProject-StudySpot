@@ -23,7 +23,7 @@ fun NavigationSetup(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = Screen.SignUp.route
+        startDestination = "map"
     ) {
         composable(
             route = Screen.SignUp.route
@@ -79,7 +79,7 @@ fun NavigationSetup(navController: NavHostController) {
             pageController()
         }
         composable("map"){
-            MapMain(mapDetailViewModel = mapDetailViewModel())
+            MapMain(mapDetailViewModel = mapDetailViewModel(),navController)
         }
 
     }

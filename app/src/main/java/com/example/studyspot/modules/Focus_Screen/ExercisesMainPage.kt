@@ -43,6 +43,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.studyspot.R
+import com.example.studyspot.modules.navbar.BottomNavBar
+import com.example.studyspot.modules.navbar.BottomNavItem
 import com.example.studyspot.ui.theme.StudySpotTheme
 import com.example.studyspot.ui.theme.newfontfamily
 import com.example.studyspot.utilities.navigation.NavigationSetup
@@ -78,6 +80,34 @@ fun mainScreen(exercisesData: exerciseViewModel,
                 navController=navController,
             )
 
+        }
+    }
+    Box {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter),
+            verticalArrangement = Arrangement.Bottom
+        ) {
+            BottomNavBar(items = listOf(
+                BottomNavItem(
+                    name = "Focus",
+                    route = "focus",
+                    iconResId = R.drawable.focusicon
+                ),
+                BottomNavItem(
+                    name = "Mapmain",
+                    route = "map",
+                    iconResId = R.drawable.mapicon
+                ),
+                BottomNavItem(
+                    name = "Profile",
+                    route = "profile",
+                    iconResId = R.drawable.personicon
+                )
+            ),
+                navController = navController,
+                onItemClick = { navController.navigate(it.route) })
         }
     }
 
