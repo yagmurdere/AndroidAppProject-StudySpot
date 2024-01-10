@@ -52,7 +52,6 @@ fun MapMain(mapDetailViewModel: mapDetailViewModel,navController: NavController)
     var selectedBoxIndex by remember { mutableStateOf(-1) }
     val viewModel = mapDetailViewModel()
     val restaurantList = viewModel.fetchRestaurant()
-
     Column(modifier = Modifier.fillMaxSize())
     {
         Image(painter = painterResource(id = R.drawable.map_bg),

@@ -59,6 +59,7 @@ class FireBaseManager {
                 for(rSnapshot in snapshot.children){
                     val place = rSnapshot.getValue(RestaurantModel::class.java)
                     if (place != null) {
+                        Log.e("doğa",place.toString())
                         restaurantPlaces.add(place)
                     }
                 }

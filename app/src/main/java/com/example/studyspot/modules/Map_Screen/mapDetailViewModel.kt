@@ -10,16 +10,30 @@ import com.example.studyspot.managers.FireBaseManager
 class mapDetailViewModel : ViewModel() {
 
     val fireBaseManager = FireBaseManager()
+    var restaurantNameArray = mutableListOf<RestaurantModel>()
+    fun fetchRestaurant() :MutableList<RestaurantModel> {
+        fireBaseManager.readRestaurants { restaurants->
+            if (restaurants != null) {
+                for(item in restaurants) {
+                    restaurantNameArray.add(
+                        RestaurantModel(restaurantName = item.restaurantName!!,
+                            restaurantHours = item.restaurantHours!!,
+                            restaurantAddress = item.restaurantAddress!!,
+                            wifi = item.wifi!!,
+                            electric = item.electric!!,
+                            hotDrink = item.hotDrink!!
+                        ))
 
-    fun fetchRestaurant() {
-        fireBaseManager.readRestaurants {
-            if (it != null) {
-                for(item in it) {
-                    Log.d("DoHa", item.restaurantName!!)
+                    Log.d("Dymr1", restaurantNameArray.toString())
                 }
+
             }
         }
+        Log.d("Dymr2", restaurantNameArray.toString())
+        return restaurantNameArray
     }
+
+
 
     val places = arrayOf(
         "Kubbe",

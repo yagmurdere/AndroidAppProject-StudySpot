@@ -24,7 +24,7 @@ fun NavigationSetup(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = Screen.Login.route
+        startDestination = "map"
     ) {
         composable(
             route = Screen.SignUp.route
