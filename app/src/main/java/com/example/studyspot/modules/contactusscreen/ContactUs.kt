@@ -127,7 +127,7 @@ fun ContactUs(navController: NavController) {
                 )
             }
 //bu column u alıp sayfanızdaki column un en altına koyabilirsiniz
-            Column(modifier = Modifier.fillMaxWidth()
+ /*           Column(modifier = Modifier.fillMaxWidth()
                 .weight(1f), //alta gitmesi için aradaki boşluğu dolduruyor
                 verticalArrangement = Arrangement.Bottom) {
                 BottomNavBar(items =listOf(
@@ -152,7 +152,7 @@ fun ContactUs(navController: NavController) {
                     onItemClick = {navController.navigate(it.route)})
                 //bu son iki kısımda hata alırsanız silip aynılarını kendiniz yazmayı deneyin oluyor
             }
-
+*/
 
 
         }

@@ -45,7 +45,6 @@ import com.example.studyspot.ui.theme.color2
 import com.example.studyspot.ui.theme.newfontfamily
 import com.example.studyspot.ui.theme.signupcolor
 import com.example.studyspot.utilities.navigation.Screen
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 val semiTransparentColor = Color.White.copy(alpha = 0.3f)
 
@@ -54,9 +53,9 @@ fun GradientButton(
     text: String,
     textColor: Color,
     gradient: Brush,
-    onClick: () -> Unit
+    navController: NavController
 ){
-    Button(onClick = { onClick},
+    Button(onClick = {},
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent
         )
@@ -220,11 +219,9 @@ fun Login(navController: NavController) {
                         color1,
                         color1
                     )
-                )
-            ) {
-
-            }
-
+                ),
+                navController = navController
+            )
             Spacer(modifier = Modifier.size(40.dp))
 
             Spacer(modifier = Modifier.height(customSpacerHeight.dp))

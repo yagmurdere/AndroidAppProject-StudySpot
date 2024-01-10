@@ -64,6 +64,10 @@ dependencies {
     // FireBase Dependency
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
     implementation("com.google.firebase:firebase-database")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1")
+
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5")
 
     // View Model Dependency
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
@@ -81,6 +85,7 @@ dependencies {
 
     //profileimg
     implementation("io.coil-kt:coil-compose:1.4.0")
+    implementation("com.google.firebase:firebase-auth:22.3.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

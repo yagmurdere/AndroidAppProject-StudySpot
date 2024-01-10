@@ -12,20 +12,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconToggleButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
@@ -38,6 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.studyspot.R
 import com.example.studyspot.modules.navbar.BottomNavBar
@@ -47,7 +42,7 @@ import com.example.studyspot.utilities.navigation.Screen
 
 
 @Composable
-fun AyarlarSayfasi(navController: NavHostController) {
+fun AyarlarSayfasi(navController: NavController) {
     
 
     Column(
@@ -325,30 +320,7 @@ fun AyarlarSayfasi(navController: NavHostController) {
                 }
             }
         }
-        Column(modifier = Modifier.fillMaxWidth()
-            .weight(1f),
-            verticalArrangement = Arrangement.Bottom) {
-            BottomNavBar(items =listOf(
-                BottomNavItem(
-                    name = "Focus",
-                    route = "focus",
-                    iconResId = R.drawable.focusicon
-                ),
-                BottomNavItem(
-                    name = "Mapmain",
-                    route = "map",
-                    iconResId = R.drawable.mapicon
-                ),
-                BottomNavItem(
-                    name = "Profile",
-                    route = "profile",
-                    iconResId = R.drawable.personicon
-                )
-            )
-                ,
-                navController = navController,
-                onItemClick = {navController.navigate(it.route)})
-        }
+
 
     }
 

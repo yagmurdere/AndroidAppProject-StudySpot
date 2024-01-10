@@ -17,22 +17,49 @@ import com.example.studyspot.modules.navbar.BottomNavBar
 import com.example.studyspot.modules.navbar.BottomNavItem
 import com.example.studyspot.ui.theme.StudySpotTheme
 import com.example.studyspot.utilities.navigation.NavigationSetup
+import com.example.studyspot.utilities.navigation.Screen
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : ComponentActivity() {
+
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             StudySpotTheme {
-                // A surface container using the 'background' color from the theme )
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                val navController = rememberNavController()
+                Scaffold(
+                    bottomBar = {
+                        BottomNavBar(
+                            items = listOf(
+                                BottomNavItem(
+                                    name = "Focus",
+                                    route = "focus",
+                                    iconResId = R.drawable.focusicon
+                                ),
+                                BottomNavItem(
+                                    name = "Mapmain",
+                                    route = "map",
+                                    iconResId = R.drawable.mapicon
+                                ),
+                                BottomNavItem(
+                                    name = "Profile",
+                                    route = "profile",
+                                    iconResId = R.drawable.personicon
+                                )
+                            ),
+                            onItemClick = { navController.navigate(it.route) }
+                        )
+                    }
                 ) {
-                    NavigationSetup(navController = rememberNavController())
-
+                    NavigationSetup(navController = navController)
+                }
                 }
             }
         }
     }
-}
+
+
+

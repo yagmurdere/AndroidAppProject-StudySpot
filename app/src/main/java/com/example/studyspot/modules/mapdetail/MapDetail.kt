@@ -6,6 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -46,6 +47,8 @@ import com.example.studyspot.R
 import com.example.studyspot.entities.CommentModel
 import com.example.studyspot.entities.RestaurantModel
 import com.example.studyspot.entities.UserModel
+import com.example.studyspot.modules.navbar.BottomNavBar
+import com.example.studyspot.modules.navbar.BottomNavItem
 import com.example.studyspot.modules.signup.createText
 import com.example.studyspot.utilities.errors.FireBaseError
 import com.example.studyspot.utilities.navigation.Screen

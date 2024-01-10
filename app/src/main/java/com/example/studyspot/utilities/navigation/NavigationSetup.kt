@@ -1,6 +1,7 @@
 package com.example.studyspot.utilities.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -23,7 +24,7 @@ fun NavigationSetup(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = "map"
+        startDestination = Screen.Login.route
     ) {
         composable(
             route = Screen.SignUp.route
@@ -78,6 +79,7 @@ fun NavigationSetup(navController: NavHostController) {
         composable("focus"){
             pageController()
         }
+
         composable("map"){
             MapMain(mapDetailViewModel = mapDetailViewModel(),navController)
         }

@@ -92,32 +92,6 @@ fun MapMain(mapDetailViewModel: mapDetailViewModel,navController: NavController)
                 modifier = Modifier
                     .size(169.dp, 50.dp)
                     .offset(x = 21.dp, y = 500.dp))
-
-            Column(modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.BottomCenter),
-                verticalArrangement = Arrangement.Bottom) {
-                BottomNavBar(items =listOf(
-                    BottomNavItem(
-                        name = "Focus",
-                        route = "focus",
-                        iconResId = R.drawable.focusicon
-                    ),
-                    BottomNavItem(
-                        name = "Mapmain",
-                        route = "map",
-                        iconResId = R.drawable.mapicon
-                    ),
-                    BottomNavItem(
-                        name = "Profile",
-                        route = "profile",
-                        iconResId = R.drawable.personicon
-                    )
-                )
-                    ,
-                    navController = navController,
-                    onItemClick = {navController.navigate(it.route)})
-            }
         }
 
     }
