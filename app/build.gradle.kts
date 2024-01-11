@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -36,6 +38,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
     }
     buildFeatures {
         compose = true
@@ -67,6 +70,8 @@ dependencies {
 
     // View Model Dependency
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+
+    implementation ("androidx.compose.runtime:runtime-livedata:1.6.0-beta03")
 
     // Splash API
     implementation("androidx.core:core-splashscreen:1.1.0-alpha02")

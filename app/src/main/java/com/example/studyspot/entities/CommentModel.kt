@@ -1,8 +1,8 @@
 package com.example.studyspot.entities
 
 data class CommentModel(
-    val commentID: String,
-    val userID: String,
-    val restaurantID: String,
-    val commet: String
+    val userID: String? = null,
+    val restaurantID: String? = null,
+    val commet: String? = null,
+    val starCount: Int? = null
 )

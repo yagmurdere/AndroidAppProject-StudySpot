@@ -6,6 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -26,6 +27,13 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -47,7 +55,6 @@ import com.example.studyspot.entities.CommentModel
 import com.example.studyspot.entities.RestaurantModel
 import com.example.studyspot.entities.UserModel
 import com.example.studyspot.modules.signup.createText
-import com.example.studyspot.utilities.errors.FireBaseError
 import com.example.studyspot.utilities.navigation.Screen
 
 @Composable
@@ -55,7 +62,12 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
     val screenHeight = LocalConfiguration.current.screenWidthDp
     val mapDetailViewModel = MapDetailViewModel()
-    mapDetailViewModel.createRestaurant()
+    val commentsState = mapDetailViewModel.comments.observeAsState(initial = emptyList())
+
+    LaunchedEffect(mapDetailViewModel) {
+        mapDetailViewModel.observeFirebaseData()
+    }
+
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -81,14 +93,16 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
                 contentDescription = "RestourantImage",
                 contentScale = ContentScale.FillBounds
             )
-            createText(
-                fontSize = 20,
-                text = restaurant.restaurantName,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier
-                    .padding(0.dp, 16.dp),
-                color = Color(android.graphics.Color.parseColor("#" + "5E44FF"))
-            )
+            restaurant.restaurantName?.let {
+                createText(
+                    fontSize = 20,
+                    text = it,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .padding(0.dp, 16.dp),
+                    color = Color(android.graphics.Color.parseColor("#" + "5E44FF"))
+                )
+            }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.width((screenWidth*0.80).dp)
@@ -143,13 +157,15 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
                     modifier = Modifier,
                     color = Color(android.graphics.Color.parseColor("#" + "5E44FF"))
                 )
-                createText(
-                    fontSize = 16,
-                    text = restaurant.restaurantHours,
-                    fontWeight = FontWeight.Normal,
-                    modifier = Modifier,
-                    color = Color.Black
-                )
+                restaurant.restaurantHours?.let {
+                    createText(
+                        fontSize = 16,
+                        text = it,
+                        fontWeight = FontWeight.Normal,
+                        modifier = Modifier,
+                        color = Color.Black
+                    )
+                }
                 createText(
                     fontSize = 16,
                     text = "Address",
@@ -157,13 +173,15 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
                     modifier = Modifier,
                     color = Color(android.graphics.Color.parseColor("#" + "5E44FF"))
                 )
-                createText(
-                    fontSize = 16,
-                    text = restaurant.restaurantAddress,
-                    fontWeight = FontWeight.Normal,
-                    modifier = Modifier,
-                    color = Color.Black
-                )
+                restaurant.restaurantAddress?.let {
+                    createText(
+                        fontSize = 16,
+                        text = it,
+                        fontWeight = FontWeight.Normal,
+                        modifier = Modifier,
+                        color = Color.Black
+                    )
+                }
                 createText(
                     fontSize = 16,
                     text = "Features",
@@ -172,21 +190,21 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
                     color = Color(android.graphics.Color.parseColor("#" + "5E44FF"))
                 )
                 Row {
-                    if (restaurant.wifi) {
+                    if (restaurant.wifi!!) {
                         Image(
                             painter = painterResource(
                                 id = R.drawable.wifi),
                             contentDescription = "Wifi"
                         )
                     }
-                    if(restaurant.electric) {
+                    if(restaurant.electric!!) {
                         Image(
                             painter = painterResource(
                                 id = R.drawable.electric),
                             contentDescription = "Electric"
                         )
                     }
-                    if(restaurant.hotDrink) {
+                    if(restaurant.hotDrink!!) {
                         Image(
                             painter = painterResource(
                                 id = R.drawable.hot),
@@ -201,12 +219,8 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
                     modifier = Modifier,
                     color = Color(android.graphics.Color.parseColor("#" + "5E44FF"))
                 )
-                val commentList = mapDetailViewModel
-                    .fetchComments(
-                        restaurantID = "restaurant.restaurantID"
-                    )
                 val userList = mapDetailViewModel.fetchUser()
-                CommentsList(commentsList = commentList, userList = userList)
+                CommentsList(commentsList = commentsState.value, userList = userList)
             }
             Button(
                 modifier = Modifier
@@ -215,7 +229,7 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
                 contentPadding = PaddingValues(),
                 onClick = {
-
+                    navController.navigate(Screen.Comment.route)
                 },
                 shape = RoundedCornerShape(20.dp),
             ) {
@@ -322,6 +336,7 @@ fun CommentsList(commentsList: List<CommentModel>, userList: List<UserModel>) {
     }
 }
 
+@OptIn(ExperimentalStdlibApi::class)
 @Composable
 fun CommentCard(comment: CommentModel) {
     Box() {
@@ -349,26 +364,25 @@ fun CommentCard(comment: CommentModel) {
                 )
                 Spacer(Modifier.weight(1f))
                 Row() {
-                    for (i in 1..5) {
-                        if (i < 3 ) {
-                            Image(
-                                painter = painterResource(
-                                    id = R.drawable.fill_star),
-                                contentDescription = "RateStar"
-                            )
-                        } else {
-                            Image(
-                                painter = painterResource(
-                                    id = R.drawable.empty_star),
-                                contentDescription = "RateStar"
-                            )
-                        }
+                    for (i in 0..< comment.starCount!!) {
+                        Image(
+                            painter = painterResource(
+                                id = R.drawable.fill_star),
+                            contentDescription = "RateStar"
+                        )
+                    }
+                    for(i in 0..<(5-comment.starCount!!)) {
+                        Image(
+                            painter = painterResource(
+                                id = R.drawable.empty_star),
+                            contentDescription = "RateStar"
+                        )
                     }
                 }
             }
             createText(
                 fontSize = 12,
-                text = comment.commet,
+                text = comment.commet!!,
                 fontWeight = FontWeight.Normal,
                 modifier = Modifier,
                 color = Color.Black
