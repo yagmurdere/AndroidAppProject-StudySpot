@@ -1,10 +1,10 @@
 package com.example.studyspot.utilities.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.studyspot.modules.Focus_Screen.pageController
 import com.example.studyspot.modules.Map_Screen.MapMain
 import com.example.studyspot.modules.Map_Screen.mapDetailViewModel
@@ -18,7 +18,7 @@ import com.example.studyspot.modules.mapdetail.MapDetail
 import com.example.studyspot.modules.signup.SignUp
 import com.example.studyspot.entities.RestaurantModel
 import com.example.studyspot.modules.commentscreen.CommentScreen
-
+import com.example.studyspot.modules.profilescreen.profileViewModel
 @Composable
 fun NavigationSetup(navController: NavHostController) {
 
@@ -44,6 +44,7 @@ fun NavigationSetup(navController: NavHostController) {
             )
             MapDetail(navController = navController, restaurant = dummyRestaurant)
         }
+
         composable(
             route = Screen.Login.route
         ) {
@@ -52,7 +53,7 @@ fun NavigationSetup(navController: NavHostController) {
         composable(
             "profile"
         ){
-            ProfilSayfasi(navController = navController)
+            ProfilSayfasi(navController = navController, viewModel = profileViewModel())
         }
         composable(
             "profileedit"
@@ -72,14 +73,15 @@ fun NavigationSetup(navController: NavHostController) {
         }
         composable(
             "contactus"){
-            ContactUs(name = String(), navController = navController)
+            ContactUs(navController = navController)
 
         }
         composable("focus"){
             pageController()
         }
+
         composable("map"){
-            MapMain(mapDetailViewModel = mapDetailViewModel())
+            MapMain(mapDetailViewModel = mapDetailViewModel(),navController)
         }
         composable(Screen.Comment.route) {
             CommentScreen(navController = navController, "", "")

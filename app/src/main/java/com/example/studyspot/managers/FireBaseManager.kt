@@ -1,7 +1,14 @@
 package com.example.studyspot.managers
 
 import com.example.studyspot.entities.CommentModel
+import android.content.Context
+import android.util.Log
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.studyspot.entities.RestaurantModel
 import com.example.studyspot.entities.UserModel
+import com.example.studyspot.modules.Map_Screen.mapDetailViewModel
+import com.example.studyspot.ui.theme.StudySpotTheme
 import com.example.studyspot.utilities.errors.FireBaseError
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -30,7 +37,7 @@ class FireBaseManager {
         auth = Firebase.auth
         var error = FireBaseError.Sucess
 
-        auth.createUserWithEmailAndPassword(user.eMail, user.password)
+        auth.createUserWithEmailAndPassword(user.eMail!!, user.password!!)
             .addOnCompleteListener() { task ->
                 if(task.isSuccessful) {
                     val savedUser = FirebaseAuth.getInstance().currentUser
@@ -69,6 +76,40 @@ class FireBaseManager {
                     commentList.add(comment!!)
                 }
                 completion(commentList)
+    fun readRestaurants(completion: (List<RestaurantModel>?) -> Unit){
+        val restaurantPlaces = mutableListOf<RestaurantModel>()
+
+        restaurantDBRefrance.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(rSnapshot in snapshot.children){
+                    val place = rSnapshot.getValue(RestaurantModel::class.java)
+                    if (place != null) {
+                        Log.e("doğa",place.toString())
+                        restaurantPlaces.add(place)
+                    }
+                }
+                completion(restaurantPlaces)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
+    fun readUsers(completion: (List<UserModel>?) -> Unit){
+        val usersinfo = mutableListOf<UserModel>()
+
+        restaurantDBRefrance.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(uSnapshot in snapshot.children){
+                    val usersi = uSnapshot.getValue(UserModel::class.java)
+                    if (usersi != null) {
+                        usersinfo.add(usersi)
+                        //Log.d("nefret", usersi.toString())
+                    }
+                }
+                completion(usersinfo)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -77,3 +118,5 @@ class FireBaseManager {
         })
     }
 }
+}
+

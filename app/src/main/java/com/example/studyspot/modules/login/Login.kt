@@ -44,16 +44,18 @@ import com.example.studyspot.ui.theme.color1
 import com.example.studyspot.ui.theme.color2
 import com.example.studyspot.ui.theme.newfontfamily
 import com.example.studyspot.ui.theme.signupcolor
+import com.example.studyspot.utilities.navigation.Screen
 
+val semiTransparentColor = Color.White.copy(alpha = 0.3f)
 
 @Composable
 fun GradientButton(
     text: String,
     textColor: Color,
     gradient: Brush,
-    onClick: () -> Unit
+    navController: NavController
 ){
-    Button(onClick = { onClick},
+    Button(onClick = {},
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent
         )
@@ -125,12 +127,7 @@ fun Login(navController: NavController) {
                         Row(
                             modifier = Modifier
                                 .background(
-                                    brush = Brush.verticalGradient(
-                                        colors = listOf(
-                                            Color(android.graphics.Color.parseColor("#" + "506ED7")),
-                                            Color(android.graphics.Color.parseColor("#" + "7C8CC2"))
-                                        )
-                                    ),
+                                    semiTransparentColor,
                                     shape = RoundedCornerShape(6.dp)
                                 )
                                 .border(
@@ -173,12 +170,7 @@ fun Login(navController: NavController) {
                         Row(
                             modifier = Modifier
                                 .background(
-                                    brush = Brush.verticalGradient(
-                                        colors = listOf(
-                                            Color(android.graphics.Color.parseColor("#" + "506ED7")),
-                                            Color(android.graphics.Color.parseColor("#" + "7C8CC2"))
-                                        )
-                                    ),
+                                    semiTransparentColor,
                                     shape = RoundedCornerShape(6.dp)
                                 )
                                 .border(
@@ -195,7 +187,7 @@ fun Login(navController: NavController) {
                     cursorBrush = SolidColor(Color.White)
                 )
 
-                Row {
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         text = "Not a member?", fontSize = 14.sp,
                         fontFamily = newfontfamily,
@@ -203,7 +195,7 @@ fun Login(navController: NavController) {
                         modifier = Modifier.padding(10.dp)
                     )
                     Surface(
-                        modifier = Modifier.clickable {},
+                        modifier = Modifier.clickable{navController.navigate(Screen.SignUp.route) },
                         color = Color.Transparent
                     ) {
                         Text(
@@ -227,11 +219,9 @@ fun Login(navController: NavController) {
                         color1,
                         color1
                     )
-                )
-            ) {
-
-            }
-
+                ),
+                navController = navController
+            )
             Spacer(modifier = Modifier.size(40.dp))
 
             Spacer(modifier = Modifier.height(customSpacerHeight.dp))
