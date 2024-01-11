@@ -37,6 +37,10 @@ import androidx.navigation.NavController
 import com.example.studyspot.R
 import com.example.studyspot.entities.CommentModel
 import com.example.studyspot.entities.RestaurantModel
+import com.example.studyspot.entities.UserModel
+import com.example.studyspot.modules.navbar.BottomNavBar
+import com.example.studyspot.modules.navbar.BottomNavItem
+
 import com.example.studyspot.modules.signup.createText
 import com.example.studyspot.utilities.navigation.Screen
 
@@ -51,6 +55,7 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
         viewModel.fetchComments()
         viewModel.fetchUsers()
     }
+
 
     Box(
         modifier = Modifier.fillMaxSize()

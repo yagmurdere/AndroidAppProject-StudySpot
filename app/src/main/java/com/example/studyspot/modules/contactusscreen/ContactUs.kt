@@ -1,14 +1,17 @@
 package com.example.studyspot.modules.contactusscreen
 
-
+import  android.annotation.SuppressLint
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -23,12 +26,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.studyspot.R
+import com.example.studyspot.modules.navbar.BottomNavBar
+import com.example.studyspot.modules.navbar.BottomNavItem
 import com.example.studyspot.ui.theme.text1
 
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ContactUs(name: String, modifier: Modifier = Modifier,
-              navController: NavController) {
+fun ContactUs(navController: NavController) {
     Box {
         Image(
             painter = painterResource(id = R.drawable.contactusbackground),
@@ -120,7 +126,48 @@ fun ContactUs(name: String, modifier: Modifier = Modifier,
                     color = text1
                 )
             }
+//bu column u alıp sayfanızdaki column un en altına koyabilirsiniz
+ /*           Column(modifier = Modifier.fillMaxWidth()
+                .weight(1f), //alta gitmesi için aradaki boşluğu dolduruyor
+                verticalArrangement = Arrangement.Bottom) {
+                BottomNavBar(items =listOf(
+                    BottomNavItem(
+                        name = "Focus",
+                        route = "focus",
+                        iconResId = R.drawable.focusicon
+                    ),
+                    BottomNavItem(
+                        name = "Mapmain",
+                        route = "map",
+                        iconResId = R.drawable.mapicon
+                    ),
+                    BottomNavItem(
+                        name = "Profile",
+                        route = "profile",
+                        iconResId = R.drawable.personicon
+                    )
+                )
+                    ,
+                    navController = navController,
+                    onItemClick = {navController.navigate(it.route)})
+                //bu son iki kısımda hata alırsanız silip aynılarını kendiniz yazmayı deneyin oluyor
+            }
+*/
+
 
         }
+
     }
+   
+
+    
+
+
+
+
 }
+
+
+
+
+

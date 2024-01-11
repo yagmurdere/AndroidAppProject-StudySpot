@@ -16,7 +16,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconToggleButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -33,12 +32,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.studyspot.R
+import com.example.studyspot.modules.navbar.BottomNavBar
+import com.example.studyspot.modules.navbar.BottomNavItem
 import com.example.studyspot.ui.theme.newfontfamily
+import com.example.studyspot.utilities.navigation.Screen
+
 
 @Composable
-fun AyarlarSayfasi(navController: NavHostController) {
+fun AyarlarSayfasi(navController: NavController) {
+    
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -60,7 +66,7 @@ fun AyarlarSayfasi(navController: NavHostController) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         IconButton(onClick = { navController.navigate("profile") }) {
                             Icon(
-                                painter = painterResource(id = R.drawable.back_icon),
+                                painter = painterResource(id = R.drawable.backicon),
                                 contentDescription = "back to profile", tint = Color.White
                             )
                         }
@@ -99,14 +105,14 @@ fun AyarlarSayfasi(navController: NavHostController) {
                                 colorResource(id = R.color.focusCardBG2).copy(alpha = 0.5f),
                                 colorResource(id = R.color.focusCardBG1).copy(alpha = 0.5f)
                             )
-                    ),
+                        ),
                         shape = RoundedCornerShape(6.dp)
-            )
+                    )
                     .border(
-                    0.5.dp,
-                    color = Color.White,
-                    shape = RoundedCornerShape(6.dp)
-                ))
+                        0.5.dp,
+                        color = Color.White,
+                        shape = RoundedCornerShape(6.dp)
+                    ))
             {
                 Column {
                     Row(
@@ -145,7 +151,7 @@ fun AyarlarSayfasi(navController: NavHostController) {
                                         painterResource(id = R.drawable.toggle_on_button)
                                     } else {
                                         painterResource(id = R.drawable.toggle_off_button)
-                                    }, contentDescription = " ", tint = Color.White
+                                    }, contentDescription = " ", tint = colorResource(id = R.color.buttoncolor)
                                 )
 
                             }
@@ -283,7 +289,7 @@ fun AyarlarSayfasi(navController: NavHostController) {
                         color = Color.White,
                         shape = RoundedCornerShape(6.dp)
                     )
-                    .clickable { navController.navigate("logout") }
+                    .clickable { navController.navigate(Screen.Login.route)}
             ) {
                 Column {
                     Row(
@@ -314,6 +320,7 @@ fun AyarlarSayfasi(navController: NavHostController) {
                 }
             }
         }
+
 
     }
 
