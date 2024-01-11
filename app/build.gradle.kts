@@ -78,6 +78,8 @@ dependencies {
     implementation ("androidx.compose.runtime:runtime-livedata:1.6.0-beta03")
 
     // Splash API
+    implementation("androidx.core:core-splashscreen:1.0.0")
+
     implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
     implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

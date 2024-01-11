@@ -11,14 +11,16 @@ class CommentViewModel: ViewModel() {
         restaurantId: String,
         userId: String,
         comment: String,
-        star: Int
+        star: Int,
+        name: String
         ) {
         fireBaseManager.createComment(
             CommentModel(
                 userId,
                 restaurantId,
                 comment,
-                star
+                star,
+                name
             ))
     }
 }

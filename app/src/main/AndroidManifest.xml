@@ -13,13 +13,10 @@
         android:theme="@style/Theme.StudySpot"
         tools:targetApi="31">
         <activity
-            android:name=".modules.login.LoginActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.StudySpot">
+            android:theme="@style/Theme.StudySpot.MySplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
