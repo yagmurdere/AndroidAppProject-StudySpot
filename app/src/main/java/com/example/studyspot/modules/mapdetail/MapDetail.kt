@@ -27,6 +27,13 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -50,7 +57,6 @@ import com.example.studyspot.entities.UserModel
 import com.example.studyspot.modules.navbar.BottomNavBar
 import com.example.studyspot.modules.navbar.BottomNavItem
 import com.example.studyspot.modules.signup.createText
-import com.example.studyspot.utilities.errors.FireBaseError
 import com.example.studyspot.utilities.navigation.Screen
 
 @Composable
@@ -58,6 +64,13 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
     val screenHeight = LocalConfiguration.current.screenWidthDp
     val mapDetailViewModel = MapDetailViewModel()
+    val commentsState = mapDetailViewModel.comments.observeAsState(initial = emptyList())
+
+    LaunchedEffect(mapDetailViewModel) {
+        mapDetailViewModel.observeFirebaseData()
+    }
+
+
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -209,12 +222,8 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
                     modifier = Modifier,
                     color = Color(android.graphics.Color.parseColor("#" + "5E44FF"))
                 )
-                val commentList = mapDetailViewModel
-                    .fetchComments(
-                        restaurantID = "restaurant.restaurantID"
-                    )
                 val userList = mapDetailViewModel.fetchUser()
-                CommentsList(commentsList = commentList, userList = userList)
+                CommentsList(commentsList = commentsState.value, userList = userList)
             }
             Button(
                 modifier = Modifier
@@ -223,7 +232,7 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
                 contentPadding = PaddingValues(),
                 onClick = {
-
+                    navController.navigate(Screen.Comment.route)
                 },
                 shape = RoundedCornerShape(20.dp),
             ) {
@@ -330,6 +339,7 @@ fun CommentsList(commentsList: List<CommentModel>, userList: List<UserModel>) {
     }
 }
 
+@OptIn(ExperimentalStdlibApi::class)
 @Composable
 fun CommentCard(comment: CommentModel) {
     Box() {
@@ -357,26 +367,25 @@ fun CommentCard(comment: CommentModel) {
                 )
                 Spacer(Modifier.weight(1f))
                 Row() {
-                    for (i in 1..5) {
-                        if (i < 3 ) {
-                            Image(
-                                painter = painterResource(
-                                    id = R.drawable.fill_star),
-                                contentDescription = "RateStar"
-                            )
-                        } else {
-                            Image(
-                                painter = painterResource(
-                                    id = R.drawable.empty_star),
-                                contentDescription = "RateStar"
-                            )
-                        }
+                    for (i in 0..< comment.starCount!!) {
+                        Image(
+                            painter = painterResource(
+                                id = R.drawable.fill_star),
+                            contentDescription = "RateStar"
+                        )
+                    }
+                    for(i in 0..<(5-comment.starCount!!)) {
+                        Image(
+                            painter = painterResource(
+                                id = R.drawable.empty_star),
+                            contentDescription = "RateStar"
+                        )
                     }
                 }
             }
             createText(
                 fontSize = 12,
-                text = comment.commet,
+                text = comment.commet!!,
                 fontWeight = FontWeight.Normal,
                 modifier = Modifier,
                 color = Color.Black

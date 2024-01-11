@@ -1,9 +1,11 @@
 package com.example.studyspot.modules.commentscreen
 
+import android.util.Log
 import android.view.KeyEvent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +20,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -45,16 +50,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.studyspot.R
+import com.example.studyspot.entities.RestaurantModel
 import com.example.studyspot.utilities.navigation.Screen
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CommentScreen(navController: NavController) {
+fun CommentScreen(navController: NavController, userId: String, restaurantId: String) {
     val height = LocalConfiguration.current.screenHeightDp
     var commentText by remember { mutableStateOf(TextFieldValue(""))}
     val viewModel = CommentViewModel()
-    var painterResource by remember { mutableStateOf(R.drawable.empty_star) }
-    var isClicked by remember { mutableStateOf(false) }
+    var myRating by remember { mutableStateOf(0 )}
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -77,6 +82,12 @@ fun CommentScreen(navController: NavController) {
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                 keyboardActions = KeyboardActions(
                     onDone = {
+                        viewModel.createComment(
+                            restaurantId,
+                            userId,
+                            commentText.text,
+                            myRating
+                        )
                         navController.navigate(Screen.MapDetail.route)
                     }
                 ),
@@ -113,23 +124,38 @@ fun CommentScreen(navController: NavController) {
                     modifier = Modifier,
                     color = Color.White)
                 Spacer(Modifier.width(58.dp))
-                for (i in 0..4) {
-                    IconButton(
-                        modifier = Modifier
-                            .size(19.dp),
-                        onClick = {
-                            isClicked = !isClicked
-                            if(isClicked) {
-                                painterResource = R.drawable.fill_star
-                            } else {
-                                painterResource = R.drawable.empty_star
-                            }
-                        }
-                    ) {
-                        Image(painter = painterResource(painterResource), contentDescription = "emptyStar")
-                    }
-                }
+
+
+                RatingBar(
+                    currentRating = myRating,
+                    onRatingChanged = { myRating = it }
+                )
             }
+        }
+    }
+}
+
+@Composable
+fun RatingBar(
+    maxRating: Int=5,
+    currentRating:Int,
+    onRatingChanged: (Int) -> Unit,
+
+    ) {
+
+    Row() {
+        for (i in 1..5) {
+            Icon(
+                imageVector = if (i <= currentRating) Icons.Filled.Star
+                else Icons.Outlined.Star,
+                contentDescription = null,
+                tint = if (i <= currentRating) Color.Yellow
+                else Color.Unspecified,
+                modifier = Modifier
+                    .clickable { onRatingChanged(i) }
+                    .padding(4.dp)
+
+            )
         }
     }
 }

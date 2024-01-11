@@ -1,5 +1,6 @@
 package com.example.studyspot.managers
 
+import com.example.studyspot.entities.CommentModel
 import android.content.Context
 import android.util.Log
 import androidx.compose.runtime.Composable
@@ -19,12 +20,16 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class FireBaseManager {
+
     private val userDBReference: DatabaseReference = FirebaseDatabase
         .getInstance()
         .getReference("Users")
     private val restaurantDBRefrance: DatabaseReference = FirebaseDatabase
         .getInstance()
         .getReference("Restaurant")
+    private val commentDBReference: DatabaseReference = FirebaseDatabase
+        .getInstance()
+        .getReference("Comments")
     private lateinit var auth: FirebaseAuth
 
     fun createAUser(user: UserModel): FireBaseError {
@@ -51,6 +56,26 @@ class FireBaseManager {
         return error
     }
 
+    fun createComment(comment: CommentModel) {
+        val commentId = commentDBReference.push().key!!
+
+        commentDBReference.child(commentId).setValue(comment)
+            .addOnCompleteListener{
+
+            } .addOnFailureListener {
+
+            }
+    }
+
+    fun fetchComment(completion: (List<CommentModel>) -> Unit) {
+        val commentList = mutableListOf<CommentModel>()
+        commentDBReference.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(item in snapshot.children) {
+                    val comment = item.getValue(CommentModel::class.java)
+                    commentList.add(comment!!)
+                }
+                completion(commentList)
     fun readRestaurants(completion: (List<RestaurantModel>?) -> Unit){
         val restaurantPlaces = mutableListOf<RestaurantModel>()
 
@@ -93,5 +118,5 @@ class FireBaseManager {
         })
     }
 }
-
+}
 
