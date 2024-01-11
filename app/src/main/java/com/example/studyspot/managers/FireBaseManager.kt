@@ -30,22 +30,26 @@ class FireBaseManager {
         auth = Firebase.auth
         var error = FireBaseError.Sucess
 
-        auth.createUserWithEmailAndPassword(user.eMail, user.password)
-            .addOnCompleteListener() { task ->
-                if(task.isSuccessful) {
-                    val savedUser = FirebaseAuth.getInstance().currentUser
-                    val uid = savedUser?.uid
-                    user.id = uid
-                    userDBReference.child(userId).setValue(user)
-                        .addOnCompleteListener{
-                            error = FireBaseError.Sucess
-                        } .addOnFailureListener {
-                            error = FireBaseError.ConnectionError
+        user.eMail?.let {
+            user.password?.let { it1 ->
+                auth.createUserWithEmailAndPassword(it, it1)
+                    .addOnCompleteListener() { task ->
+                        if(task.isSuccessful) {
+                            val savedUser = FirebaseAuth.getInstance().currentUser
+                            val uid = savedUser?.uid
+                            user.id = uid
+                            userDBReference.child(userId).setValue(user)
+                                .addOnCompleteListener{
+                                    error = FireBaseError.Sucess
+                                } .addOnFailureListener {
+                                    error = FireBaseError.ConnectionError
+                                }
+                        } else {
+                            error = FireBaseError.UndifiendError
                         }
-                } else {
-                    error = FireBaseError.UndifiendError
-                }
+                    }
             }
+        }
         return error
     }
 
@@ -74,6 +78,23 @@ class FireBaseManager {
             override fun onCancelled(error: DatabaseError) {
 
             }
+        })
+    }
+
+    fun fetchUsers(completion: (List<UserModel>) -> Unit) {
+        val userList = mutableListOf<UserModel>()
+        userDBReference.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.map {
+                    userList.add(it.getValue(UserModel::class.java)!!)
+                }
+                completion(userList)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
         })
     }
 }

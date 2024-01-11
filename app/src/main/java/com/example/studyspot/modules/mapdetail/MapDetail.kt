@@ -1,12 +1,8 @@
 package com.example.studyspot.modules.mapdetail
 
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -21,30 +17,18 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -53,7 +37,6 @@ import androidx.navigation.NavController
 import com.example.studyspot.R
 import com.example.studyspot.entities.CommentModel
 import com.example.studyspot.entities.RestaurantModel
-import com.example.studyspot.entities.UserModel
 import com.example.studyspot.modules.signup.createText
 import com.example.studyspot.utilities.navigation.Screen
 
@@ -61,11 +44,12 @@ import com.example.studyspot.utilities.navigation.Screen
 fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
     val screenHeight = LocalConfiguration.current.screenWidthDp
-    val mapDetailViewModel = MapDetailViewModel()
-    val commentsState = mapDetailViewModel.comments.observeAsState(initial = emptyList())
+    val viewModel = MapDetailViewModel()
+    val commentsState = viewModel.comments.observeAsState(initial = emptyList())
 
-    LaunchedEffect(mapDetailViewModel) {
-        mapDetailViewModel.observeFirebaseData()
+    LaunchedEffect(viewModel) {
+        viewModel.fetchComments()
+        viewModel.fetchUsers()
     }
 
     Box(
@@ -219,8 +203,7 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
                     modifier = Modifier,
                     color = Color(android.graphics.Color.parseColor("#" + "5E44FF"))
                 )
-                val userList = mapDetailViewModel.fetchUser()
-                CommentsList(commentsList = commentsState.value, userList = userList)
+                CommentsList(commentsList = commentsState.value)
             }
             Button(
                 modifier = Modifier
@@ -323,7 +306,7 @@ fun CreateText(
 }
 
 @Composable
-fun CommentsList(commentsList: List<CommentModel>, userList: List<UserModel>) {
+fun CommentsList(commentsList: List<CommentModel>) {
     val screenHeight = LocalConfiguration.current.screenHeightDp
     LazyColumn(
         modifier = Modifier
@@ -357,7 +340,7 @@ fun CommentCard(comment: CommentModel) {
             ) {
                 createText(
                     fontSize = 13,
-                    text = "Erdem Ezgi",
+                    text = comment.name!!,
                     fontWeight = FontWeight.SemiBold,
                     modifier = Modifier,
                     color = Color(android.graphics.Color.parseColor("#" + "5E44FF"))

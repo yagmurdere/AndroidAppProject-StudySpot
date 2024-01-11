@@ -83,10 +83,11 @@ fun CommentScreen(navController: NavController, userId: String, restaurantId: St
                 keyboardActions = KeyboardActions(
                     onDone = {
                         viewModel.createComment(
-                            restaurantId,
-                            userId,
+                            "NnVIj0khJ64xrrxholu",
+                            "o5yiedUm7qZixKHqELoedaqmWfo1",
                             commentText.text,
-                            myRating
+                            myRating,
+                            "Emre Tanrısever"
                         )
                         navController.navigate(Screen.MapDetail.route)
                     }
