@@ -1,6 +1,5 @@
 package com.example.studyspot.modules.mapdetail
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -23,7 +22,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -38,9 +36,6 @@ import androidx.navigation.NavController
 import com.example.studyspot.R
 import com.example.studyspot.entities.CommentModel
 import com.example.studyspot.entities.RestaurantModel
-import com.example.studyspot.entities.UserModel
-import com.example.studyspot.modules.navbar.BottomNavBar
-import com.example.studyspot.modules.navbar.BottomNavItem
 
 import com.example.studyspot.modules.signup.createText
 import com.example.studyspot.utilities.navigation.Screen
@@ -50,7 +45,7 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
     val screenHeight = LocalConfiguration.current.screenWidthDp
     val viewModel = MapDetailViewModel()
-    val commentsState = viewModel.comments.observeAsState(initial = emptyList())
+//    val commentsState = viewModel.comments.observeAsState(initial = emptyList())
     LaunchedEffect(viewModel) {
         viewModel.fetchComments()
         viewModel.fetchUsers()
@@ -208,7 +203,7 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
                     modifier = Modifier,
                     color = Color(android.graphics.Color.parseColor("#" + "5E44FF"))
                 )
-                CommentsList(commentsList = commentsState.value)
+ //               CommentsList(commentsList = commentsState.value)
             }
             Button(
                 modifier = Modifier

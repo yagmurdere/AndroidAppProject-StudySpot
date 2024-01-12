@@ -33,10 +33,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import com.example.studyspot.R
-import com.example.studyspot.modules.navbar.BottomNavBar
-import com.example.studyspot.modules.navbar.BottomNavItem
 import com.example.studyspot.ui.theme.newfontfamily
 import com.example.studyspot.utilities.navigation.Screen
 

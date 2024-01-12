@@ -85,4 +85,5 @@ fun NavigationSetup(navController: NavHostController) {
         }
 
     }
+
 }

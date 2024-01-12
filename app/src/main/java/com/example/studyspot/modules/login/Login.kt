@@ -233,14 +233,9 @@ fun Login(navController: NavController) {
                     .width(89.dp)
                     .height(22.dp),
             )
+
+
         }
-
-
-
-
-
-
-
     }
 
 }

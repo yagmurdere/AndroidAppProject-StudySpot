@@ -30,8 +30,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.studyspot.R
-import com.example.studyspot.modules.navbar.BottomNavBar
-import com.example.studyspot.modules.navbar.BottomNavItem
 import com.example.studyspot.ui.theme.StudySpotTheme
 import com.example.studyspot.ui.theme.newfontfamily
 import com.example.studyspot.utilities.navigation.NavigationSetup
