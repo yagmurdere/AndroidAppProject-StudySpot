@@ -1,6 +1,8 @@
 package com.example.studyspot.managers
 
+import android.util.Log
 import com.example.studyspot.entities.CommentModel
+import com.example.studyspot.entities.RestaurantModel
 import com.example.studyspot.entities.UserModel
 import com.example.studyspot.utilities.errors.FireBaseError
 import com.google.firebase.Firebase
@@ -95,6 +97,26 @@ class FireBaseManager {
                 TODO("Not yet implemented")
             }
 
+        })
+    }
+    fun readRestaurants(completion: (List<RestaurantModel>?) -> Unit){
+        val restaurantPlaces = mutableListOf<RestaurantModel>()
+
+        restaurantDBRefrance.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(rSnapshot in snapshot.children){
+                    val place = rSnapshot.getValue(RestaurantModel::class.java)
+                    if (place != null) {
+                        Log.e("doğa",place.toString())
+                        restaurantPlaces.add(place)
+                    }
+                }
+                completion(restaurantPlaces)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
         })
     }
 }
