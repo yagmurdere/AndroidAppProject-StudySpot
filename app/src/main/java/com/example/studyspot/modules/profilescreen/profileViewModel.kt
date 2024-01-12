@@ -32,7 +32,6 @@ class profileViewModel:ViewModel() {
         "GSF"
     )
 
-    val fireBaseManager = FireBaseManager()
 
 
 
