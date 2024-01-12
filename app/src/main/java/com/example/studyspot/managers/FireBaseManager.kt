@@ -99,17 +99,14 @@ class FireBaseManager {
 
         })
     }
-    fun readRestaurants(completion: (List<RestaurantModel>?) -> Unit){
+    fun readRestaurants(completion: (List<RestaurantModel>) -> Unit){
         val restaurantPlaces = mutableListOf<RestaurantModel>()
 
         restaurantDBRefrance.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                for(rSnapshot in snapshot.children){
-                    val place = rSnapshot.getValue(RestaurantModel::class.java)
-                    if (place != null) {
-                        Log.e("doğa",place.toString())
-                        restaurantPlaces.add(place)
-                    }
+                snapshot.children.map{
+                    restaurantPlaces.add(it.getValue(RestaurantModel::class.java)!!)
+
                 }
                 completion(restaurantPlaces)
             }
@@ -119,4 +116,5 @@ class FireBaseManager {
             }
         })
     }
+
 }

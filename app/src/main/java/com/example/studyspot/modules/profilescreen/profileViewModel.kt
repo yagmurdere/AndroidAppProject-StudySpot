@@ -34,15 +34,7 @@ class profileViewModel:ViewModel() {
 
     val fireBaseManager = FireBaseManager()
 
-    fun fetchUser(){
-        fireBaseManager.readUsers {
-            if(it != null){
-                for (item in it){
-                    Log.d("doa", item.name!!)
-                }
-            }
-        }
-    }
+
 
 
 

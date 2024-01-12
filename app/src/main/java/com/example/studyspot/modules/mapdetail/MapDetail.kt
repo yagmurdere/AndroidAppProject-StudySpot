@@ -1,5 +1,6 @@
 package com.example.studyspot.modules.mapdetail
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -50,7 +51,6 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
     val screenHeight = LocalConfiguration.current.screenWidthDp
     val viewModel = MapDetailViewModel()
     val commentsState = viewModel.comments.observeAsState(initial = emptyList())
-
     LaunchedEffect(viewModel) {
         viewModel.fetchComments()
         viewModel.fetchUsers()
