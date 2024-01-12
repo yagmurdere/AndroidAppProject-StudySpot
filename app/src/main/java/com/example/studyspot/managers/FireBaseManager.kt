@@ -51,7 +51,6 @@ class FireBaseManager {
             }
         }
         return error
-        
     }
 
     fun createComment(comment: CommentModel) {
