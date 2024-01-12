@@ -17,14 +17,14 @@ import com.example.studyspot.modules.login.Login
 import com.example.studyspot.modules.mapdetail.MapDetail
 import com.example.studyspot.modules.signup.SignUp
 import com.example.studyspot.entities.RestaurantModel
-import com.example.studyspot.modules.commentscreen.CommentScreen
 import com.example.studyspot.modules.profilescreen.profileViewModel
+
 @Composable
 fun NavigationSetup(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = Screen.MapDetail.route
+        startDestination = Screen.Login.route
     ) {
         composable(
             route = Screen.SignUp.route
@@ -83,8 +83,6 @@ fun NavigationSetup(navController: NavHostController) {
         composable("map"){
             MapMain(mapDetailViewModel = mapDetailViewModel(),navController)
         }
-        composable(Screen.Comment.route) {
-            CommentScreen(navController = navController, "", "")
-        }
+
     }
 }

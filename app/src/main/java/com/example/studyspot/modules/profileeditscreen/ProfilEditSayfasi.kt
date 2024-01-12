@@ -119,6 +119,8 @@ fun ProfilEditSayfasi(navController: NavController) {
         var lastSelectedAvatar by remember { mutableStateOf(R.drawable.avatar_man) }
 
 
+        val isUploading = remember{ mutableStateOf(false) }
+
         LaunchedEffect(isEditing) {
             lastSelectedAvatar = if (isEditing) {
                 R.drawable.avatar_man
@@ -475,12 +477,15 @@ fun ProfilEditSayfasi(navController: NavController) {
 
 @Composable
 fun ButtonGradient(
+    navController: NavController,
     text: String,
     textColor: Color,
     gradient: Brush,
     onClick: () -> Unit
 ){
-    Button(onClick = { },
+    Button(onClick = { navController.navigate("profile")
+
+                     },
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent
         )

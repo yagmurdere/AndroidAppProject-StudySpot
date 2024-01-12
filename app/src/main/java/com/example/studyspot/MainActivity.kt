@@ -31,36 +31,40 @@ class MainActivity : ComponentActivity() {
         setContent {
             StudySpotTheme {
                 val navController = rememberNavController()
-                Scaffold(
-                    bottomBar = {
-                        BottomNavBar(
-                            items = listOf(
-                                BottomNavItem(
-                                    name = "Focus",
-                                    route = "focus",
-                                    iconResId = R.drawable.focusicon
+
+                StudySpotTheme {
+                    val navController = rememberNavController()
+                    Scaffold(
+                        bottomBar = {
+                            BottomNavBar(
+                                items = listOf(
+                                    BottomNavItem(
+                                        name = "Focus",
+                                        route = "focus",
+                                        iconResId = R.drawable.focusicon
+                                    ),
+                                    BottomNavItem(
+                                        name = "Mapmain",
+                                        route = "map",
+                                        iconResId = R.drawable.mapicon
+                                    ),
+                                    BottomNavItem(
+                                        name = "Profile",
+                                        route = "profile",
+                                        iconResId = R.drawable.personicon
+                                    )
                                 ),
-                                BottomNavItem(
-                                    name = "Mapmain",
-                                    route = "map",
-                                    iconResId = R.drawable.mapicon
-                                ),
-                                BottomNavItem(
-                                    name = "Profile",
-                                    route = "profile",
-                                    iconResId = R.drawable.personicon
-                                )
-                            ),
-                            onItemClick = { navController.navigate(it.route) }
-                        )
+                                onItemClick = { navController.navigate(it.route) }
+                            )
+                        }
+                    ) {
+                        NavigationSetup(navController = navController)
                     }
-                ) {
-                    NavigationSetup(navController = navController)
                 }
                 }
             }
         }
-    }
+        }
 
 
 
