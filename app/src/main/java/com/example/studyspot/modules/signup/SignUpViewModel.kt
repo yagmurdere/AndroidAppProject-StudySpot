@@ -14,19 +14,24 @@ class SignUpViewModel: ViewModel() {
         surname: String,
         eMail: String,
         password: String,
-        confirmPassword: String
+        confirmPassword: String,
+        isCheked: Boolean
     ): FireBaseError {
-        if(password == confirmPassword) {
-            val user = UserModel(
-                name.lowercase(),
-                surname.lowercase(),
-                eMail.lowercase(),
-                password,
-                ""
-            )
-            return fireBaseManager.createAUser(user)
+        if(isCheked) {
+            if(password == confirmPassword) {
+                val user = UserModel(
+                    name.lowercase(),
+                    surname.lowercase(),
+                    eMail.lowercase(),
+                    password,
+                    ""
+                )
+                return fireBaseManager.createAUser(user)
+            } else {
+                return FireBaseError.PasswordNotEqual
+            }
         } else {
-            return FireBaseError.PasswordNotEqual
+            return FireBaseError.NoChecked
         }
     }
 }

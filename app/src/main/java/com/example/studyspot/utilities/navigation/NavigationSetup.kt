@@ -42,7 +42,12 @@ fun NavigationSetup(navController: NavHostController) {
                 true,
                 true
             )
-            MapDetail(navController = navController, restaurant = dummyRestaurant)
+            MapDetail(
+                navController = navController,
+                restaurant = dummyRestaurant,
+                "NnVIj0khJ64xrrxholu",
+                "NnuQNKv7nTmCRZzRALM"
+            )
         }
 
         composable(
@@ -81,7 +86,10 @@ fun NavigationSetup(navController: NavHostController) {
         }
 
         composable("map"){
-            MapMain(mapDetailViewModel = mapDetailViewModel(),navController)
+            MapMain(mapDetailViewModel = mapDetailViewModel())
+        }
+        composable(Screen.Comment.route) {
+            CommentScreen(navController = navController, "", "NnVIj0khJ64xrrxholu")
         }
 
     }
