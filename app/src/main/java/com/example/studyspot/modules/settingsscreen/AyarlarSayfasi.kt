@@ -90,7 +90,7 @@ fun AyarlarSayfasi(navController: NavController) {
             verticalArrangement = Arrangement.SpaceBetween
         ) {
 
-
+/*
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -111,6 +111,7 @@ fun AyarlarSayfasi(navController: NavController) {
                         shape = RoundedCornerShape(6.dp)
                     ))
             {
+
                 Column {
                     Row(
                         modifier = Modifier
@@ -162,7 +163,7 @@ fun AyarlarSayfasi(navController: NavController) {
             }
 
 
-            Spacer(modifier = Modifier.padding(15.dp))
+            Spacer(modifier = Modifier.padding(15.dp))*/
 
             Box(
                 modifier = Modifier
