@@ -46,6 +46,50 @@ class mapDetailViewModel : ViewModel() {
         "Top Roastry",
         "Headquarters Coffee"
     )
+    val wifi = arrayOf(
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true
+    )
+    val coffe = arrayOf(
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+    )
+    val plug = arrayOf(
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        false,
+        true,
+        true
+    )
+    val yogun= arrayOf(
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80,
+        90
+    )
     val xcor= arrayOf(
         210,
         320,

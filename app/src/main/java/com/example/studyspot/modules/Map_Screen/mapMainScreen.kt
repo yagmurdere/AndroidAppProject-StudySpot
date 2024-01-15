@@ -89,7 +89,11 @@ fun MapMain(mapDetailViewModel: mapDetailViewModel,navController: NavController)
                     isSelected = selectedBoxIndex == count,
                     onBoxClick = {
                         selectedBoxIndex = if (selectedBoxIndex == count) -1 else count
-                    }
+                    },
+                    plug=mapDetailViewModel.plug,
+                    coffe=mapDetailViewModel.coffe,
+                    wifi=mapDetailViewModel.wifi,
+                    yogun=mapDetailViewModel.yogun
                 )
             }
             Image(painter = painterResource(id = R.drawable.map_details), contentDescription ="" ,
@@ -108,7 +112,11 @@ fun MapButtons(
     xcor:Array<Int>,
     ycor:Array<Int>,
     isSelected: Boolean,
-    onBoxClick: () -> Unit
+    onBoxClick: () -> Unit,
+    plug : Array<Boolean>,
+    coffe : Array<Boolean>,
+    wifi : Array<Boolean>,
+    yogun : Array<Int>,
 )
 {
     Box {
@@ -116,8 +124,14 @@ fun MapButtons(
             modifier = Modifier
                 .size(20.dp, 20.dp)
                 .offset(x = xcor[count].dp, y = ycor[count].dp),
-            colors = ButtonDefaults.buttonColors(Color.Red)) {
+            colors = ButtonDefaults.buttonColors(
+                colorResource(id =
+                if(yogun[count]<=40) R.color.green_box_border_color
+                else if(yogun[count]<=70) R.color.yellow_box_border_color
+                else R.color.red_box_border_color)
+            )) {
         }
+
         if (isSelected) {
             Box(
                 modifier = Modifier
@@ -143,7 +157,10 @@ fun MapButtons(
                         width = 5.dp,
                         brush = Brush.verticalGradient(
                             colors = listOf(
-                                colorResource(id = R.color.map_page_box_border_color).copy(alpha = 0.9f),
+                                colorResource(id =
+                                if(yogun[count]<=40) R.color.green_box_border_color
+                                else if(yogun[count]<=70) R.color.yellow_box_border_color
+                                else R.color.red_box_border_color).copy(alpha = 0.9f),
                                 Color.White.copy(alpha = 0.9f)
                             )
                         ), shape = RoundedCornerShape(15.dp)
@@ -170,18 +187,25 @@ fun MapButtons(
                         fontSize = 13.sp,
                         fontFamily = newfontfamily)
                     Row {
-                        Icon(painter = painterResource(id = R.drawable.wifi_icon), contentDescription =" ",
-                            modifier = Modifier
-                                .size(15.dp)
-                                .padding(end = 2.dp))
-                        Icon(painter = painterResource(id = R.drawable.plug_icon), contentDescription =" ",
-                            modifier = Modifier
-                                .size(15.dp)
-                                .padding(end = 2.dp))
-                        Icon(painter = painterResource(id = R.drawable.coffe_icon), contentDescription =" ",
-                            modifier = Modifier
-                                .size(15.dp)
-                                .padding(end = 2.dp))
+                        if(wifi[count]){
+                            Icon(painter = painterResource(id = R.drawable.wifi_icon), contentDescription =" ",
+                                modifier = Modifier
+                                    .size(15.dp)
+                                    .padding(end = 2.dp))
+                        }
+                        if(plug[count]){
+                            Icon(painter = painterResource(id = R.drawable.plug_icon), contentDescription =" ",
+                                modifier = Modifier
+                                    .size(15.dp)
+                                    .padding(end = 2.dp))
+                        }
+                        if(coffe[count]){
+                            Icon(painter = painterResource(id = R.drawable.coffe_icon), contentDescription =" ",
+                                modifier = Modifier
+                                    .size(15.dp)
+                                    .padding(end = 2.dp))
+                        }
+
                     }
                 }
 
