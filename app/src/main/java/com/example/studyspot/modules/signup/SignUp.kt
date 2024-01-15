@@ -359,14 +359,16 @@ fun inputComponent(navController: NavController, context: Context) {
                     surnameText.text,
                     eMailText.text,
                     passwordText.text,
-                    confirmPasswordText.text
+                    confirmPasswordText.text,
+                    checkBoxState
                 )
 
                 when(returnFromFireBase) {
                     FireBaseError.Sucess -> navController.navigate(Screen.Login.route)
-                    FireBaseError.ConnectionError -> Toast.makeText(context, "There is a connection error", Toast.LENGTH_LONG).show()
+                    FireBaseError.ConnectionError -> Toast.makeText(context, "There is a connection error.", Toast.LENGTH_LONG).show()
                     FireBaseError.PasswordNotEqual -> Toast.makeText(context, "Passwords are not equal.", Toast.LENGTH_LONG).show()
-                    FireBaseError.UndifiendError -> Toast.makeText(context, "Undifiend error", Toast.LENGTH_LONG).show()
+                    FireBaseError.UndifiendError -> Toast.makeText(context, "Undifiend error.", Toast.LENGTH_LONG).show()
+                    FireBaseError.NoChecked -> Toast.makeText(context, "Checked the privacy.", Toast.LENGTH_LONG).show()
                 }
             },
             shape = RoundedCornerShape(20.dp),

@@ -24,7 +24,7 @@ fun NavigationSetup(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = Screen.MapDetail.route
+        startDestination = Screen.SignUp.route
     ) {
         composable(
             route = Screen.SignUp.route
@@ -42,7 +42,12 @@ fun NavigationSetup(navController: NavHostController) {
                 true,
                 true
             )
-            MapDetail(navController = navController, restaurant = dummyRestaurant)
+            MapDetail(
+                navController = navController,
+                restaurant = dummyRestaurant,
+                "NnVIj0khJ64xrrxholu",
+                "NnuQNKv7nTmCRZzRALM"
+            )
         }
         composable(
             route = Screen.Login.route
@@ -82,7 +87,7 @@ fun NavigationSetup(navController: NavHostController) {
             MapMain(mapDetailViewModel = mapDetailViewModel())
         }
         composable(Screen.Comment.route) {
-            CommentScreen(navController = navController, "", "")
+            CommentScreen(navController = navController, "", "NnVIj0khJ64xrrxholu")
         }
     }
 }

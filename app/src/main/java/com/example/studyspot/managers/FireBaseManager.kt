@@ -1,6 +1,9 @@
 package com.example.studyspot.managers
 
+import android.util.Log
+import com.example.studyspot.entities.BookMarkModel
 import com.example.studyspot.entities.CommentModel
+import com.example.studyspot.entities.CrawdedModel
 import com.example.studyspot.entities.UserModel
 import com.example.studyspot.utilities.errors.FireBaseError
 import com.google.firebase.Firebase
@@ -23,6 +26,12 @@ class FireBaseManager {
     private val commentDBReference: DatabaseReference = FirebaseDatabase
         .getInstance()
         .getReference("Comments")
+    private val crawdedDBReference: DatabaseReference = FirebaseDatabase
+        .getInstance()
+        .getReference("Crawded")
+    private val bookmarkDBReference: DatabaseReference = FirebaseDatabase
+        .getInstance()
+        .getReference("Bookmark")
     private lateinit var auth: FirebaseAuth
 
     fun createAUser(user: UserModel): FireBaseError {
@@ -64,6 +73,30 @@ class FireBaseManager {
             }
     }
 
+    fun addCrawded(crawded: CrawdedModel): Boolean {
+        val crawdedId = commentDBReference.push().key!!
+        var isSuccess = false
+        crawdedDBReference.child(crawdedId).setValue(crawded)
+            .addOnCompleteListener{
+                isSuccess = true
+            } .addOnFailureListener {
+                isSuccess = false
+            }
+        return isSuccess
+    }
+
+    fun addBookMark(bookmark: BookMarkModel): Boolean {
+        val bookMarkId = commentDBReference.push().key!!
+        var isSuccess = false
+        bookmarkDBReference.child(bookMarkId).setValue(bookmark)
+            .addOnCompleteListener{
+                isSuccess = true
+            } .addOnFailureListener {
+                isSuccess = false
+            }
+        return isSuccess
+    }
+
     fun fetchComment(completion: (List<CommentModel>) -> Unit) {
         val commentList = mutableListOf<CommentModel>()
         commentDBReference.addValueEventListener(object: ValueEventListener {
@@ -96,5 +129,70 @@ class FireBaseManager {
             }
 
         })
+    }
+
+    fun fetchCreawdedData(completion: (List<CrawdedModel>) -> Unit) {
+        val crawdedList = mutableListOf<CrawdedModel>()
+        crawdedDBReference.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.map {
+                    crawdedList.add(it.getValue(CrawdedModel::class.java)!!)
+                }
+                completion(crawdedList)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    fun removeCreawdedData(userId: String) {
+        var key = ""
+        crawdedDBReference.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.map {
+                    if(it.getValue(CrawdedModel::class.java)!!.userId == userId) {
+                        key = snapshot.key.toString()
+                    }
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+        crawdedDBReference.child(key).removeValue()
+    }
+
+    fun fetchBookMark(completion: (List<BookMarkModel>) -> Unit) {
+        val bookmarkList = mutableListOf<BookMarkModel>()
+        bookmarkDBReference.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.map {
+                    bookmarkList.add(it.getValue(BookMarkModel::class.java)!!)
+                }
+                completion(bookmarkList)
+            }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+    fun removeBookMark(userId: String) {
+        var key = ""
+        bookmarkDBReference.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.map {
+                    if(it.getValue(BookMarkModel::class.java)!!.userId == userId) {
+                        key = snapshot.key.toString()
+                    }
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+        bookmarkDBReference.child(key).removeValue()
     }
 }

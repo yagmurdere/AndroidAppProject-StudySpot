@@ -1,5 +1,6 @@
 package com.example.studyspot.modules.mapdetail
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -13,16 +14,25 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -41,15 +51,18 @@ import com.example.studyspot.modules.signup.createText
 import com.example.studyspot.utilities.navigation.Screen
 
 @Composable
-fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
+fun MapDetail(navController: NavController, restaurant: RestaurantModel, restaurantId: String, userId: String) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
     val screenHeight = LocalConfiguration.current.screenWidthDp
     val viewModel = MapDetailViewModel()
     val commentsState = viewModel.comments.observeAsState(initial = emptyList())
+    var isHere by rememberSaveable { mutableStateOf(viewModel.isHere.value) }
 
     LaunchedEffect(viewModel) {
-        viewModel.fetchComments()
+        viewModel.fetchComments(restaurantId)
         viewModel.fetchUsers()
+        viewModel.isHere(userId)
+        viewModel.isBookMarkChecked(userId)
     }
 
     Box(
@@ -124,11 +137,23 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
                         color = Color.Black
                     )
                     Spacer(Modifier.weight(1f))
-                    Image(
-                        painter = painterResource(id = R.drawable.empyt_bookmark),
-                        contentDescription = "Bookmark"
+                    IconButton(
+                        modifier = Modifier.size(24.dp),
+                        onClick = {
+                            Log.d(" BookmarkData", viewModel.isBookMarkChecked.value.toString())
+                            if(viewModel.isBookMarkChecked.value == true) {
+                                viewModel.removeBookMark(userId)
+                            } else {
+                                viewModel.addBookMark(restaurantId, userId)
+                            }
+                        }
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.empyt_bookmark),
+                            contentDescription = "Bookmark",
+                            )
+                    }
 
-                    )
                 }
             }
             Column(
@@ -248,7 +273,13 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
                 contentPadding = PaddingValues(),
                 onClick = {
-
+                    if(viewModel.isHere.value == true) {
+                        viewModel.leaveHere(userId)
+                        isHere = !isHere!!
+                    } else {
+                        isHere = !isHere!!
+                        viewModel.addCrawded(restaurantId, userId)
+                    }
                 },
                 shape = RoundedCornerShape(20.dp),
             ) {
@@ -265,7 +296,7 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel) {
                         .fillMaxSize(),
                     contentAlignment = Alignment.Center,
                 ) {
-                    if(false) {
+                    if(isHere == false) {
                         createText(
                             fontSize = 16,
                             text = "I'm here!",

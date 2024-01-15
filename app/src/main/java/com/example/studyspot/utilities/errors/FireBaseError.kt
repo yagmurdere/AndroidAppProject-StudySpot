@@ -4,5 +4,6 @@ enum class FireBaseError {
     Sucess,
     ConnectionError,
     PasswordNotEqual,
-    UndifiendError
+    UndifiendError,
+    NoChecked
 }
