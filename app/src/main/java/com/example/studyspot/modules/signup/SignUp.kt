@@ -49,6 +49,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.studyspot.R
 import com.example.studyspot.utilities.errors.FireBaseError
 import com.example.studyspot.utilities.navigation.Screen
@@ -58,6 +59,8 @@ import com.example.studyspot.utilities.navigation.Screen
 fun SignUp(navController: NavController) {
     val customScreenWidth = LocalConfiguration.current.screenWidthDp * 0.75
     val context = LocalContext.current
+    val navController = rememberNavController()
+    val currentDestination = navController.currentDestination?.route
 
     Box(
         modifier = Modifier
@@ -95,6 +98,7 @@ fun SignUp(navController: NavController) {
         }
     }
 }
+val semiTransparentColor = Color.White.copy(alpha = 0.3f)
 
 @ExperimentalMaterial3Api
 @Composable
@@ -130,12 +134,7 @@ fun inputComponent(navController: NavController, context: Context) {
             Row(
                 modifier = Modifier
                     .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(
-                                Color(android.graphics.Color.parseColor("#" + "E8F5FF")),
-                                Color(android.graphics.Color.parseColor("#" + "6779B9"))
-                            )
-                        ),
+                        semiTransparentColor,
                         shape = RoundedCornerShape(6.dp)
                     )
                     .border(0.dp, color = Color.White, shape = RoundedCornerShape(6.dp))
@@ -170,12 +169,7 @@ fun inputComponent(navController: NavController, context: Context) {
             Row(
                 modifier = Modifier
                     .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(
-                                Color(android.graphics.Color.parseColor("#" + "E8F5FF")),
-                                Color(android.graphics.Color.parseColor("#" + "6779B9"))
-                            )
-                        ),
+                        semiTransparentColor,
                         shape = RoundedCornerShape(6.dp)
                     )
                     .border(0.dp, color = Color.White, shape = RoundedCornerShape(6.dp))
@@ -210,12 +204,7 @@ fun inputComponent(navController: NavController, context: Context) {
             Row(
                 modifier = Modifier
                     .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(
-                                Color(android.graphics.Color.parseColor("#" + "E8F5FF")),
-                                Color(android.graphics.Color.parseColor("#" + "6779B9"))
-                            )
-                        ),
+                        semiTransparentColor,
                         shape = RoundedCornerShape(6.dp)
                     )
                     .border(0.dp, color = Color.White, shape = RoundedCornerShape(6.dp))
@@ -252,12 +241,7 @@ fun inputComponent(navController: NavController, context: Context) {
             Row(
                 modifier = Modifier
                     .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(
-                                Color(android.graphics.Color.parseColor("#" + "E8F5FF")),
-                                Color(android.graphics.Color.parseColor("#" + "6779B9"))
-                            )
-                        ),
+                        semiTransparentColor,
                         shape = RoundedCornerShape(6.dp)
                     )
                     .border(0.dp, color = Color.White, shape = RoundedCornerShape(6.dp))
@@ -294,12 +278,7 @@ fun inputComponent(navController: NavController, context: Context) {
             Row(
                 modifier = Modifier
                     .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(
-                                Color(android.graphics.Color.parseColor("#" + "E8F5FF")),
-                                Color(android.graphics.Color.parseColor("#" + "6779B9"))
-                            )
-                        ),
+                        semiTransparentColor,
                         shape = RoundedCornerShape(6.dp)
                     )
                     .border(0.dp, color = Color.White, shape = RoundedCornerShape(6.dp))

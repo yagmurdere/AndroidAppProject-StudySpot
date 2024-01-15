@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.studyspot.entities.BookMarkModel
 import com.example.studyspot.entities.CommentModel
 import com.example.studyspot.entities.CrawdedModel
+import com.example.studyspot.entities.RestaurantModel
 import com.example.studyspot.entities.UserModel
 import com.example.studyspot.utilities.errors.FireBaseError
 import com.google.firebase.Firebase
@@ -43,14 +44,14 @@ class FireBaseManager {
             user.password?.let { it1 ->
                 auth.createUserWithEmailAndPassword(it, it1)
                     .addOnCompleteListener() { task ->
-                        if(task.isSuccessful) {
+                        if (task.isSuccessful) {
                             val savedUser = FirebaseAuth.getInstance().currentUser
                             val uid = savedUser?.uid
                             user.id = uid
                             userDBReference.child(userId).setValue(user)
-                                .addOnCompleteListener{
+                                .addOnCompleteListener {
                                     error = FireBaseError.Sucess
-                                } .addOnFailureListener {
+                                }.addOnFailureListener {
                                     error = FireBaseError.ConnectionError
                                 }
                         } else {
@@ -66,9 +67,9 @@ class FireBaseManager {
         val commentId = commentDBReference.push().key!!
 
         commentDBReference.child(commentId).setValue(comment)
-            .addOnCompleteListener{
+            .addOnCompleteListener {
 
-            } .addOnFailureListener {
+            }.addOnFailureListener {
 
             }
     }
@@ -99,9 +100,9 @@ class FireBaseManager {
 
     fun fetchComment(completion: (List<CommentModel>) -> Unit) {
         val commentList = mutableListOf<CommentModel>()
-        commentDBReference.addValueEventListener(object: ValueEventListener {
+        commentDBReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                for(item in snapshot.children) {
+                for (item in snapshot.children) {
                     val comment = item.getValue(CommentModel::class.java)
                     commentList.add(comment!!)
                 }
@@ -116,7 +117,7 @@ class FireBaseManager {
 
     fun fetchUsers(completion: (List<UserModel>) -> Unit) {
         val userList = mutableListOf<UserModel>()
-        userDBReference.addValueEventListener(object: ValueEventListener {
+        userDBReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.map {
                     userList.add(it.getValue(UserModel::class.java)!!)
@@ -130,7 +131,7 @@ class FireBaseManager {
 
         })
     }
-
+    
     fun fetchCreawdedData(completion: (List<CrawdedModel>) -> Unit) {
         val crawdedList = mutableListOf<CrawdedModel>()
         crawdedDBReference.addValueEventListener(object: ValueEventListener {
@@ -179,6 +180,7 @@ class FireBaseManager {
             }
         })
     }
+    
     fun removeBookMark(userId: String) {
         var key = ""
         bookmarkDBReference.addValueEventListener(object: ValueEventListener {
@@ -194,5 +196,26 @@ class FireBaseManager {
             }
         })
         bookmarkDBReference.child(key).removeValue()
+    }
+    
+    fun readRestaurants(completion: (List<RestaurantModel>?) -> Unit){
+        val restaurantPlaces = mutableListOf<RestaurantModel>()
+
+        restaurantDBRefrance.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(rSnapshot in snapshot.children){
+                    val place = rSnapshot.getValue(RestaurantModel::class.java)
+                    if (place != null) {
+                        Log.e("doğa",place.toString())
+                        restaurantPlaces.add(place)
+                    }
+                }
+                completion(restaurantPlaces)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
     }
 }

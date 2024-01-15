@@ -22,13 +22,13 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -46,12 +46,10 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.studyspot.R
 import com.example.studyspot.modules.login.GradientButton
@@ -62,6 +60,7 @@ import com.example.studyspot.ui.theme.newfontfamily
 import com.example.studyspot.utilities.navigation.NavigationSetup
 
 @Composable
+
 fun ProfilEditSayfasi(navController: NavController) {
     Column(
         Modifier
@@ -105,7 +104,7 @@ fun ProfilEditSayfasi(navController: NavController) {
         )
 
 
-        var isEditing by remember { mutableStateOf(true) }
+
         var name by remember {
             mutableStateOf("John Doe")
         }
@@ -115,6 +114,21 @@ fun ProfilEditSayfasi(navController: NavController) {
         var oldpassword by remember {
             mutableStateOf("**********")
         }
+        var isEditing by remember { mutableStateOf(true) }
+
+        var lastSelectedAvatar by remember { mutableStateOf(R.drawable.avatar_man) }
+
+
+        val isUploading = remember{ mutableStateOf(false) }
+
+        LaunchedEffect(isEditing) {
+            lastSelectedAvatar = if (isEditing) {
+                R.drawable.avatar_man
+            } else {
+                R.drawable.avatar_women
+            }
+        }
+
 
 
         Column(
@@ -129,37 +143,56 @@ fun ProfilEditSayfasi(navController: NavController) {
                 .clip(CircleShape)
                 .clickable { isEditing = !isEditing }) {
                 if (isEditing) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.profileimgedit),
-                        contentDescription = " ",
+                    Image(
+                        painter = painterResource(id = lastSelectedAvatar),
+                        contentDescription = "Profile Image",
+                        contentScale = ContentScale.Crop,
                         modifier = Modifier
-                            .size(40.dp)
-                            .padding(4.dp)
-                            .align(Alignment.Center)
-
-                    )
-                }
-                Image(
-                    painter = painterResource(id = R.drawable.profile_img),
-                    contentDescription = "Profile Image",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(150.dp)
-                        .clip(CircleShape)
-                        .border(
-                            width = 4.dp,
-                            brush = Brush.linearGradient(
-                                colors = listOf(
-                                    colorResource(id = R.color.Profileimgbordercolor),
-                                    Color.Blue
+                            .size(150.dp)
+                            .clip(CircleShape)
+                            .border(
+                                width = 4.dp,
+                                brush = Brush.linearGradient(
+                                    colors = listOf(
+                                        colorResource(id = R.color.Profileimgbordercolor),
+                                        Color.Blue
+                                    ),
+                                    start = Offset(0f, 170f),
+                                    end = Offset(170f, 480f)
                                 ),
-                                start = Offset(0f, 170f),
-                                end = Offset(170f, 480f)
-                            ),
-                            shape = CircleShape
+                                shape = CircleShape
 
-                        )
-                )
+                            )
+                    )
+
+                }
+                    else{
+                    Image(
+                        painter = painterResource(id = R.drawable.avatar_women),
+                        contentDescription = "Profile Image",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(150.dp)
+                            .clip(CircleShape)
+                            .border(
+                                width = 4.dp,
+                                brush = Brush.linearGradient(
+                                    colors = listOf(
+                                        colorResource(id = R.color.Profileimgbordercolor),
+                                        Color.Blue
+                                    ),
+                                    start = Offset(0f, 170f),
+                                    end = Offset(170f, 480f)
+                                ),
+                                shape = CircleShape
+
+                            )
+                    )
+
+                    }
+
+
+
 
             }
 
@@ -170,14 +203,13 @@ fun ProfilEditSayfasi(navController: NavController) {
                     name = it
                 },
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 15.dp, bottom=15.dp, start = 26.dp, end = 26.dp),
+                    .padding(top = 15.dp, bottom=15.dp),
                 textStyle = TextStyle(
                     color = Color.White,
                     fontSize = 35.sp,
                     fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    fontFamily = newfontfamily
+                    fontFamily = newfontfamily,
+
                 ),
                 decorationBox = { innerTextField ->
                     Row(
@@ -190,14 +222,18 @@ fun ProfilEditSayfasi(navController: NavController) {
                                 color = Color.White,
                                 shape = RoundedCornerShape(6.dp)
                             )
-                            .height(50.dp),
-                        verticalAlignment = Alignment.CenterVertically,
+
+                            .height(45.dp)
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+
                     ) {
 
                         innerTextField()
                     }
                 },
-                cursorBrush = SolidColor(Color.White)
+                cursorBrush = SolidColor(Color.White),
+
             )
         }
 
@@ -214,7 +250,7 @@ fun ProfilEditSayfasi(navController: NavController) {
         ) {
 
             Column(
-                modifier = Modifier.padding(horizontal = 35.dp, vertical = 15.dp),
+                modifier = Modifier.padding(horizontal = 35.dp, vertical = 10.dp),
                 horizontalAlignment = Alignment.Start
             ) {
 
@@ -236,7 +272,7 @@ fun ProfilEditSayfasi(navController: NavController) {
                     },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 10.dp),
+                        .padding(top = 5.dp),
                     textStyle = TextStyle(color = Color.Black, fontFamily = newfontfamily),
                     decorationBox = { innerTextField ->
                         Row(
@@ -267,7 +303,7 @@ fun ProfilEditSayfasi(navController: NavController) {
 
                 Row {
                     Text(
-                        modifier = Modifier.padding(top = 10.dp),
+                        modifier = Modifier.padding(top = 15.dp),
                         text = "Change Password",
                         color = colorResource(id = R.color.ProfileTextColor),
                         fontSize = 15.sp,
@@ -293,7 +329,7 @@ fun ProfilEditSayfasi(navController: NavController) {
                     },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 10.dp),
+                        .padding(top = 5.dp),
                     textStyle = TextStyle(color = Color.Black, fontFamily = newfontfamily),
                     decorationBox = { innerTextField ->
                         Row(
@@ -312,7 +348,7 @@ fun ProfilEditSayfasi(navController: NavController) {
                                     color = Color.White,
                                     shape = RoundedCornerShape(6.dp)
                                 )
-                                .height(40.dp),
+                                .height(35.dp),
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Spacer(modifier = Modifier.width(width = 5.dp))
@@ -339,7 +375,7 @@ fun ProfilEditSayfasi(navController: NavController) {
                     },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 10.dp),
+                        .padding(top = 5.dp),
                     textStyle = TextStyle(color = Color.Black, fontFamily = newfontfamily),
                     decorationBox = { innerTextField ->
                         Row(
@@ -358,7 +394,7 @@ fun ProfilEditSayfasi(navController: NavController) {
                                     color = Color.White,
                                     shape = RoundedCornerShape(6.dp)
                                 )
-                                .height(40.dp),
+                                .height(35.dp),
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Spacer(modifier = Modifier.width(width = 5.dp))
@@ -384,7 +420,7 @@ fun ProfilEditSayfasi(navController: NavController) {
                     },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 10.dp),
+                        .padding(top = 5.dp),
                     textStyle = TextStyle(color = Color.Black, fontFamily = newfontfamily,),
                     decorationBox = { innerTextField ->
                         Row(
@@ -403,7 +439,7 @@ fun ProfilEditSayfasi(navController: NavController) {
                                     color = Color.White,
                                     shape = RoundedCornerShape(6.dp)
                                 )
-                                .height(40.dp),
+                                .height(35.dp),
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
 
@@ -415,7 +451,7 @@ fun ProfilEditSayfasi(navController: NavController) {
 
             }
             Column(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 GradientButton(
@@ -427,16 +463,51 @@ fun ProfilEditSayfasi(navController: NavController) {
                             color1,
                             color1
                         )
-                    )
-                ) {
-
-                }
+                    ),
+                    navController =  navController
+                )
 
             }
         }
 
     }
+
+    }
+
+
+@Composable
+fun ButtonGradient(
+    navController: NavController,
+    text: String,
+    textColor: Color,
+    gradient: Brush,
+    onClick: () -> Unit
+){
+    Button(onClick = { navController.navigate("profile")
+
+                     },
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color.Transparent
+        )
+    ) {
+        Box(modifier = Modifier
+            .background(gradient, shape = MaterialTheme.shapes.extraLarge)
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .size(80.dp, 30.dp)
+        )
+        {
+            Text(text = text, color= textColor,
+                fontFamily = newfontfamily,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                modifier = Modifier.align(alignment = Alignment.Center)
+            )
+        }
+    }
 }
+
+
+
 
 
 @Preview(showBackground = true)

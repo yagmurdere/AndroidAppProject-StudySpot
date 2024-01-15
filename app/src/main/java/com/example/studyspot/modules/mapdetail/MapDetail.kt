@@ -33,6 +33,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -47,6 +48,7 @@ import androidx.navigation.NavController
 import com.example.studyspot.R
 import com.example.studyspot.entities.CommentModel
 import com.example.studyspot.entities.RestaurantModel
+
 import com.example.studyspot.modules.signup.createText
 import com.example.studyspot.utilities.navigation.Screen
 
@@ -64,6 +66,7 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel, restaur
         viewModel.isHere(userId)
         viewModel.isBookMarkChecked(userId)
     }
+
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -228,7 +231,7 @@ fun MapDetail(navController: NavController, restaurant: RestaurantModel, restaur
                     modifier = Modifier,
                     color = Color(android.graphics.Color.parseColor("#" + "5E44FF"))
                 )
-                CommentsList(commentsList = commentsState.value)
+ //               CommentsList(commentsList = commentsState.value)
             }
             Button(
                 modifier = Modifier
