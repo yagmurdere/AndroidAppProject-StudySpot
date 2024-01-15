@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -39,18 +41,22 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.studyspot.R
+import com.example.studyspot.entities.RestaurantModel
+import com.example.studyspot.modules.mapdetail.MapDetailViewModel
+
 import com.example.studyspot.ui.theme.StudySpotTheme
 import com.example.studyspot.ui.theme.newfontfamily
+import com.example.studyspot.utilities.navigation.NavigationSetup
 
 @Composable
 fun MapMain(mapDetailViewModel: mapDetailViewModel,navController: NavController){
     var selectedBoxIndex by remember { mutableStateOf(-1) }
     val viewModel = mapDetailViewModel()
-//    val restaurantList = viewModel.restaurants.observeAsState(initial =  emptyList())
+    //val restaurantList = viewModel.restaurants.observeAsState(initial =  emptyList())
     LaunchedEffect(viewModel){
         viewModel.fetchRestaurant()
     }
- //   Log.d("seco2", restaurantList.value[0].toString())
+    //Log.d("seco2", restaurantList.value[0].toString())
     Column(modifier = Modifier.fillMaxSize())
     {
         Image(painter = painterResource(id = R.drawable.map_bg),
@@ -194,5 +200,3 @@ fun MapPreview(){
         MapMain(mapDetailViewModel = mapDetailViewModel(), navController = rememberNavController())
     }
 }
-
-
