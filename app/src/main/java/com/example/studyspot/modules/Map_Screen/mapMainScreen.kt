@@ -126,8 +126,8 @@ fun MapButtons(
                 .offset(x = xcor[count].dp, y = ycor[count].dp),
             colors = ButtonDefaults.buttonColors(
                 colorResource(id =
-                if(yogun[count]<=40) R.color.green_box_border_color
-                else if(yogun[count]<=70) R.color.yellow_box_border_color
+                if(yogun[count]<=30) R.color.green_box_border_color
+                else if(yogun[count]<=60) R.color.yellow_box_border_color
                 else R.color.red_box_border_color)
             )) {
         }
