@@ -16,14 +16,13 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        actionBar?.hide()
         setContent {
             StudySpotTheme {
-                val navController = rememberNavController()
 
-                StudySpotTheme {
-                    BottomNav()
-                }
+
+                BottomNav()
+
                 }
             }
         }
