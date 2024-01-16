@@ -83,7 +83,7 @@ fun GradientButton(
 fun Login(navController: NavController) {
     var emailText by remember { mutableStateOf(TextFieldValue("")) }
     var passwordText by remember { mutableStateOf(TextFieldValue("")) }
-    val customSpacerHeight = LocalConfiguration.current.screenHeightDp * 0.22
+    val customSpacerHeight = LocalConfiguration.current.screenHeightDp * 0.26
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
 
     Box {

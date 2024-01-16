@@ -98,7 +98,7 @@ fun ProfilSayfasi(navController: NavController, viewModel: profileViewModel) {
                     )
             )
 
-            Text(text = "John Doe", modifier = Modifier.padding(top= 15.dp),fontWeight = FontWeight.Bold, fontSize = 40.sp, color=Color.White, fontFamily = newfontfamily)
+            Text(text = "Ezgi Efe", modifier = Modifier.padding(top= 15.dp),fontWeight = FontWeight.Bold, fontSize = 40.sp, color=Color.White, fontFamily = newfontfamily)
 
                 TextButton(onClick = { navController.navigate("profileedit")
                     Log.d("Navigation", "profileedit button clicked")}) {

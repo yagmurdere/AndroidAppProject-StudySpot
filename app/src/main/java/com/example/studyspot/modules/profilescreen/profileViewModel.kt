@@ -9,11 +9,11 @@ import com.example.studyspot.managers.FireBaseManager
 
 class profileViewModel:ViewModel() {
     val user_names = arrayOf(
-        "John Doe",
-        "John Doe",
-        "John Doe",
-        "John Doe",
-        "John Doe"
+        "Ezgi Efe",
+        "Ezgi Efe",
+        "Ezgi Efe",
+        "Ezgi Efe",
+        "Ezgi Efe"
 
 
     )

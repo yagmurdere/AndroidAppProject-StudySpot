@@ -106,15 +106,15 @@ fun ProfilEditSayfasi(navController: NavController) {
 
 
         var name by remember {
-            mutableStateOf("John Doe")
+            mutableStateOf("Ezgi Efe")
         }
         var email by remember {
-            mutableStateOf("john.doe@gmail.com")
+            mutableStateOf("ezgiefe@gmail.com")
         }
         var oldpassword by remember {
             mutableStateOf("**********")
         }
-        var isEditing by remember { mutableStateOf(true) }
+        var isEditing by remember { mutableStateOf(false) }
 
         var lastSelectedAvatar by remember { mutableStateOf(R.drawable.avatar_man) }
 
