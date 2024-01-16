@@ -25,6 +25,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,7 +37,9 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -80,7 +83,8 @@ fun GradientButton(
 fun Login(navController: NavController) {
     var emailText by remember { mutableStateOf(TextFieldValue("")) }
     var passwordText by remember { mutableStateOf(TextFieldValue("")) }
-    val customSpacerHeight = LocalConfiguration.current.screenHeightDp * 0.20
+    val customSpacerHeight = LocalConfiguration.current.screenHeightDp * 0.22
+    var passwordVisible by rememberSaveable { mutableStateOf(false) }
 
     Box {
         Image(
@@ -166,7 +170,9 @@ fun Login(navController: NavController) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(0.dp, 4.dp),
-                    textStyle = TextStyle(color = Color.White),
+                    textStyle = TextStyle(color = Color.White ),
+                    visualTransformation = if (passwordVisible) VisualTransformation.None
+                    else PasswordVisualTransformation(),
                     decorationBox = { innerTextField ->
                         Row(
                             modifier = Modifier

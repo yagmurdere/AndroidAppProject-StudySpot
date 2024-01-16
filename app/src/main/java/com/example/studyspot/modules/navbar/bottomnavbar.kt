@@ -88,7 +88,8 @@ fun BottomBar(navController: NavHostController){
                 modifier = Modifier
                     .clip(CircleShape)
                     .background(semiTransparentColor)
-                    .size(300.dp, 70.dp)
+                    .size(280.dp, 70.dp)
+                    .padding(horizontal = 10.dp)
             ) {
                 Row(modifier = Modifier
                     .padding(8.dp)
