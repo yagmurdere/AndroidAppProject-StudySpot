@@ -59,7 +59,7 @@ fun GradientButton(
     gradient: Brush,
     navController: NavController
 ){
-    Button(onClick = {},
+    Button(onClick = {navController.navigate("map")},
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent
         )
